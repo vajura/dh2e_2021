@@ -2688,7 +2688,7 @@
 					<span class="input-text" data-i18n="elite-advance-u">Elite Advance:</span>
 					<input name="attr_elite_advance_title" type="text" data-i18n-placeholder="advance-title-u" Placeholder="Advance Title">
 					<div class="margin2" />
-					<input name="attr_elite_advance_exp" type="text" data-i18n-placeholder="experience-points-u" Placeholder="XP">
+					<input name="attr_elite_advance_exp" type="number" data-i18n-placeholder="experience-points-u" Placeholder="XP" value="0">
 					<div class="margin2" />
 					<select class="advanceselect width100" name="attr_elite_advance_aptitude">
 						<option data-i18n="aptitude" selected disabled>Aptitude</option>
@@ -2714,6 +2714,7 @@
 						<option data-i18n="social-u">Social</option>
 					</select>
 				</div>
+				<div class="margin2" />
 			</fieldset>
 		</div>
 	</div>
@@ -3208,29 +3209,42 @@ on('sheet:opened', (ev) => {
 function calcAdvExp() {
     getSectionIDs('repeating_advancements', (sectionIDs) => {
         let repeatingValues = [];
+        let repeatingValuesElite = [];
         let staticValues = [];
         for (let a = 0; a < sectionIDs.length; a++) {
             repeatingValues.push(`repeating_advancements_${sectionIDs[a]}_advancement1exp`);
             repeatingValues.push(`repeating_advancements_${sectionIDs[a]}_advancement2exp`);
             repeatingValues.push(`repeating_advancements_${sectionIDs[a]}_advancement3exp`);
         }
-        staticValues.push('exp_total');
-        getAttrs(staticValues, (values1) => {
-            getAttrs(repeatingValues, (values2) => {
-                const keys = Object.keys(values2);
-                let sum = 0;
-                for (let a = 0; a < keys.length; a++) {
-                    sum += sanitizeToNumber(values2[keys[a]]);
-                }
-                setAttrs({
-                    exp_spent: sum,
-                    exp_to_spend: values1['exp_total'] - sum
-                });
-            });
-        });
+        getSectionIDs('repeating_eliteadvances', (eAdvancesIDs) => {
+	        for (let a = 0; a < eAdvancesIDs.length; a++) {
+	            repeatingValuesElite.push(`repeating_eliteadvances_${eAdvancesIDs[a]}_elite_advance_exp`);
+	        }
+	        staticValues.push('exp_total');
+	        getAttrs(staticValues, (values1) => {
+	            getAttrs(repeatingValues, (values2) => {
+	            	getAttrs(repeatingValuesElite, (values3) => {
+		                const keys = Object.keys(values2);
+		                let sum = 0;
+		                for (let a = 0; a < keys.length; a++) {
+		                    sum += sanitizeToNumber(values2[keys[a]]);
+		                }
+		                const keys2 = Object.keys(values3);
+		                let sum2 = 0;
+		                for (let a = 0; a < keys2.length; a++) {
+		                    sum2 += sanitizeToNumber(values3[keys2[a]]);
+		                }
+		                setAttrs({
+		                    exp_spent: sum + sum2,
+		                    exp_to_spend: values1['exp_total'] - sum - sum2
+		                });
+		            });
+	            });
+	        });
+    	});
     });
 }
-on('change:repeating_advancements change:exptotal', () => {
+on('change:repeating_advancements change:exptotal change:repeating_eliteadvances sheet:opened', () => {
     calcAdvExp();
 });
 
