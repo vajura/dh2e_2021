@@ -1021,6 +1021,30 @@
 						</div>
 					</div>
 					<div class="flex-row flex-align-items-center">
+						<button name="roll_security" type="roll"
+								value="!dh2e2021roll Security Skill,Characteristic,@{security_characteristic},Skill,[[-20+@{security1}+@{security2}+@{security3}+@{security4}]],Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+							<span data-i18n="security-u">Security</span>
+						</button>
+						<div class="margin2" />
+						<select class="skill-char-select" name="attr_security_characteristic">
+							<option value="@{intelligence}" data-i18n="int-u">(Int)</option>
+							<option value="@{agility}" data-i18n="ag-u">(Ag)</option>
+						</select>
+						<div class="margin2" />
+						<div class="skill-checkbox">
+							<input name="attr_security1" type="checkbox" value="20">
+						</div>
+						<div class="skill-checkbox">
+							<input name="attr_security2" type="checkbox" value="10">
+						</div>
+						<div class="skill-checkbox">
+							<input name="attr_security3" type="checkbox" value="10">
+						</div>
+						<div class="skill-checkbox">
+							<input name="attr_security4" type="checkbox" value="10">
+						</div>
+					</div>
+					<div class="flex-row flex-align-items-center">
 						<button name="roll_sleight_of_hand" type="roll"
 								value="!dh2e2021roll Sleight of hand Skill,Characteristic,@{sleight_of_hand_characteristic},Skill,[[-20+@{sleight_of_hand1}+@{sleight_of_hand2}+@{sleight_of_hand3}+@{sleight_of_hand4}]],Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="sleight-of-hand-u">Sleight of hand</span>
@@ -2622,27 +2646,27 @@
 				<div class="flex-column flex-item2">
 					<fieldset class="repeating_aptitude1">
 						<select class="advanceselect" name="attr_aptitudes">
-							<option data-i18n="aptitude" selected disabled>Aptitude</option>
-							<option data-i18n="general-u">General</option>
-							<option data-i18n="weapon-skill-u">Weapon Skill</option>
-							<option data-i18n="ballistic-skill-u">Ballistic Skill</option>
-							<option data-i18n="strength-u">Strength</option>
-							<option data-i18n="toughness-u">Toughness</option>
-							<option data-i18n="agility-u">Agility</option>
-							<option data-i18n="intelligence-u">Intelligence</option>
-							<option data-i18n="perception-u">Perception</option>
-							<option data-i18n="willpower-u">Willpower</option>
-							<option data-i18n="fellowship-u">Fellowship</option>
-							<option data-i18n="influence-u">Influence</option>
-							<option data-i18n="offence-u">Offence</option>
-							<option data-i18n="finesse-u">Finesse</option>
-							<option data-i18n="defence-u">Defence</option>
-							<option data-i18n="psyker-u">Psyker</option>
-							<option data-i18n="tech-u">Tech</option>
-							<option data-i18n="knowledge-u">Knowledge</option>
-							<option data-i18n="leadership-u">Leadership</option>
-							<option data-i18n="fieldcraft-u">Fieldcraft</option>
-							<option data-i18n="social-u">Social</option>
+							<option value="none" data-i18n="aptitude" selected disabled>Aptitude</option>
+							<option value="general" data-i18n="general-u">General</option>
+							<option value="weapon skill" data-i18n="weapon-skill-u">Weapon Skill</option>
+							<option value="ballistic skill" data-i18n="ballistic-skill-u">Ballistic Skill</option>
+							<option value="strength" data-i18n="strength-u">Strength</option>
+							<option value="toughness" data-i18n="toughness-u">Toughness</option>
+							<option value="agility" data-i18n="agility-u">Agility</option>
+							<option value="intelligence" data-i18n="intelligence-u">Intelligence</option>
+							<option value="perception" data-i18n="perception-u">Perception</option>
+							<option value="willpower" data-i18n="willpower-u">Willpower</option>
+							<option value="fellowship" data-i18n="fellowship-u">Fellowship</option>
+							<option value="influence" data-i18n="influence-u">Influence</option>
+							<option value="offence" data-i18n="offence-u">Offence</option>
+							<option value="finesse" data-i18n="finesse-u">Finesse</option>
+							<option value="defence" data-i18n="defence-u">Defence</option>
+							<option value="psyker" data-i18n="psyker-u">Psyker</option>
+							<option value="tech" data-i18n="tech-u">Tech</option>
+							<option value="knowledge" data-i18n="knowledge-u">Knowledge</option>
+							<option value="leadership" data-i18n="leadership-u">Leadership</option>
+							<option value="fieldcraft" data-i18n="fieldcraft-u">Fieldcraft</option>
+							<option value="social" data-i18n="social-u">Social</option>
 						</select>
 						<div class="margin2" />
 					</fieldset>
@@ -2651,27 +2675,27 @@
 				<div class="flex-column flex-item2">
 					<fieldset class="repeating_aptitude2">
 						<select class="advanceselect" name="attr_aptitudes">
-							<option data-i18n="aptitude" selected disabled>Aptitude</option>
-							<option data-i18n="general-u">General</option>
-							<option data-i18n="weapon-skill-u">Weapon Skill</option>
-							<option data-i18n="ballistic-skill-u">Ballistic Skill</option>
-							<option data-i18n="strength-u">Strength</option>
-							<option data-i18n="toughness-u">Toughness</option>
-							<option data-i18n="agility-u">Agility</option>
-							<option data-i18n="intelligence-u">Intelligence</option>
-							<option data-i18n="perception-u">Perception</option>
-							<option data-i18n="willpower-u">Willpower</option>
-							<option data-i18n="fellowship-u">Fellowship</option>
-							<option data-i18n="influence-u">Influence</option>
-							<option data-i18n="offence-u">Offence</option>
-							<option data-i18n="finesse-u">Finesse</option>
-							<option data-i18n="defence-u">Defence</option>
-							<option data-i18n="psyker-u">Psyker</option>
-							<option data-i18n="tech-u">Tech</option>
-							<option data-i18n="knowledge-u">Knowledge</option>
-							<option data-i18n="leadership-u">Leadership</option>
-							<option data-i18n="fieldcraft-u">Fieldcraft</option>
-							<option data-i18n="social-u">Social</option>
+							<option value="none" data-i18n="aptitude" selected disabled>Aptitude</option>
+							<option value="general" data-i18n="general-u">General</option>
+							<option value="weapon skill" data-i18n="weapon-skill-u">Weapon Skill</option>
+							<option value="ballistic skill" data-i18n="ballistic-skill-u">Ballistic Skill</option>
+							<option value="strength" data-i18n="strength-u">Strength</option>
+							<option value="toughness" data-i18n="toughness-u">Toughness</option>
+							<option value="agility" data-i18n="agility-u">Agility</option>
+							<option value="intelligence" data-i18n="intelligence-u">Intelligence</option>
+							<option value="perception" data-i18n="perception-u">Perception</option>
+							<option value="willpower" data-i18n="willpower-u">Willpower</option>
+							<option value="fellowship" data-i18n="fellowship-u">Fellowship</option>
+							<option value="influence" data-i18n="influence-u">Influence</option>
+							<option value="offence" data-i18n="offence-u">Offence</option>
+							<option value="finesse" data-i18n="finesse-u">Finesse</option>
+							<option value="defence" data-i18n="defence-u">Defence</option>
+							<option value="psyker" data-i18n="psyker-u">Psyker</option>
+							<option value="tech" data-i18n="tech-u">Tech</option>
+							<option value="knowledge" data-i18n="knowledge-u">Knowledge</option>
+							<option value="leadership" data-i18n="leadership-u">Leadership</option>
+							<option value="fieldcraft" data-i18n="fieldcraft-u">Fieldcraft</option>
+							<option value="social" data-i18n="social-u">Social</option>
 						</select>
 						<div class="margin2" />
 					</fieldset>
@@ -2691,27 +2715,27 @@
 					<input name="attr_elite_advance_exp" type="number" data-i18n-placeholder="experience-points-u" Placeholder="XP" value="0">
 					<div class="margin2" />
 					<select class="advanceselect width100" name="attr_elite_advance_aptitude">
-						<option data-i18n="aptitude" selected disabled>Aptitude</option>
-						<option data-i18n="general-u">General</option>
-						<option data-i18n="weapon-skill-u">Weapon Skill</option>
-						<option data-i18n="ballistic-skill-u">Ballistic Skill</option>
-						<option data-i18n="strength-u">Strength</option>
-						<option data-i18n="toughness-u">Toughness</option>
-						<option data-i18n="agility-u">Agility</option>
-						<option data-i18n="intelligence-u">Intelligence</option>
-						<option data-i18n="perception-u">Perception</option>
-						<option data-i18n="willpower-u">Willpower</option>
-						<option data-i18n="fellowship-u">Fellowship</option>
-						<option data-i18n="influence-u">Influence</option>
-						<option data-i18n="offence-u">Offence</option>
-						<option data-i18n="finesse-u">Finesse</option>
-						<option data-i18n="defence-u">Defence</option>
-						<option data-i18n="psyker-u">Psyker</option>
-						<option data-i18n="tech-u">Tech</option>
-						<option data-i18n="knowledge-u">Knowledge</option>
-						<option data-i18n="leadership-u">Leadership</option>
-						<option data-i18n="fieldcraft-u">Fieldcraft</option>
-						<option data-i18n="social-u">Social</option>
+						<option value="none" data-i18n="aptitude" selected disabled>Aptitude</option>
+						<option value="general" data-i18n="general-u">General</option>
+						<option value="weapon skill" data-i18n="weapon-skill-u">Weapon Skill</option>
+						<option value="ballistic skill" data-i18n="ballistic-skill-u">Ballistic Skill</option>
+						<option value="strength" data-i18n="strength-u">Strength</option>
+						<option value="toughness" data-i18n="toughness-u">Toughness</option>
+						<option value="agility" data-i18n="agility-u">Agility</option>
+						<option value="intelligence" data-i18n="intelligence-u">Intelligence</option>
+						<option value="perception" data-i18n="perception-u">Perception</option>
+						<option value="willpower" data-i18n="willpower-u">Willpower</option>
+						<option value="fellowship" data-i18n="fellowship-u">Fellowship</option>
+						<option value="influence" data-i18n="influence-u">Influence</option>
+						<option value="offence" data-i18n="offence-u">Offence</option>
+						<option value="finesse" data-i18n="finesse-u">Finesse</option>
+						<option value="defence" data-i18n="defence-u">Defence</option>
+						<option value="psyker" data-i18n="psyker-u">Psyker</option>
+						<option value="tech" data-i18n="tech-u">Tech</option>
+						<option value="knowledge" data-i18n="knowledge-u">Knowledge</option>
+						<option value="leadership" data-i18n="leadership-u">Leadership</option>
+						<option value="fieldcraft" data-i18n="fieldcraft-u">Fieldcraft</option>
+						<option value="social" data-i18n="social-u">Social</option>
 					</select>
 				</div>
 				<div class="margin2" />
@@ -2738,7 +2762,491 @@
 				<span class="input-text" data-i18n="total-u">Total:</span>
 				<input class="input-text" name="attr_exp_total" type="number" value="0">
 			</div>
-			<div class="margin10" />
+			<div class="flex-row flex-space-around">
+				<div class="margin10" />
+			</div>
+			<div class="flex-row flex-space-around">
+				<h3 >Advancements</h3>
+			</div>
+			<div class="flex-row flex-space-around">
+				<div class="margin10" />
+			</div>
+			<div class="flex-row">
+				<div class="flex-column width100">
+					<fieldset class="repeating_autoadvancements width100">
+						<div class="margin2" />
+						<div class="flex-row">
+							<select name="attr_auto_advancement_1">
+								<option value="none" selected>None</option>
+								<option value="Ambidextrous">Ambidextrous</option>
+								<option value="Blind Fighting">Blind Fighting</option>
+								<option value="Bodyguard">Bodyguard</option>
+								<option value="Catfall">Catfall</option>
+								<option value="Clues from the Crowds">Clues from the Crowds</option>
+								<option value="Die Hard">Die Hard</option>
+								<option value="Disarm">Disarm</option>
+								<option value="Double Team">Double Team</option>
+								<option value="Enemy (choose)">Enemy (choose)</option>
+								<option value="Ferric Summons">Ferric Summons</option>
+								<option value="Flagellant">Flagellant</option>
+								<option value="Frenzy">Frenzy</option>
+								<option value="Grenadier">Grenadier</option>
+								<option value="Iron Jaw">Iron Jaw</option>
+								<option value="Jaded">Jaded</option>
+								<option value="Keen Intuition">Keen Intuition</option>
+								<option value="Leap Up">Leap Up</option>
+								<option value="Leaping Dodge">Leaping Dodge</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Nowhere to Hide">Nowhere to Hide</option>
+								<option value="Peer (choose)">Peer (choose)</option>
+								<option value="Quick Draw">Quick Draw</option>
+								<option value="Rapid Reload">Rapid Reload</option>
+								<option value="Resistance (Cold)">Resistance (Cold)</option>
+								<option value="Resistance (Fear)">Resistance (Fear)</option>
+								<option value="Resistance (Heat)">Resistance (Heat)</option>
+								<option value="Resistance (Poisons)">Resistance (Poisons)</option>
+								<option value="Resistance (Psychic Powers)">Resistance (Psychic Powers)</option>
+								<option value="Resistance (Radiation)">Resistance (Radiation)</option>
+								<option value="Resistance (Vacuum)">Resistance (Vacuum)</option>
+								<option value="Resistance (Other)">Resistance (Other)</option>
+								<option value="Skilled Rider">Skilled Rider</option>
+								<option value="Sound Constitution">Sound Constitution</option>
+								<option value="Takedown">Takedown</option>
+								<option value="Technical Knock">Technical Knock</option>
+								<option value="Warp Sense">Warp Sense</option>
+								<option value="Weapon Training (Bolt)">Weapon Training (Bolt)</option>
+								<option value="Weapon Training (Chain)">Weapon Training (Chain)</option>
+								<option value="Weapon Training (Flame)">Weapon Training (Flame)</option>
+								<option value="Weapon Training (Heavy)">Weapon Training (Heavy)</option>
+								<option value="Weapon Training (Las)">Weapon Training (Las)</option>
+								<option value="Weapon Training (Launcher)">Weapon Training (Launcher)</option>
+								<option value="Weapon Training (Low-Tech)">Weapon Training (Low-Tech)</option>
+								<option value="Weapon Training (Melta)">Weapon Training (Melta)</option>
+								<option value="Weapon Training (Plasma)">Weapon Training (Plasma)</option>
+								<option value="Weapon Training (Power)">Weapon Training (Power)</option>
+								<option value="Weapon Training (Shock)">Weapon Training (Shock)</option>
+								<option value="Weapon Training (Solid Projectile)">Weapon Training (Solid Projectile)</option>
+								<option value="Weapon-Tech">Weapon-Tech</option>
+								<option value="Ambassador Imperialis">Ambassador Imperialis</option>
+								<option value="Archivator">Archivator</option>
+								<option value="Armor-Monger">Armor-Monger</option>
+								<option value="Battle Rage">Battle Rage</option>
+								<option value="Bulging Biceps">Bulging Biceps</option>
+								<option value="Bulwark of Faith">Bulwark of Faith</option>
+								<option value="Combat Master">Combat Master</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Contact Network">Contact Network</option>
+								<option value="Coordinated Interrogation">Coordinated Interrogation</option>
+								<option value="Counter Attack">Counter Attack</option>
+								<option value="Cover-Up">Cover-Up</option>
+								<option value="Daemonhunter">Daemonhunter</option>
+								<option value="Daemonologist">Daemonologist</option>
+								<option value="Deny the Witch">Deny the Witch</option>
+								<option value="Devastating Assault">Devastating Assault</option>
+								<option value="Double Tap">Double Tap</option>
+								<option value="Exotic Weapon Training">Exotic Weapon Training</option>
+								<option value="Face in a Crowd">Face in a Crowd</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Hard Target">Hard Target</option>
+								<option value="Harden Soul">Harden Soul</option>
+								<option value="Hardy">Hardy</option>
+								<option value="Hatred (choose)">Hatred (choose)</option>
+								<option value="Hip Shooting">Hip Shooting</option>
+								<option value="Hotshot Pilot">Hotshot Pilot</option>
+								<option value="Independent Targeting">Independent Targeting</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inspiring Aura">Inspiring Aura</option>
+								<option value="Iron Resolve">Iron Resolve</option>
+								<option value="Killing Strike">Killing Strike</option>
+								<option value="Lexographer">Lexographer</option>
+								<option value="Luminen Shock">Luminen Shock</option>
+								<option value="Maglev Transcendence">Maglev Transcendence</option>
+								<option value="Marksman">Marksman</option>
+								<option value="Mechadendrite Use (choose)">Mechadendrite Use (choose)</option>
+								<option value="One-on-One">One-on-One</option>
+								<option value="Penitent Psyker">Penitent Psyker</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Prosanguine">Prosanguine</option>
+								<option value="Purity of Hatred">Purity of Hatred</option>
+								<option value="Rites of Banishment">Rites of Banishment</option>
+								<option value="Strong Minded">Strong Minded</option>
+								<option value="Swift Attack">Swift Attack</option>
+								<option value="Tainted Psyker">Tainted Psyker</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Unarmed Specialist">Unarmed Specialist</option>
+								<option value="Warp Conduit">Warp Conduit</option>
+								<option value="Whirlwind of Death">Whirlwind of Death</option>
+								<option value="Witch Finder">Witch Finder</option>
+								<option value="Xenosavant">Xenosavant</option>
+								<option value="Adamantium Faith">Adamantium Faith</option>
+								<option value="Aegis of Contempt">Aegis of Contempt</option>
+								<option value="Assassin Strike">Assassin Strike</option>
+								<option value="Bastion of Iron Will">Bastion of Iron Will</option>
+								<option value="Blademaster">Blademaster</option>
+								<option value="Crushing Blow">Crushing Blow</option>
+								<option value="Daemonic Disruption">Daemonic Disruption</option>
+								<option value="Dark Soul">Dark Soul</option>
+								<option value="Deathdealer">Deathdealer</option>
+								<option value="Delicate Interrogation">Delicate Interrogation</option>
+								<option value="Divine Protection">Divine Protection</option>
+								<option value="Eye of Vengeance">Eye of Vengeance</option>
+								<option value="Favored by the Warp">Favored by the Warp</option>
+								<option value="Flash of Insight">Flash of Insight</option>
+								<option value="Halo of Command">Halo of Command</option>
+								<option value="Hammer Blow">Hammer Blow</option>
+								<option value="Hull Down">Hull Down</option>
+								<option value="Indomitable Conviction">Indomitable Conviction</option>
+								<option value="Infused Knowledge">Infused Knowledge</option>
+								<option value="Instrument of His Will">Instrument of His Will</option>
+								<option value="Into the Jaws of Hell">Into the Jaws of Hell</option>
+								<option value="Iron Faith">Iron Faith</option>
+								<option value="Lightning Attack">Lightning Attack</option>
+								<option value="Luminen Blast">Luminen Blast</option>
+								<option value="Mastery (choose)">Mastery (choose)</option>
+								<option value="Mighty Shot">Mighty Shot</option>
+								<option value="Never Die">Never Die</option>
+								<option value="Preternatural Speed">Preternatural Speed</option>
+								<option value="Push the Limit">Push the Limit</option>
+								<option value="Sanctic Purity">Sanctic Purity</option>
+								<option value="Shield Wall">Shield Wall</option>
+								<option value="Sprint">Sprint</option>
+								<option value="Step Aside">Step Aside</option>
+								<option value="Superior Chirurgeon">Superior Chirurgeon</option>
+								<option value="Target Selection">Target Selection</option>
+								<option value="Thunder Charge">Thunder Charge</option>
+								<option value="True Grit">True Grit</option>
+								<option value="Two-Weapon Master">Two-Weapon Master</option>
+								<option value="Warp Lock">Warp Lock</option>
+								<option value="Weapon Intuition">Weapon Intuition</option>
+							</select>
+							<div class="margin2" />
+							<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+							<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_auto_advancement_1exp" readonly type="number" value="0">
+							<div class="margin5" />
+							<select name="attr_auto_advancement_2">
+								<option value="none" selected>None</option>
+								<option value="Ambidextrous">Ambidextrous</option>
+								<option value="Blind Fighting">Blind Fighting</option>
+								<option value="Bodyguard">Bodyguard</option>
+								<option value="Catfall">Catfall</option>
+								<option value="Clues from the Crowds">Clues from the Crowds</option>
+								<option value="Die Hard">Die Hard</option>
+								<option value="Disarm">Disarm</option>
+								<option value="Double Team">Double Team</option>
+								<option value="Enemy (choose)">Enemy (choose)</option>
+								<option value="Ferric Summons">Ferric Summons</option>
+								<option value="Flagellant">Flagellant</option>
+								<option value="Frenzy">Frenzy</option>
+								<option value="Grenadier">Grenadier</option>
+								<option value="Iron Jaw">Iron Jaw</option>
+								<option value="Jaded">Jaded</option>
+								<option value="Keen Intuition">Keen Intuition</option>
+								<option value="Leap Up">Leap Up</option>
+								<option value="Leaping Dodge">Leaping Dodge</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Nowhere to Hide">Nowhere to Hide</option>
+								<option value="Peer (choose)">Peer (choose)</option>
+								<option value="Quick Draw">Quick Draw</option>
+								<option value="Rapid Reload">Rapid Reload</option>
+								<option value="Resistance (Cold)">Resistance (Cold)</option>
+								<option value="Resistance (Fear)">Resistance (Fear)</option>
+								<option value="Resistance (Heat)">Resistance (Heat)</option>
+								<option value="Resistance (Poisons)">Resistance (Poisons)</option>
+								<option value="Resistance (Psychic Powers)">Resistance (Psychic Powers)</option>
+								<option value="Resistance (Radiation)">Resistance (Radiation)</option>
+								<option value="Resistance (Vacuum)">Resistance (Vacuum)</option>
+								<option value="Resistance (Other)">Resistance (Other)</option>
+								<option value="Skilled Rider">Skilled Rider</option>
+								<option value="Sound Constitution">Sound Constitution</option>
+								<option value="Takedown">Takedown</option>
+								<option value="Technical Knock">Technical Knock</option>
+								<option value="Warp Sense">Warp Sense</option>
+								<option value="Weapon Training (Bolt)">Weapon Training (Bolt)</option>
+								<option value="Weapon Training (Chain)">Weapon Training (Chain)</option>
+								<option value="Weapon Training (Flame)">Weapon Training (Flame)</option>
+								<option value="Weapon Training (Heavy)">Weapon Training (Heavy)</option>
+								<option value="Weapon Training (Las)">Weapon Training (Las)</option>
+								<option value="Weapon Training (Launcher)">Weapon Training (Launcher)</option>
+								<option value="Weapon Training (Low-Tech)">Weapon Training (Low-Tech)</option>
+								<option value="Weapon Training (Melta)">Weapon Training (Melta)</option>
+								<option value="Weapon Training (Plasma)">Weapon Training (Plasma)</option>
+								<option value="Weapon Training (Power)">Weapon Training (Power)</option>
+								<option value="Weapon Training (Shock)">Weapon Training (Shock)</option>
+								<option value="Weapon Training (Solid Projectile)">Weapon Training (Solid Projectile)</option>
+								<option value="Weapon-Tech">Weapon-Tech</option>
+								<option value="Ambassador Imperialis">Ambassador Imperialis</option>
+								<option value="Archivator">Archivator</option>
+								<option value="Armor-Monger">Armor-Monger</option>
+								<option value="Battle Rage">Battle Rage</option>
+								<option value="Bulging Biceps">Bulging Biceps</option>
+								<option value="Bulwark of Faith">Bulwark of Faith</option>
+								<option value="Combat Master">Combat Master</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Contact Network">Contact Network</option>
+								<option value="Coordinated Interrogation">Coordinated Interrogation</option>
+								<option value="Counter Attack">Counter Attack</option>
+								<option value="Cover-Up">Cover-Up</option>
+								<option value="Daemonhunter">Daemonhunter</option>
+								<option value="Daemonologist">Daemonologist</option>
+								<option value="Deny the Witch">Deny the Witch</option>
+								<option value="Devastating Assault">Devastating Assault</option>
+								<option value="Double Tap">Double Tap</option>
+								<option value="Exotic Weapon Training">Exotic Weapon Training</option>
+								<option value="Face in a Crowd">Face in a Crowd</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Hard Target">Hard Target</option>
+								<option value="Harden Soul">Harden Soul</option>
+								<option value="Hardy">Hardy</option>
+								<option value="Hatred (choose)">Hatred (choose)</option>
+								<option value="Hip Shooting">Hip Shooting</option>
+								<option value="Hotshot Pilot">Hotshot Pilot</option>
+								<option value="Independent Targeting">Independent Targeting</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inspiring Aura">Inspiring Aura</option>
+								<option value="Iron Resolve">Iron Resolve</option>
+								<option value="Killing Strike">Killing Strike</option>
+								<option value="Lexographer">Lexographer</option>
+								<option value="Luminen Shock">Luminen Shock</option>
+								<option value="Maglev Transcendence">Maglev Transcendence</option>
+								<option value="Marksman">Marksman</option>
+								<option value="Mechadendrite Use (choose)">Mechadendrite Use (choose)</option>
+								<option value="One-on-One">One-on-One</option>
+								<option value="Penitent Psyker">Penitent Psyker</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Prosanguine">Prosanguine</option>
+								<option value="Purity of Hatred">Purity of Hatred</option>
+								<option value="Rites of Banishment">Rites of Banishment</option>
+								<option value="Strong Minded">Strong Minded</option>
+								<option value="Swift Attack">Swift Attack</option>
+								<option value="Tainted Psyker">Tainted Psyker</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Unarmed Specialist">Unarmed Specialist</option>
+								<option value="Warp Conduit">Warp Conduit</option>
+								<option value="Whirlwind of Death">Whirlwind of Death</option>
+								<option value="Witch Finder">Witch Finder</option>
+								<option value="Xenosavant">Xenosavant</option>
+								<option value="Adamantium Faith">Adamantium Faith</option>
+								<option value="Aegis of Contempt">Aegis of Contempt</option>
+								<option value="Assassin Strike">Assassin Strike</option>
+								<option value="Bastion of Iron Will">Bastion of Iron Will</option>
+								<option value="Blademaster">Blademaster</option>
+								<option value="Crushing Blow">Crushing Blow</option>
+								<option value="Daemonic Disruption">Daemonic Disruption</option>
+								<option value="Dark Soul">Dark Soul</option>
+								<option value="Deathdealer">Deathdealer</option>
+								<option value="Delicate Interrogation">Delicate Interrogation</option>
+								<option value="Divine Protection">Divine Protection</option>
+								<option value="Eye of Vengeance">Eye of Vengeance</option>
+								<option value="Favored by the Warp">Favored by the Warp</option>
+								<option value="Flash of Insight">Flash of Insight</option>
+								<option value="Halo of Command">Halo of Command</option>
+								<option value="Hammer Blow">Hammer Blow</option>
+								<option value="Hull Down">Hull Down</option>
+								<option value="Indomitable Conviction">Indomitable Conviction</option>
+								<option value="Infused Knowledge">Infused Knowledge</option>
+								<option value="Instrument of His Will">Instrument of His Will</option>
+								<option value="Into the Jaws of Hell">Into the Jaws of Hell</option>
+								<option value="Iron Faith">Iron Faith</option>
+								<option value="Lightning Attack">Lightning Attack</option>
+								<option value="Luminen Blast">Luminen Blast</option>
+								<option value="Mastery (choose)">Mastery (choose)</option>
+								<option value="Mighty Shot">Mighty Shot</option>
+								<option value="Never Die">Never Die</option>
+								<option value="Preternatural Speed">Preternatural Speed</option>
+								<option value="Push the Limit">Push the Limit</option>
+								<option value="Sanctic Purity">Sanctic Purity</option>
+								<option value="Shield Wall">Shield Wall</option>
+								<option value="Sprint">Sprint</option>
+								<option value="Step Aside">Step Aside</option>
+								<option value="Superior Chirurgeon">Superior Chirurgeon</option>
+								<option value="Target Selection">Target Selection</option>
+								<option value="Thunder Charge">Thunder Charge</option>
+								<option value="True Grit">True Grit</option>
+								<option value="Two-Weapon Master">Two-Weapon Master</option>
+								<option value="Warp Lock">Warp Lock</option>
+								<option value="Weapon Intuition">Weapon Intuition</option>
+							</select>
+							<div class="margin2" />
+							<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+							<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_auto_advancement_2exp" readonly type="number" value="0">
+							<div class="margin5" />
+							<select name="attr_auto_advancement_3">
+								<option value="none" selected>None</option>
+								<option value="Ambidextrous">Ambidextrous</option>
+								<option value="Blind Fighting">Blind Fighting</option>
+								<option value="Bodyguard">Bodyguard</option>
+								<option value="Catfall">Catfall</option>
+								<option value="Clues from the Crowds">Clues from the Crowds</option>
+								<option value="Die Hard">Die Hard</option>
+								<option value="Disarm">Disarm</option>
+								<option value="Double Team">Double Team</option>
+								<option value="Enemy (choose)">Enemy (choose)</option>
+								<option value="Ferric Summons">Ferric Summons</option>
+								<option value="Flagellant">Flagellant</option>
+								<option value="Frenzy">Frenzy</option>
+								<option value="Grenadier">Grenadier</option>
+								<option value="Iron Jaw">Iron Jaw</option>
+								<option value="Jaded">Jaded</option>
+								<option value="Keen Intuition">Keen Intuition</option>
+								<option value="Leap Up">Leap Up</option>
+								<option value="Leaping Dodge">Leaping Dodge</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Mounted Warrior">Mounted Warrior</option>
+								<option value="Nowhere to Hide">Nowhere to Hide</option>
+								<option value="Peer (choose)">Peer (choose)</option>
+								<option value="Quick Draw">Quick Draw</option>
+								<option value="Rapid Reload">Rapid Reload</option>
+								<option value="Resistance (Cold)">Resistance (Cold)</option>
+								<option value="Resistance (Fear)">Resistance (Fear)</option>
+								<option value="Resistance (Heat)">Resistance (Heat)</option>
+								<option value="Resistance (Poisons)">Resistance (Poisons)</option>
+								<option value="Resistance (Psychic Powers)">Resistance (Psychic Powers)</option>
+								<option value="Resistance (Radiation)">Resistance (Radiation)</option>
+								<option value="Resistance (Vacuum)">Resistance (Vacuum)</option>
+								<option value="Resistance (Other)">Resistance (Other)</option>
+								<option value="Skilled Rider">Skilled Rider</option>
+								<option value="Sound Constitution">Sound Constitution</option>
+								<option value="Takedown">Takedown</option>
+								<option value="Technical Knock">Technical Knock</option>
+								<option value="Warp Sense">Warp Sense</option>
+								<option value="Weapon Training (Bolt)">Weapon Training (Bolt)</option>
+								<option value="Weapon Training (Chain)">Weapon Training (Chain)</option>
+								<option value="Weapon Training (Flame)">Weapon Training (Flame)</option>
+								<option value="Weapon Training (Heavy)">Weapon Training (Heavy)</option>
+								<option value="Weapon Training (Las)">Weapon Training (Las)</option>
+								<option value="Weapon Training (Launcher)">Weapon Training (Launcher)</option>
+								<option value="Weapon Training (Low-Tech)">Weapon Training (Low-Tech)</option>
+								<option value="Weapon Training (Melta)">Weapon Training (Melta)</option>
+								<option value="Weapon Training (Plasma)">Weapon Training (Plasma)</option>
+								<option value="Weapon Training (Power)">Weapon Training (Power)</option>
+								<option value="Weapon Training (Shock)">Weapon Training (Shock)</option>
+								<option value="Weapon Training (Solid Projectile)">Weapon Training (Solid Projectile)</option>
+								<option value="Weapon-Tech">Weapon-Tech</option>
+								<option value="Ambassador Imperialis">Ambassador Imperialis</option>
+								<option value="Archivator">Archivator</option>
+								<option value="Armor-Monger">Armor-Monger</option>
+								<option value="Battle Rage">Battle Rage</option>
+								<option value="Bulging Biceps">Bulging Biceps</option>
+								<option value="Bulwark of Faith">Bulwark of Faith</option>
+								<option value="Combat Master">Combat Master</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Constant Vigilance">Constant Vigilance</option>
+								<option value="Contact Network">Contact Network</option>
+								<option value="Coordinated Interrogation">Coordinated Interrogation</option>
+								<option value="Counter Attack">Counter Attack</option>
+								<option value="Cover-Up">Cover-Up</option>
+								<option value="Daemonhunter">Daemonhunter</option>
+								<option value="Daemonologist">Daemonologist</option>
+								<option value="Deny the Witch">Deny the Witch</option>
+								<option value="Devastating Assault">Devastating Assault</option>
+								<option value="Double Tap">Double Tap</option>
+								<option value="Exotic Weapon Training">Exotic Weapon Training</option>
+								<option value="Face in a Crowd">Face in a Crowd</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Field Vivisection">Field Vivisection</option>
+								<option value="Hard Target">Hard Target</option>
+								<option value="Harden Soul">Harden Soul</option>
+								<option value="Hardy">Hardy</option>
+								<option value="Hatred (choose)">Hatred (choose)</option>
+								<option value="Hip Shooting">Hip Shooting</option>
+								<option value="Hotshot Pilot">Hotshot Pilot</option>
+								<option value="Independent Targeting">Independent Targeting</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inescapable Attack">Inescapable Attack</option>
+								<option value="Inspiring Aura">Inspiring Aura</option>
+								<option value="Iron Resolve">Iron Resolve</option>
+								<option value="Killing Strike">Killing Strike</option>
+								<option value="Lexographer">Lexographer</option>
+								<option value="Luminen Shock">Luminen Shock</option>
+								<option value="Maglev Transcendence">Maglev Transcendence</option>
+								<option value="Marksman">Marksman</option>
+								<option value="Mechadendrite Use (choose)">Mechadendrite Use (choose)</option>
+								<option value="One-on-One">One-on-One</option>
+								<option value="Penitent Psyker">Penitent Psyker</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Precision Killer">Precision Killer</option>
+								<option value="Prosanguine">Prosanguine</option>
+								<option value="Purity of Hatred">Purity of Hatred</option>
+								<option value="Rites of Banishment">Rites of Banishment</option>
+								<option value="Strong Minded">Strong Minded</option>
+								<option value="Swift Attack">Swift Attack</option>
+								<option value="Tainted Psyker">Tainted Psyker</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Two-Weapon Wielder">Two-Weapon Wielder</option>
+								<option value="Unarmed Specialist">Unarmed Specialist</option>
+								<option value="Warp Conduit">Warp Conduit</option>
+								<option value="Whirlwind of Death">Whirlwind of Death</option>
+								<option value="Witch Finder">Witch Finder</option>
+								<option value="Xenosavant">Xenosavant</option>
+								<option value="Adamantium Faith">Adamantium Faith</option>
+								<option value="Aegis of Contempt">Aegis of Contempt</option>
+								<option value="Assassin Strike">Assassin Strike</option>
+								<option value="Bastion of Iron Will">Bastion of Iron Will</option>
+								<option value="Blademaster">Blademaster</option>
+								<option value="Crushing Blow">Crushing Blow</option>
+								<option value="Daemonic Disruption">Daemonic Disruption</option>
+								<option value="Dark Soul">Dark Soul</option>
+								<option value="Deathdealer">Deathdealer</option>
+								<option value="Delicate Interrogation">Delicate Interrogation</option>
+								<option value="Divine Protection">Divine Protection</option>
+								<option value="Eye of Vengeance">Eye of Vengeance</option>
+								<option value="Favored by the Warp">Favored by the Warp</option>
+								<option value="Flash of Insight">Flash of Insight</option>
+								<option value="Halo of Command">Halo of Command</option>
+								<option value="Hammer Blow">Hammer Blow</option>
+								<option value="Hull Down">Hull Down</option>
+								<option value="Indomitable Conviction">Indomitable Conviction</option>
+								<option value="Infused Knowledge">Infused Knowledge</option>
+								<option value="Instrument of His Will">Instrument of His Will</option>
+								<option value="Into the Jaws of Hell">Into the Jaws of Hell</option>
+								<option value="Iron Faith">Iron Faith</option>
+								<option value="Lightning Attack">Lightning Attack</option>
+								<option value="Luminen Blast">Luminen Blast</option>
+								<option value="Mastery (choose)">Mastery (choose)</option>
+								<option value="Mighty Shot">Mighty Shot</option>
+								<option value="Never Die">Never Die</option>
+								<option value="Preternatural Speed">Preternatural Speed</option>
+								<option value="Push the Limit">Push the Limit</option>
+								<option value="Sanctic Purity">Sanctic Purity</option>
+								<option value="Shield Wall">Shield Wall</option>
+								<option value="Sprint">Sprint</option>
+								<option value="Step Aside">Step Aside</option>
+								<option value="Superior Chirurgeon">Superior Chirurgeon</option>
+								<option value="Target Selection">Target Selection</option>
+								<option value="Thunder Charge">Thunder Charge</option>
+								<option value="True Grit">True Grit</option>
+								<option value="Two-Weapon Master">Two-Weapon Master</option>
+								<option value="Warp Lock">Warp Lock</option>
+								<option value="Weapon Intuition">Weapon Intuition</option>
+							</select>
+							<div class="margin2" />
+							<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+							<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_auto_advancement_3exp" readonly type="number" value="0">
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="flex-row flex-space-around">
+				<div class="margin10" />
+			</div>
+			<div class="flex-row flex-space-around">
+				<h3>Custom Advancements</h3>
+			</div>
+			<div class="flex-row flex-space-around">
+				<div class="margin10" />
+			</div>
 			<div class="flex-row">
 				<div class="flex-column  width100">
 					<fieldset class="repeating_advancements width100">
@@ -3133,6 +3641,47 @@
 
 
 <script type="text/worker">
+const Characteristics = [
+    'weapon_skill',
+    'ballistic_skill',
+    'strength',
+    'toughness',
+    'agility',
+    'intelligence',
+    'perception',
+    'willpower',
+    'fellowship',
+    'influence',
+];
+for (let a = 0; a < Characteristics.length; a++) {
+    const ch = Characteristics[a];
+    on(`change:base_${ch} change:advance_${ch} sheet:opened`, () => {
+        const attrs = [`base_${ch}`, `advance_${ch}`];
+        getAttrs(attrs, (values) => {
+            const setAtt = {};
+            setAtt[`${ch}`] = sanitizeToNumber(values[`base_${ch}`]) + sanitizeToNumber(values[`advance_${ch}`]);
+            setAttrs(setAtt);
+        });
+    });
+}
+on(`change:max_base_wounds sheet:opened`, () => {
+    const attrs = [`max_base_wounds`];
+    getAttrs(attrs, (values) => {
+        const setAtt = {};
+        setAtt[`max_wounds`] = sanitizeToNumber(values[`max_base_wounds`]);
+        setAttrs(setAtt);
+    });
+});
+on(`change:strength change:toughness sheet:opened`, () => {
+    const attrs = [`strength`, `toughness`];
+    getAttrs(attrs, (values) => {
+        const weightMap = {0: 0.9,1: 2.25,2: 4.5,3: 9,4: 18,5: 27,6: 36,7: 45,8: 56,9: 67,10: 78,11: 90,12: 112,13: 225,14: 337,15: 450,16: 675,17: 900,18: 1.350,19: 1.800,20: 2.250};
+		const sum = Math.floor(sanitizeToNumber(values[`strength`]) / 10) + Math.floor(sanitizeToNumber(values[`toughness`]) / 10);
+		const setAtt = {};
+        setAtt[`max_carry`] = weightMap[sum].toFixed(2) + ' kg';
+        setAttrs(setAtt);
+    });
+});
 on("change:repeating_gear", () => {
 	getSectionIDs("repeating_gear", (idarray) => {
 		const attrs = [];
@@ -3151,22 +3700,22 @@ on("change:repeating_gear", () => {
 	});
 });
 on("change:repeating_psypowers1", () => {
-   getSectionIDs("repeating_psypowers1", (idarray) => {
-      const setOps = {};
-      for(var i=0; i < idarray.length; i++) {
-         setOps[`repeating_psypowers1_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
-      }
-      setAttrs(setOps);
-   });
+	getSectionIDs("repeating_psypowers1", (idarray) => {
+		const setOps = {};
+		for(var i=0; i < idarray.length; i++) {
+			setOps[`repeating_psypowers1_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
+		}
+		setAttrs(setOps);
+	});
 });
 on("change:repeating_psypowers2", () => {
-   getSectionIDs("repeating_psypowers2", (idarray) => {
-      const setOps = {};
-      for(var i=0; i < idarray.length; i++) {
-         setOps[`repeating_psypowers2_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
-      }
-      setAttrs(setOps);
-   });
+	getSectionIDs("repeating_psypowers2", (idarray) => {
+		const setOps = {};
+		for(var i=0; i < idarray.length; i++) {
+			setOps[`repeating_psypowers2_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
+		}
+		setAttrs(setOps);
+	});
 });
 on("change:repeating_rangedweapons", () => {
    getSectionIDs("repeating_rangedweapons", (idarray) => {

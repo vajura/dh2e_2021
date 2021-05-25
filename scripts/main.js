@@ -16,105 +16,19 @@ const Characteristics = [
     'influence',
 ];
 
-on('change:attribute', (ev) => {
-    const charId = ev.get('_characterid');
-    const eventName = ev.get('name');
-    const eventValue = ev.get('current');
-    //log(`Change ${eventName} ${eventValue}`);
-
-    calcCharacteristics(charId, eventName);
-    calcWounds(charId, eventName);
-    calcCarryLimit(charId, eventName);
-    checkIfHiddenApiTrigger(eventName, eventValue, charId);
-});
-
-on('add:attribute', (ev) => {
-    const charId = ev.get('_characterid');
-    const eventName = ev.get('name');
-    const eventValue = ev.get('current');
-    //log(`Add ${eventName} ${eventValue}`);
-
-    calcCharacteristics(charId, eventName);
-    calcWounds(charId, eventName);
-    calcCarryLimit(charId, eventName);
-    checkIfHiddenApiTrigger(eventName, eventValue, charId);
-});
-
-
-function checkIfHiddenApiTrigger(eventName, eventValue, charId) {
-    if (eventName === 'hidden_api_trigger' && eventValue === 'calc_all_fields_2') {
-        calcAllCharacteristics(charId);
-        calcWounds(charId, 'max_base_wounds');
-    }
-}
-
-function calcCarryLimit(charId, eventName) {
-    if (eventName.indexOf('strength') !== -1 || eventName.indexOf('toughness') !== -1) {
-        const weightMap = {
-            0: 0.9,1: 2.25,2: 4.5,3: 9,4: 18,5: 27,6: 36,7: 45,8: 56,9: 67,10: 78,11: 90,12: 112,13: 225,14: 337,15: 450,16: 675,17: 900,18: 1.350,19: 1.800,20: 2.250
-        };
-        const strength = getAttrByName(charId, `strength`);
-        const toughness = getAttrByName(charId, `toughness`);
-        const sum = weightMap[Math.floor(sanitizeToNumber(strength) / 10) + Math.floor(sanitizeToNumber(toughness) / 10)];
-        const maxCarry = findObjs({
-            type: 'attribute',
-            characterid: charId,
-            name: 'max_carry'
-        }, {caseInsensitive: true})[0];
-        if (maxCarry) {
-            maxCarry.set('current', sum.toFixed(2) + ' kg');
-        }
-    }
-}
-
-function calcWounds(charId, eventName) {
-    if (eventName.indexOf('max_base_wounds') !== -1) {
-        const baseValue = getAttrByName(charId, `max_base_wounds`);
-        const attribute = findObjs({
-            type: 'attribute',
-            characterid: charId,
-            name: 'max_wounds'
-        }, {caseInsensitive: true})[0];
-        if (attribute !== undefined) {
-            attribute.set('current', sanitizeToNumber(baseValue));
-        }
-    }
-}
-
-function calcAllCharacteristics(charId) {
-    if (charId !== undefined) {
-        for (let a = 0; a < Characteristics.length; a++) {
-            calcCharacteristics(charId, Characteristics[a]);
-        }
-    }
-}
-
-function calcCharacteristics(charId, eventName) {
-    let attributeName = '';
-    for (let a = 0; a < Characteristics.length; a++) {
-        if (eventName.indexOf(Characteristics[a]) !== -1) {
-            attributeName = Characteristics[a];
-            break;
-        }
-    }
-    if (attributeName === '') {
-        return;
-    }
-
-    const baseValue = getAttrByName(charId, `base_${attributeName}`);
-    let advancesValue = 0;
-    if (attributeName !== 'influence') {
-        advancesValue = getAttrByName(charId, `advance_${attributeName}`);
-    }
-    const attribute = findObjs({
-        type: 'attribute',
-        characterid: charId,
-        name: attributeName
-    }, {caseInsensitive: true})[0];
-    if (attribute !== undefined) {
-        attribute.set('current', sanitizeToNumber(baseValue) + sanitizeToNumber(advancesValue));
-    }
-}
+//on('change:attribute', (ev) => {
+//    const charId = ev.get('_characterid');
+//    const eventName = ev.get('name');
+//    const eventValue = ev.get('current');
+//    //log(`Change ${eventName} ${eventValue}`);
+//});
+//
+//on('add:attribute', (ev) => {
+//    const charId = ev.get('_characterid');
+//    const eventName = ev.get('name');
+//    const eventValue = ev.get('current');
+//    //log(`Add ${eventName} ${eventValue}`);
+//});
 
 function sanitizeToNumber(input) {
     let num = 0;
@@ -163,20 +77,6 @@ function processInlinerolls(msg) {
     }
 };
 
-/*
-!dh2e2021weaponhit
-@{character_id}, 
-repeating_rangedweapons, 
-@{hidden_row_id},
-@{ballistic_skill},
-[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],
-[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],
-[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (-20),-20}]],
-[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]]
-
-repeating_rangedweapons_-MaJkoNLugyRt7kU4fHq_ranged_weapon_special1
-repeating_rangedweapons_-MaJkoNLugyRt7kU4fHq_ranged_weapon_mod1
-*/
 const savedRolls = {};
 function calcWeaponHit(who, playerId, paramArray, fate) {
     const charId = paramArray[0];
@@ -597,8 +497,6 @@ function calcWeaponDmg(who, playerId, paramArray, msg, fate) {
     sendChat(who, output);
 }
 
-// !dh2e2021focuspower @{character_id},Willpower,@{willpower},@{psy_rating},[[?{Psy Use?|1}]],0,[[?{Modifier|0}]]
-// "!roll40k @{character_name}'s channelled Willpower, @{Willpower},[[(@{PsyRating} - ?{Psy Use?|1}) *10 + ?{Modifier|0}]]"
 function calcFocusPower(who, playerId, paramArray, fate) {
     const charId = paramArray[0];
     const focusName = paramArray[1];
@@ -765,3 +663,813 @@ on('chat:message', function (msg) {
         }
     }
 });
+
+function calcAdvancementsExp(charId, eventName, originalEvent) {
+    if (eventName.indexOf('repeating_autoadvancements') === -1) {
+        return;
+    }
+    const allAtributes = findObjs({
+        type: 'attribute',
+        characterid: charId,
+    }, {caseInsensitive: true});
+    const autoAdvancementsIds = [];
+    const regexAutoAdvancements = /repeating_autoadvancements_(.+?)_auto_advancement_(1|2|3)/;
+    const regexAptitude1Ids = /repeating_aptitude1_(.+?)_aptitudes/;
+    const regexAptitude2Ids = /repeating_aptitude2_(.+?)_aptitudes/;
+    const regexAptitudeEliteIds = /repeating_eliteadvances_(.+?)_elite_advance_aptitude/;
+    const aptitudes = {};
+    for (let a = 0; a < allAtributes.length; a++) {
+        const name = allAtributes[a].get('name');
+        let groups = name.match(regexAptitude1Ids);
+        if (groups && groups.length === 2) {
+            aptitudes[allAtributes[a].get('current')] = true;
+        }
+        groups = name.match(regexAptitude2Ids);
+        if (groups && groups.length === 2) {
+            aptitudes[allAtributes[a].get('current')] = true;
+        }
+        groups = name.match(regexAptitudeEliteIds);
+        if (groups && groups.length === 2) {
+            aptitudes[allAtributes[a].get('current')] = true;
+        }
+    }
+    log(aptitudes);
+    for (let a = 0; a < allAtributes.length; a++) {
+        const name = allAtributes[a].get('name');
+        const current = allAtributes[a].get('current');
+        let groups = name.match(regexAutoAdvancements);
+        if (groups && groups.length === 3 && !name.endsWith('exp')) {
+            const adv = advancements[current];
+            if (adv) {
+                let match = 0;
+                if (aptitudes[adv.a1]) {
+                    match++;
+                }
+                if (aptitudes[adv.a2]) {
+                    match++;
+                }
+                log(adv.name + ' ' + match);
+                let cost = advancementsCosts[adv.tier][match];
+                const expCost = findObjs({
+                    type: 'attribute',
+                    characterid: charId,
+                    name: name + 'exp'
+                }, {caseInsensitive: true});
+                if (expCost && expCost[0]) {
+                    expCost[0].set('current', cost);
+                }
+            }
+        }
+    }
+}
+
+const advancementsCosts = {
+    1: {
+        0: 200,
+        1: 300,
+        2: 400
+    },
+    2: {
+        0: 300,
+        1: 450,
+        2: 600
+    },
+    3: {
+        0: 600,
+        1: 900,
+        2: 1200
+    }
+}
+
+const advancements = {
+    'Ambidextrous':{name:'Ambidextrous',
+        a1:'weapon skill',
+        a2:'ballistic skill',
+        tier:1
+    },
+    'Blind Fighting':{name:'Blind Fighting',
+        a1:'perception',
+        a2:'fieldcraft',
+        tier:1
+    },
+    'Bodyguard':{name:'Bodyguard',
+        a1:'agility',
+        a2:'defence',
+        tier:1
+    },
+    'Catfall':{name:'Catfall',
+        a1:'agility',
+        a2:'fieldcraft',
+        tier:1
+    },
+    'Clues from the Crowds':{name:'Clues from the Crowds',
+        a1:'general',
+        a2:'social',
+        tier:1
+    },
+    'Die Hard':{name:'Die Hard',
+        a1:'willpower',
+        a2:'defence',
+        tier:1
+    },
+    'Disarm':{name:'Disarm',
+        a1:'weapon skill',
+        a2:'defence',
+        tier:1
+    },
+    'Double Team':{name:'Double Team',
+        a1:'general',
+        a2:'offence',
+        tier:1
+    },
+    'Enemy (choose)':{name:'Enemy (choose)',
+        a1:'general',
+        a2:'social',
+        tier:1
+    },
+    'Ferric Summons':{name:'Ferric Summons',
+        a1:'willpower',
+        a2:'tech',
+        tier:1
+    },
+    'Flagellant':{name:'Flagellant',
+        a1:'offense',
+        a2:'toughness',
+        tier:1
+    },
+    'Frenzy':{name:'Frenzy',
+        a1:'strength',
+        a2:'offence',
+        tier:1
+    },
+    'Grenadier':{name:'Grenadier',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:1
+    },
+    'Iron Jaw':{name:'Iron Jaw',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Jaded':{name:'Jaded',
+        a1:'willpower',
+        a2:'defence',
+        tier:1
+    },
+    'Keen Intuition':{name:'Keen Intuition',
+        a1:'perception',
+        a2:'social',
+        tier:1
+    },
+    'Leap Up':{name:'Leap Up',
+        a1:'agility',
+        a2:'general',
+        tier:1
+    },
+    'Leaping Dodge':{name:'Leaping Dodge',
+        a1:'agility',
+        a2:'defence',
+        tier:1
+    },
+    'Mounted Warrior':{name:'Mounted Warrior',
+        a1:'ballistic skill',
+        a2:'offence',
+        tier:1
+    },
+    'Mounted Warrior':{name:'Mounted Warrior',
+        a1:'weapon skill',
+        a2:'offence',
+        tier:1
+    },
+    'Nowhere to Hide':{name:'Nowhere to Hide',
+        a1:'perception',
+        a2:'offence',
+        tier:1
+    },
+    'Peer (choose)':{name:'Peer (choose)',
+        a1:'fellowship',
+        a2:'social',
+        tier:1
+    },
+    'Quick Draw':{name:'Quick Draw',
+        a1:'agility',
+        a2:'finesse',
+        tier:1
+    },
+    'Rapid Reload':{name:'Rapid Reload',
+        a1:'agility',
+        a2:'fieldcraft',
+        tier:1
+    },
+    'Resistance (Cold)':{name:'Resistance (Cold)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Fear)':{name:'Resistance (Fear)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Heat)':{name:'Resistance (Heat)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Poisons)':{name:'Resistance (Poisons)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Psychic Powers)':{name:'Resistance (Psychic Powers)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Radiation)':{name:'Resistance (Radiation)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Vacuum)':{name:'Resistance (Vacuum)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Resistance (Other)':{name:'Resistance (Other)',
+        a1:'toughness',
+        a2:'defence',
+        tier:1
+    },
+    'Skilled Rider':{name:'Skilled Rider',
+        a1:'agility',
+        a2:'fieldcraft',
+        tier:1
+    },
+    'Sound Constitution':{name:'Sound Constitution',
+        a1:'toughness',
+        a2:'general',
+        tier:1
+    },
+    'Takedown':{name:'Takedown',
+        a1:'weapon skill',
+        a2:'offence',
+        tier:1
+    },
+    'Technical Knock':{name:'Technical Knock',
+        a1:'intelligence',
+        a2:'tech',
+        tier:1
+    },
+    'Warp Sense':{name:'Warp Sense',
+        a1:'perception',
+        a2:'psyker',
+        tier:1
+    },
+    'Weapon Training (Bolt)':{name:'Weapon Training (Bolt)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Chain)':{name:'Weapon Training (Chain)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Flame)':{name:'Weapon Training (Flame)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Heavy)':{name:'Weapon Training (Heavy)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Las)':{name:'Weapon Training (Las)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Launcher)':{name:'Weapon Training (Launcher)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Low-Tech)':{name:'Weapon Training (Low-Tech)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Melta)':{name:'Weapon Training (Melta)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Plasma)':{name:'Weapon Training (Plasma)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Power)':{name:'Weapon Training (Power)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Shock)':{name:'Weapon Training (Shock)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon Training (Solid Projectile)':{name:'Weapon Training (Solid Projectile)',
+        a1:'general',
+        a2:'finesse',
+        tier:1
+    },
+    'Weapon-Tech':{name:'Weapon-Tech',
+        a1:'intelligence',
+        a2:'tech',
+        tier:1
+    },
+    'Ambassador Imperialis':{name:'Ambassador Imperialis',
+        a1:'perception',
+        a2:'social',
+        tier:2
+    },
+    'Archivator':{name:'Archivator',
+        a1:'knowledge',
+        a2:'social',
+        tier:2
+    },
+    'Armor-Monger':{name:'Armor-Monger',
+        a1:'intelligence',
+        a2:'tech',
+        tier:2
+    },
+    'Battle Rage':{name:'Battle Rage',
+        a1:'strength',
+        a2:'defence',
+        tier:2
+    },
+    'Bulging Biceps':{name:'Bulging Biceps',
+        a1:'strength',
+        a2:'offence',
+        tier:2
+    },
+    'Bulwark of Faith':{name:'Bulwark of Faith',
+        a1:'defence',
+        a2:'willpower',
+        tier:2
+    },
+    'Combat Master':{name:'Combat Master',
+        a1:'weapon skill',
+        a2:'defence',
+        tier:2
+    },
+    'Constant Vigilance':{name:'Constant Vigilance',
+        a1:'perception',
+        a2:'defence',
+        tier:2
+    },
+    'Constant Vigilance':{name:'Constant Vigilance',
+        a1:'intelligence',
+        a2:'defence',
+        tier:2
+    },
+    'Contact Network':{name:'Contact Network',
+        a1:'fellowship',
+        a2:'leadership',
+        tier:2
+    },
+    'Coordinated Interrogation':{name:'Coordinated Interrogation',
+        a1:'intelligence',
+        a2:'social',
+        tier:2
+    },
+    'Counter Attack':{name:'Counter Attack',
+        a1:'weapon skill',
+        a2:'defence',
+        tier:2
+    },
+    'Cover-Up':{name:'Cover-Up',
+        a1:'intelligence',
+        a2:'knowledge',
+        tier:2
+    },
+    'Daemonhunter':{name:'Daemonhunter',
+        a1:'offence',
+        a2:'willpower',
+        tier:2
+    },
+    'Daemonologist':{name:'Daemonologist',
+        a1:'psyker',
+        a2:'willpower',
+        tier:2
+    },
+    'Deny the Witch':{name:'Deny the Witch',
+        a1:'willpower',
+        a2:'defence',
+        tier:2
+    },
+    'Devastating Assault':{name:'Devastating Assault',
+        a1:'weapon skill',
+        a2:'offence',
+        tier:2
+    },
+    'Double Tap':{name:'Double Tap',
+        a1:'finesse',
+        a2:'offence',
+        tier:2
+    },
+    'Exotic Weapon Training':{name:'Exotic Weapon Training',
+        a1:'intelligence',
+        a2:'finesse',
+        tier:2
+    },
+    'Face in a Crowd':{name:'Face in a Crowd',
+        a1:'fellowship',
+        a2:'social',
+        tier:2
+    },
+    'Field Vivisection':{name:'Field Vivisection',
+        a1:'ballistic skill',
+        a2:'knowledge',
+        tier:2
+    },
+    'Field Vivisection':{name:'Field Vivisection',
+        a1:'weapon skill',
+        a2:'knowledge',
+        tier:2
+    },
+    'Hard Target':{name:'Hard Target',
+        a1:'agility',
+        a2:'defence',
+        tier:2
+    },
+    'Harden Soul':{name:'Harden Soul',
+        a1:'defence',
+        a2:'willpower',
+        tier:2
+    },
+    'Hardy':{name:'Hardy',
+        a1:'toughness',
+        a2:'defence',
+        tier:2
+    },
+    'Hatred (choose)':{name:'Hatred (choose)',
+        a1:'weapon skill',
+        a2:'social',
+        tier:2
+    },
+    'Hip Shooting':{name:'Hip Shooting',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Hotshot Pilot':{name:'Hotshot Pilot',
+        a1:'agility',
+        a2:'tech',
+        tier:2
+    },
+    'Independent Targeting':{name:'Independent Targeting',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Inescapable Attack':{name:'Inescapable Attack',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Inescapable Attack':{name:'Inescapable Attack',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Inspiring Aura':{name:'Inspiring Aura',
+        a1:'leadership',
+        a2:'willpower',
+        tier:2
+    },
+    'Iron Resolve':{name:'Iron Resolve',
+        a1:'defence',
+        a2:'willpower',
+        tier:2
+    },
+    'Killing Strike':{name:'Killing Strike',
+        a1:'weapon skill',
+        a2:'offence',
+        tier:2
+    },
+    'Lexographer':{name:'Lexographer',
+        a1:'intelligence',
+        a2:'knowledge',
+        tier:2
+    },
+    'Luminen Shock':{name:'Luminen Shock',
+        a1:'weapon skill',
+        a2:'tech',
+        tier:2
+    },
+    'Maglev Transcendence':{name:'Maglev Transcendence',
+        a1:'intelligence',
+        a2:'tech',
+        tier:2
+    },
+    'Marksman':{name:'Marksman',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Mechadendrite Use (choose)':{name:'Mechadendrite Use (choose)',
+        a1:'intelligence',
+        a2:'tech',
+        tier:2
+    },
+    'One-on-One':{name:'One-on-One',
+        a1:'finesse',
+        a2:'weapon skill',
+        tier:2
+    },
+    'Penitent Psyker':{name:'Penitent Psyker',
+        a1:'psyker',
+        a2:'defence',
+        tier:2
+    },
+    'Precision Killer':{name:'Precision Killer',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Precision Killer':{name:'Precision Killer',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Prosanguine':{name:'Prosanguine',
+        a1:'toughness',
+        a2:'tech',
+        tier:2
+    },
+    'Purity of Hatred':{name:'Purity of Hatred',
+        a1:'offence',
+        a2:'willpower',
+        tier:2
+    },
+    'Rites of Banishment':{name:'Rites of Banishment',
+        a1:'offence',
+        a2:'willpower',
+        tier:2
+    },
+    'Strong Minded':{name:'Strong Minded',
+        a1:'willpower',
+        a2:'defence',
+        tier:2
+    },
+    'Swift Attack':{name:'Swift Attack',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Tainted Psyker':{name:'Tainted Psyker',
+        a1:'knowledge',
+        a2:'psyker',
+        tier:2
+    },
+    'Two-Weapon Wielder':{name:'Two-Weapon Wielder',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Two-Weapon Wielder':{name:'Two-Weapon Wielder',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Unarmed Specialist':{name:'Unarmed Specialist',
+        a1:'strength',
+        a2:'offence',
+        tier:2
+    },
+    'Warp Conduit':{name:'Warp Conduit',
+        a1:'willpower',
+        a2:'psyker',
+        tier:2
+    },
+    'Whirlwind of Death':{name:'Whirlwind of Death',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:2
+    },
+    'Witch Finder':{name:'Witch Finder',
+        a1:'knowledge',
+        a2:'perception',
+        tier:2
+    },
+    'Xenosavant':{name:'Xenosavant',
+        a1:'intelligence',
+        a2:'knowledge',
+        tier:2
+    },
+    'Adamantium Faith':{name:'Adamantium Faith',
+        a1:'willpower',
+        a2:'defence',
+        tier:3
+    },
+    'Aegis of Contempt':{name:'Aegis of Contempt',
+        a1:'defence',
+        a2:'leadership',
+        tier:3
+    },
+    'Assassin Strike':{name:'Assassin Strike',
+        a1:'weapon skill',
+        a2:'fieldcraft',
+        tier:3
+    },
+    'Bastion of Iron Will':{name:'Bastion of Iron Will',
+        a1:'willpower',
+        a2:'psyker',
+        tier:3
+    },
+    'Blademaster':{name:'Blademaster',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:3
+    },
+    'Crushing Blow':{name:'Crushing Blow',
+        a1:'weapon skill',
+        a2:'offence',
+        tier:3
+    },
+    'Daemonic Disruption':{name:'Daemonic Disruption',
+        a1:'willpower',
+        a2:'general',
+        tier:3
+    },
+    'Dark Soul':{name:'Dark Soul',
+        a1:'toughness',
+        a2:'willpower',
+        tier:3
+    },
+    'Deathdealer':{name:'Deathdealer',
+        a1:'perception',
+        a2:'finesse',
+        tier:3
+    },
+    'Delicate Interrogation':{name:'Delicate Interrogation',
+        a1:'intelligence',
+        a2:'finesse',
+        tier:3
+    },
+    'Divine Protection':{name:'Divine Protection',
+        a1:'general',
+        a2:'finesse',
+        tier:3
+    },
+    'Eye of Vengeance':{name:'Eye of Vengeance',
+        a1:'ballistic skill',
+        a2:'offence',
+        tier:3
+    },
+    'Favored by the Warp':{name:'Favored by the Warp',
+        a1:'willpower',
+        a2:'psyker',
+        tier:3
+    },
+    'Flash of Insight':{name:'Flash of Insight',
+        a1:'perception',
+        a2:'knowledge',
+        tier:3
+    },
+    'Halo of Command':{name:'Halo of Command',
+        a1:'fellowship',
+        a2:'leadership',
+        tier:3
+    },
+    'Hammer Blow':{name:'Hammer Blow',
+        a1:'strength',
+        a2:'offence',
+        tier:3
+    },
+    'Hull Down':{name:'Hull Down',
+        a1:'agility',
+        a2:'fieldcraft',
+        tier:3
+    },
+    'Indomitable Conviction':{name:'Indomitable Conviction',
+        a1:'leadership',
+        a2:'willpower',
+        tier:3
+    },
+    'Infused Knowledge':{name:'Infused Knowledge',
+        a1:'intelligence',
+        a2:'knowledge',
+        tier:3
+    },
+    'Instrument of His Will':{name:'Instrument of His Will',
+        a1:'offence',
+        a2:'willpower',
+        tier:3
+    },
+    'Into the Jaws of Hell':{name:'Into the Jaws of Hell',
+        a1:'leadership',
+        a2:'willpower',
+        tier:3
+    },
+    'Iron Faith':{name:'Iron Faith',
+        a1:'defence',
+        a2:'willpower',
+        tier:3
+    },
+    'Lightning Attack':{name:'Lightning Attack',
+        a1:'weapon skill',
+        a2:'finesse',
+        tier:3
+    },
+    'Luminen Blast':{name:'Luminen Blast',
+        a1:'ballistic skill',
+        a2:'tech',
+        tier:3
+    },
+    'Mastery (choose)':{name:'Mastery (choose)',
+        a1:'intelligence',
+        a2:'knowledge',
+        tier:3
+    },
+    'Mighty Shot':{name:'Mighty Shot',
+        a1:'ballistic skill',
+        a2:'offence',
+        tier:3
+    },
+    'Never Die':{name:'Never Die',
+        a1:'toughness',
+        a2:'defence',
+        tier:3
+    },
+    'Preternatural Speed':{name:'Preternatural Speed',
+        a1:'agility',
+        a2:'offence',
+        tier:3
+    },
+    'Push the Limit':{name:'Push the Limit',
+        a1:'perception',
+        a2:'tech',
+        tier:3
+    },
+    'Sanctic Purity':{name:'Sanctic Purity',
+        a1:'psyker',
+        a2:'willpower',
+        tier:3
+    },
+    'Shield Wall':{name:'Shield Wall',
+        a1:'defence',
+        a2:'weapon skill',
+        tier:3
+    },
+    'Sprint':{name:'Sprint',
+        a1:'agility',
+        a2:'fieldcraft',
+        tier:3
+    },
+    'Step Aside':{name:'Step Aside',
+        a1:'agility',
+        a2:'defence',
+        tier:3
+    },
+    'Superior Chirurgeon':{name:'Superior Chirurgeon',
+        a1:'intelligence',
+        a2:'fieldcraft',
+        tier:3
+    },
+    'Target Selection':{name:'Target Selection',
+        a1:'ballistic skill',
+        a2:'finesse',
+        tier:3
+    },
+    'Thunder Charge':{name:'Thunder Charge',
+        a1:'strength',
+        a2:'offence',
+        tier:3
+    },
+    'True Grit':{name:'True Grit',
+        a1:'toughness',
+        a2:'defence',
+        tier:3
+    },
+    'Two-Weapon Master':{name:'Two-Weapon Master',
+        a1:'finesse',
+        a2:'offence',
+        tier:3
+    },
+    'Warp Lock':{name:'Warp Lock',
+        a1:'willpower',
+        a2:'psyker',
+        tier:3
+    },
+    'Weapon Intuition':{name:'Weapon Intuition',
+        a1:'intelligence',
+        a2:'finesse',
+        tier:3
+    }
+};
