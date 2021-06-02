@@ -1,7 +1,8 @@
 on('ready', () => {
-    sendChat('test', 'started');
-    log('started');
+    //sendChat('test', 'started');
+    //log('started');
 });
+const savedRolls = {};
 
 const Characteristics = [
     'weapon_skill',
@@ -15,20 +16,6 @@ const Characteristics = [
     'fellowship',
     'influence',
 ];
-
-//on('change:attribute', (ev) => {
-//    const charId = ev.get('_characterid');
-//    const eventName = ev.get('name');
-//    const eventValue = ev.get('current');
-//    //log(`Change ${eventName} ${eventValue}`);
-//});
-//
-//on('add:attribute', (ev) => {
-//    const charId = ev.get('_characterid');
-//    const eventName = ev.get('name');
-//    const eventValue = ev.get('current');
-//    //log(`Add ${eventName} ${eventValue}`);
-//});
 
 function sanitizeToNumber(input) {
     let num = 0;
@@ -77,74 +64,26 @@ function processInlinerolls(msg) {
     }
 };
 
-const savedRolls = {};
-function calcWeaponHit(who, playerId, paramArray, fate) {
-    const charId = paramArray[0];
-    const prefix = paramArray[1];
-    let weaponType = 'melee_weapon';
-    if (prefix.indexOf('rangedweapons') !== -1) {
-        weaponType = 'ranged_weapon';
-    }
-    const weaponId = paramArray[2];
-    const skill = sanitizeToNumber(paramArray[3]);
-    const aimMod = sanitizeToNumber(paramArray[4]);
-    const rangeMod = sanitizeToNumber(paramArray[5]);
-    const meleeAttackType = sanitizeToNumber(paramArray[5]);
-    let rofMod = sanitizeToNumber(paramArray[6]);
-    let supressingFireMode = 'none';
-    if (rofMod === -21) {
-        supressingFireMode = 'semi';
-        rofMod = -20;
-    } else if (rofMod === -22) {
-        supressingFireMode = 'auto';
-        rofMod = -20;
-    }
-    const firingModeMod = sanitizeToNumber(paramArray[7]);
-    const modifier = sanitizeToNumber(paramArray[8]);
-    let roll = sanitizeToNumber(paramArray[9]);
-    if (fate) {
-        roll = Math.floor(Math.random() * 100) + 1; 
-    }
+function getWeaponSpecials(prefix, weaponId, weaponType, charId) {
     const specials = [];
-    const mods = [];
-    const result = [];
-    let jam = {
-        jammed: false,
-        status: ''
-    };
-
-    result.push(getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_name`));
-    if (weaponType === 'ranged_weapon') {
-        result.push('Ballistic skill');
-    } else {
-        result.push('Weapon skill');
-    }
-    result.push(skill);
-    result.push('Aim');
-    result.push(aimMod);
-    if (weaponType === 'ranged_weapon') {
-        result.push('Range');
-        result.push(rangeMod);
-        result.push('RoF');
-        result.push(rofMod);
-    }
-    if (weaponType === 'melee_weapon') {
-        result.push('Attack type');
-        result.push(meleeAttackType);
-    }
-    result.push('Roll');
-    result.push(roll);
     for (let a = 1; a < 4; a++) {
         specials.push({
             'val': getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_special${a}`),
-            'x': sanitizeToNumber(getAttrByName(paramArray[0], `${prefix}_${weaponId}_${weaponType}_special${a}_x`))
+            'x': sanitizeToNumber(getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_special${a}_x`))
         });
     }
+    return specials;
+}
+function getWeaponMods(prefix, weaponId, weaponType, charId) {
+    const mods = [];
     for (let a = 1; a < 5; a++) {
         mods.push({
             'val': getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_mod${a}`)
         });
     }
+    return mods;
+}
+function checkWeaponSpecials(specials, result, jam, roll, aimMod, rangeMod) {
     for (let a = 0; a < specials.length; a++) {
         switch(specials[a].val) {
             case 'accurate':
@@ -180,6 +119,8 @@ function calcWeaponHit(who, playerId, paramArray, fate) {
             break;
         }
     }
+}
+function checkWeaponMods(mods, result, aimMod, rofMod) {
     for (let a = 0; a < mods.length; a++) {
         if (result.includes(mods[a].val)) {
             continue;
@@ -233,11 +174,8 @@ function calcWeaponHit(who, playerId, paramArray, fate) {
             break;
         }
     }
-    if (modifier !== 0) {
-        result.push('Modifier');
-        result.push(modifier);
-    }
-
+}
+function calculateAmmoUsage(charId, prefix, weaponId, weaponType, jam, roll, rofMod, supressingFireMode, firingModeMod, fate) {
     let bulletsUsed = 0;
     let ammoBefore = 0;
     if (weaponType === 'ranged_weapon') {
@@ -249,10 +187,9 @@ function calcWeaponHit(who, playerId, paramArray, fate) {
             name: `${prefix}_${weaponId}_${weaponType}_clip`
         }, {caseInsensitive: true})[0];
         let ammo = sanitizeToNumber(currentAmmo.get('current'));
-        if (fate && savedRolls[playerId] && savedRolls[playerId].ammo) {
-            ammo = savedRolls[playerId].ammo
+        if (fate && savedRolls[weaponId] && savedRolls[weaponId].ammoBefore) {
+            ammo = savedRolls[weaponId].ammoBefore
         }
-        bulletsUsed = 0;
         ammoBefore = ammo;
         if (rofMod === 10 || (rofMod === -20 && supressingFireMode === 'none')) {
             if (jam.status === '' && roll >= 96) {
@@ -295,18 +232,76 @@ function calcWeaponHit(who, playerId, paramArray, fate) {
         }
         currentAmmo.set('current', ammo);
     }
-    savedRolls[playerId] = {
-        ammo: ammoBefore,
-        paramArray: paramArray,
-        type: 'hit'
-    };
-    savedRolls[weaponId] = {
-        aim: aimMod,
+    return {bulletsUsed, ammoBefore};
+}
+function calcWeaponHit(who, playerId, paramArray, msg, fate) {
+    const charId = paramArray[0];
+    const prefix = paramArray[1];
+    let weaponType = 'melee_weapon';
+    if (prefix.indexOf('rangedweapons') !== -1) {
+        weaponType = 'ranged_weapon';
     }
+    const weaponId = paramArray[2];
+    const skill = sanitizeToNumber(paramArray[3]);
+    const aimMod = sanitizeToNumber(paramArray[4]);
+    const rangeMod = sanitizeToNumber(paramArray[5]);
+    const meleeAttackType = sanitizeToNumber(paramArray[5]);
+    let rofMod = sanitizeToNumber(paramArray[6]);
+    let supressingFireMode = 'none';
+    if (rofMod === -21) {
+        supressingFireMode = 'semi';
+        rofMod = -20;
+    } else if (rofMod === -22) {
+        supressingFireMode = 'auto';
+        rofMod = -20;
+    }
+    const firingModeMod = sanitizeToNumber(paramArray[7]);
+    const modifier = sanitizeToNumber(paramArray[8]);
+    const roll = sanitizeToNumber(paramArray[9]);
+    const result = [];
+    let jam = {
+        jammed: false,
+        status: ''
+    };
+    result.push(getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_name`));
+    if (weaponType === 'ranged_weapon') {
+        result.push('Ballistic skill');
+    } else {
+        result.push('Weapon skill');
+    }
+    result.push(skill);
+    result.push('Aim');
+    result.push(aimMod);
+    if (weaponType === 'ranged_weapon') {
+        result.push('Range');
+        result.push(rangeMod);
+        result.push('RoF');
+        result.push(rofMod);
+    }
+    if (weaponType === 'melee_weapon') {
+        result.push('Attack type');
+        result.push(meleeAttackType);
+    }
+    if (modifier !== 0) {
+        result.push('Modifier');
+        result.push(modifier);
+    }
+    result.push('Roll');
+    result.push(roll);
+
+    const specials = getWeaponSpecials(prefix, weaponId, weaponType, charId);
+    const mods = getWeaponMods(prefix, weaponId, weaponType, charId);
+    checkWeaponSpecials(specials, result, jam, roll, aimMod, rangeMod);
+    checkWeaponMods(mods, result, aimMod, rofMod);
+    const {bulletsUsed, ammoBefore} = calculateAmmoUsage(charId, prefix, weaponId, weaponType, jam, roll, rofMod, supressingFireMode, firingModeMod, fate);
+    saveRollInfo(weaponId, 'ammoBefore', ammoBefore);
+    saveRollInfo(weaponId, 'aim', aimMod);
+
     postWeaponHitInfo(who, charId, prefix, weaponId, weaponType, bulletsUsed, ammoBefore, jam.jammed, playerId);
-    postRollTemplateResult(who, result, weaponId);
+    postRollTemplateResult(who, playerId, result, weaponId);
     postHitLocationInfo(who, roll);
 }
+
 
 function postHitLocationInfo(who, roll) {
     let hitLocation = 1;
@@ -352,16 +347,27 @@ function postWeaponHitInfo(who, charId, prefix, weaponId, weaponType, bulletsUse
         sendChat(who, `<br/><div style="padding:5px;font-style:italic;text-align: center;font-weight: bold;background-color:#F5E4D3;color:#653E10">${who} exclaims "Be cut apart by the Emperors wrath"<div>`);
     }
 }
-
-function postRollTemplateResult(who, paramArray, weaponId) {
+/*
+paramArray:
+NAME
+...
+key
+value
+key
+value
+...
+Roll
+rollValue
+*/
+function postRollTemplateResult(who, playerId, result, weaponId) {
     const paramMap = {};
     let roll = -1;
-    const name = paramArray[0];
-    for (let a = 1; a < paramArray.length; a+=2) {
-        if (paramArray[a] === 'Roll') {
-            roll = sanitizeToNumber(paramArray[a + 1]);
+    const name = result[0];
+    for (let a = 1; a < result.length; a+=2) {
+        if (result[a] === 'Roll') {
+            roll = sanitizeToNumber(result[a + 1]);
         } else {
-            paramMap[paramArray[a]] = sanitizeToNumber(paramArray[a + 1]);
+            paramMap[result[a]] = sanitizeToNumber(result[a + 1]);
         }
     }
     const keys = Object.keys(paramMap);
@@ -382,13 +388,18 @@ function postRollTemplateResult(who, paramArray, weaponId) {
         output += ` {{Degreesm=-${degOfSuc}}}`;
         degOfSuc = -degOfSuc;
     }
-    if (weaponId && savedRolls[weaponId] === undefined) {
-        savedRolls[weaponId] = {};
-    }
-    if (weaponId) {
-        savedRolls[weaponId].degOfSuc = degOfSuc;
-    }
+    saveRollInfo(weaponId, 'degOfSuc', degOfSuc);
     sendChat(who, output);
+}
+
+function saveRollInfo(id, key, value) {
+    if (id === undefined || typeof id !== 'string') {
+        return
+    }
+    if (savedRolls[id] === undefined) {
+        savedRolls[id] = {};
+    }
+    savedRolls[id][key] = value;
 }
 
 function useFatePoint(charId, who) {
@@ -409,7 +420,85 @@ function useFatePoint(charId, who) {
     return true;
 }
 
-function calcWeaponDmg(who, playerId, paramArray, msg, fate) {
+/*
+type R
+    roll
+type M
+    + or - value like "+4", "+4+22", "-2-22+22"
+    will always be "+4+58-58" without space
+    can also be direct number 10
+type C
+    can be ignored
+*/
+function checkMinMax(msg) {
+    let min = false;
+    let max = false;
+    for (let a = 0; a < msg.inlinerolls.length; a++) {
+        const inlineroll = msg.inlinerolls[a];
+        let previousRolls = 0;
+        let newRolls = 0;
+        for (let b = 0; b < inlineroll.results.rolls.length; b++) {
+            const roll = inlineroll.results.rolls[b];
+            if (roll.type === 'R') {
+                for (let c = 0; c < roll.results.length; c++) {
+                    if (roll.results[c].v === roll.sides) {
+                        max = true;
+                    }
+                    if (roll.results[c].v === 1) {
+                        min = true;
+                    }
+                }
+            }
+        }
+    }
+    return {min, max};
+}
+
+function rerollMsg(msg) {
+    for (let a = 0; a < msg.inlinerolls.length; a++) {
+        const inlineroll = msg.inlinerolls[a];
+        let previousRolls = 0;
+        let newRolls = 0;
+        for (let b = 0; b < inlineroll.results.rolls.length; b++) {
+            const roll = inlineroll.results.rolls[b];
+            if (roll.type === 'R') {
+                for (let c = 0; c < roll.results.length; c++) {
+                    previousRolls += roll.results[c].v;
+                    roll.results[c].v = Math.floor(Math.random() * roll.sides) + 1;
+                    newRolls += roll.results[c].v;
+                }
+            }
+        }
+        inlineroll.results.total = inlineroll.results.total - previousRolls + newRolls;
+    }
+}
+
+function getDmgTemplateString(msg) {
+    let damageRolls = '';
+    let rCounter = 1;
+    let mCounter = 1;
+    for (let a = 0; a < msg.inlinerolls.length; a++) {
+        const inlineroll = msg.inlinerolls[a];
+        let previousRolls = 0;
+        let newRolls = 0;
+        for (let b = 0; b < inlineroll.results.rolls.length; b++) {
+            const roll = inlineroll.results.rolls[b];
+            if (roll.type === 'R') {
+                for (let c = 0; c < roll.results.length; c++) {
+                    damageRolls += ` {{Dice ${rCounter}=${roll.results[c].v}}}`;
+                    rCounter++;
+                }
+            }
+            if (roll.type === 'M') {
+                damageRolls += ` {{Added Damage ${mCounter}=${roll.expr}}}`;
+                mCounter++;
+            }
+        }
+    }
+    return damageRolls;
+}
+
+function calcWeaponDmg(who, playerId, paramArray, msg) {
     const charId = paramArray[0];
     const prefix = paramArray[1];
     let weaponType = 'melee_weapon';
@@ -423,7 +512,8 @@ function calcWeaponDmg(who, playerId, paramArray, msg, fate) {
     const penetration = sanitizeToNumber(paramArray[4]);
     const type = paramArray[5];
     const name = paramArray[6];
-    const specials = [];
+    let damageRolls = getDmgTemplateString(msg);
+    let specials = [];
     let aimMod = 0;
     let degOfSuc = 0;
     if (weaponId && savedRolls[weaponId]) {
@@ -431,32 +521,10 @@ function calcWeaponDmg(who, playerId, paramArray, msg, fate) {
         degOfSuc = savedRolls[weaponId].degOfSuc;
     }
     if (weaponType === 'melee_weapon' || weaponType === 'ranged_weapon' ) {
-        for (let a = 1; a < 4; a++) {
-            specials.push({
-                'val': getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_special${a}`),
-                'x': sanitizeToNumber(getAttrByName(paramArray[0], `${prefix}_${weaponId}_${weaponType}_special${a}_x`))
-            });
-        }
+        specials = getWeaponSpecials(prefix, weaponId, weaponType, charId);
     }
     let border = '';
-    let min = false;
-    let max = false;
-    for (let a = 0; a < msg.inlinerolls.length; a++) {
-        const inlineroll = msg.inlinerolls[a];
-        for (let c = 0; c < inlineroll.results.rolls.length; c++) {
-            const roll = inlineroll.results.rolls[c];
-            if (roll.type === 'R') {
-                for (let b = 0; b < roll.results.length; b++) {
-                    if (roll.results[b].v === roll.sides) {
-                        max = true;
-                    }
-                    if (roll.results[b].v === 1) {
-                        min = true;
-                    }
-                }
-            }
-        }
-    }
+    const {min, max} = checkMinMax(msg);
     if (min) {
         border = 'rolltemplate-container-damage-value-min';
     }
@@ -474,30 +542,39 @@ function calcWeaponDmg(who, playerId, paramArray, msg, fate) {
                 accurate = true;
             }
         }
-        if (accurate) {
+        if (accurate && aimMod > 0) {
             let num = Math.floor((degOfSuc - 1) / 2);
             if (num > 2) {
                 num = 2;
             }
             if (num === 1) {
-                damage += Math.floor(Math.random() * 10) + 1;
+                const accRoll1 = Math.floor(Math.random() * 10) + 1;
+                damageRolls += ` {{Accurate 1=${accRoll1}}}`;
+                damage += accRoll1;
             } else if (num === 2) {
-                damage += Math.floor(Math.random() * 10) + 1; 
-                damage += Math.floor(Math.random() * 10) + 1; 
+                const accRoll1 = Math.floor(Math.random() * 10) + 1;
+                const accRoll2 = Math.floor(Math.random() * 10) + 1;
+                damageRolls += ` {{Accurate 1=${accRoll1}}}`;
+                damageRolls += ` {{Accurate 2=${accRoll2}}}`;
+                damage += accRoll1;
+                damage += accRoll2;
             }
         }
     }
+    if (weaponType === 'ranged_weapon' ) {
+        
+    }
     let output = `&{template:dh2e2021damage} {{Name=${name}}}`;
     output += ` {{Who=${who}}}`;
-    output += ` {{WeaponName=${name}}}`;
     output += ` {{Damage=${damage}}}`;
     output += ` {{Penetration=${penetration}}}`;
     output += ` {{Type=${type}}}`;
     output += ` {{Border=${border}}}`;
+    output += damageRolls;
     sendChat(who, output);
 }
 
-function calcFocusPower(who, playerId, paramArray, fate) {
+function calcFocusPower(who, playerId, paramArray) {
     const charId = paramArray[0];
     const focusName = paramArray[1];
     const characteristic = sanitizeToNumber(paramArray[2]);
@@ -505,10 +582,7 @@ function calcFocusPower(who, playerId, paramArray, fate) {
     const psyUse = sanitizeToNumber(paramArray[4]);
     const psyniscienceSkill = sanitizeToNumber(paramArray[5]) - 20;
     const modifier = sanitizeToNumber(paramArray[6]);
-    let roll = sanitizeToNumber(paramArray[7]);
-    if (fate) {
-        roll = Math.floor(Math.random() * 100) + 1; 
-    }
+    const roll = sanitizeToNumber(paramArray[7]);
     const result = [];
     result.push('F.P. ' + focusName);
     result.push(focusName);
@@ -527,13 +601,13 @@ function calcFocusPower(who, playerId, paramArray, fate) {
     }
     result.push('Roll');
     result.push(roll);
-    postRollTemplateResult(who, result);
+    postRollTemplateResult(who, playerId, result);
     if (roll % 11 === 0 || roll === 100) {
         sendChat(who, `Something stirs in the warp... <br/>Roll for Psychic Phenomena`);
     }
 }
 
-function calcPsyHit(who, playerId, paramArray, fate) {
+function calcPsyHit(who, playerId, paramArray) {
     const charId = paramArray[0];
     const prefix = paramArray[1];
     const psyPowerId = paramArray[2];
@@ -547,10 +621,7 @@ function calcPsyHit(who, playerId, paramArray, fate) {
     const modifier = sanitizeToNumber(paramArray[10]);
     const psynicienceSkill = sanitizeToNumber(paramArray[11]) - 20;
     const powerModifier = sanitizeToNumber(paramArray[12]);
-    let roll = sanitizeToNumber(paramArray[13]);
-    if (fate) {
-        roll = Math.floor(Math.random() * 100) + 1; 
-    }
+    const roll = sanitizeToNumber(paramArray[13]);
 
     const result = [];
     result.push(psyName);
@@ -578,7 +649,7 @@ function calcPsyHit(who, playerId, paramArray, fate) {
     }
     result.push('Roll');
     result.push(roll);
-    postRollTemplateResult(who, result);
+    postRollTemplateResult(who, playerId, result);
     postHitLocationInfo(who, roll);
     if (roll % 11 === 0 || roll === 100) {
         sendChat(who, `Something stirs in the warp... <br/>Roll for Psychic Phenomena`);
@@ -586,80 +657,42 @@ function calcPsyHit(who, playerId, paramArray, fate) {
 }
 
 on('chat:message', function (msg) {
+    const playerId = msg.playerid;
     const rollCmd = '!dh2e2021roll ';
     const weaponHitCmd = '!dh2e2021weaponhit ';
     const weaponDamageCmd = '!dh2e2021damage ';
-    const fateWeaponHitCmd = '!dh2e2021fateweaponhit ';
+    const fateCmd = '!dh2e2021fate ';
     const focusPowerCmd = '!dh2e2021focuspower ';
     const psyHitCmd = '!dh2e2021psyhit ';
-    const playerId = msg.playerid;
-
-    if (msg.type === 'api' && msg.content.indexOf(rollCmd) !== -1) {
-        const content = processInlinerolls(msg);
-        const paramArray = content.slice(rollCmd.length).split(',');
-        postRollTemplateResult(msg.who, paramArray);
+    let fate = false;
+    log(JSON.stringify(msg, undefined, 2));
+    const commands = [
+        {cmd: rollCmd, fn: postRollTemplateResult},
+        {cmd: weaponHitCmd, fn: calcWeaponHit},
+        {cmd: weaponDamageCmd, fn: calcWeaponDmg},
+        {cmd: focusPowerCmd, fn: calcFocusPower},
+        {cmd: psyHitCmd, fn: calcPsyHit}
+    ];
+    if (msg.type !== 'api') {
+        return;
     }
-
-    if (msg.type === 'api' && msg.content.indexOf(weaponHitCmd) !== -1) {
+    if (msg.content.indexOf(fateCmd) !== -1 && savedRolls[playerId] && savedRolls[playerId].msg) {
         const content = processInlinerolls(msg);
-        const paramArray = content.slice(weaponHitCmd.length).split(',');
-        calcWeaponHit(msg.who, playerId, paramArray, false);
-    }
-
-    if (msg.type === 'api' && msg.content.indexOf(weaponDamageCmd) !== -1) {
-        const content = processInlinerolls(msg);
-        const paramArray = content.slice(weaponDamageCmd.length).split(',');
-        savedRolls[playerId] = {
-            msg: msg,
-            type: 'damage'
-        };
-        calcWeaponDmg(msg.who, playerId, paramArray, msg, false);
-    }
-
-    if (msg.type === 'api' && msg.content.indexOf(focusPowerCmd) !== -1) {
-        const content = processInlinerolls(msg);
-        const paramArray = content.slice(focusPowerCmd.length).split(',');
-        savedRolls[playerId] = {
-            msg: msg,
-            type: 'focuspower'
-        };
-        calcFocusPower(msg.who, playerId, paramArray, false);
-    }
-
-    if (msg.type === 'api' && msg.content.indexOf(psyHitCmd) !== -1) {
-        const content = processInlinerolls(msg);
-        const paramArray = content.slice(psyHitCmd.length).split(',');
-        savedRolls[playerId] = {
-            msg: msg,
-            type: 'psyhit'
-        };
-        calcPsyHit(msg.who, playerId, paramArray, false);
-    }
-
-    if (msg.type === 'api' && msg.content.indexOf(fateWeaponHitCmd) !== -1) {
-        const content = processInlinerolls(msg);
-        const paramArray = content.slice(fateWeaponHitCmd.length).split(',');
-        if (savedRolls[playerId] && savedRolls[playerId].type === 'hit' && useFatePoint(paramArray[0], msg.who)) {
-            const savedParamArray = savedRolls[playerId].paramArray;
-            calcWeaponHit(msg.who, playerId, savedParamArray, true);
+        const paramArray = content.slice(fateCmd.length).split(',');
+        if (!useFatePoint(paramArray[0], msg.who)) {
+            return;
         }
-        if (savedRolls[playerId] && savedRolls[playerId].type === 'damage' && useFatePoint(paramArray[0], msg.who)) {
-            const msg2 = savedRolls[playerId].msg;
-            const content2 = processInlinerolls(msg2);
-            const paramArray2 = content2.slice(weaponDamageCmd.length).split(',');
-            calcWeaponDmg(msg.who, playerId, paramArray2, msg2, true);
-        }
-        if (savedRolls[playerId] && savedRolls[playerId].type === 'focuspower' && useFatePoint(paramArray[0], msg.who)) {
-            const msg2 = savedRolls[playerId].msg;
-            const content2 = processInlinerolls(msg2);
-            const paramArray2 = content2.slice(focusPowerCmd.length).split(',');
-            calcFocusPower(msg.who, playerId, paramArray2, true);
-        }
-        if (savedRolls[playerId] && savedRolls[playerId].type === 'psyhit' && useFatePoint(paramArray[0], msg.who)) {
-            const msg2 = savedRolls[playerId].msg;
-            const content2 = processInlinerolls(msg2);
-            const paramArray2 = content2.slice(psyHitCmd.length).split(',');
-            calcPsyHit(msg.who, playerId, paramArray2, true);
+        msg = savedRolls[playerId].msg
+        rerollMsg(msg);
+        fate = true;
+    }
+    for (let a = 0; a < commands.length; a++) {
+        if (msg.content.indexOf(commands[a].cmd) !== -1) {
+            saveRollInfo(playerId, 'msg', msg);
+            const content = processInlinerolls(msg);
+            const paramArray = content.slice(commands[a].cmd.length).split(',');
+            commands[a].fn(msg.who, playerId, paramArray, msg, fate);
+            break;
         }
     }
 });

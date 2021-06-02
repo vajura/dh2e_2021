@@ -390,7 +390,7 @@
 				<div class="margin2" />
 				<input class="width-min70 text-align-center" name="attr_fate" type="number">
 				<div class="margin2" />
-				<button name="roll_fate" type="roll" value="!dh2e2021fateweaponhit @{character_id}">
+				<button name="roll_fate" type="roll" value="!dh2e2021fate @{character_id}">
 					<span data-i18n="use-fate-u">Use fate</span>
 				</button>
 				<div class="margin5" />
@@ -1958,15 +1958,15 @@
 						<input class="text-align-center width-min40" name="attr_ranged_weapon_single" type="text" value="S" />
 						<div class="margin1" />
 						<span class="input-text width-min15">/</span>
-						<input class="text-align-center width-min40" name="attr_ranged_weapon_semi" type="text" value="0" />
+						<input class="text-align-center width-min40" name="attr_ranged_weapon_semi" type="number" value="0" />
 						<div class="margin1" />
 						<span class="input-text width-min15">/</span>
-						<input class="text-align-center width-min40" name="attr_ranged_weapon_full" type="text" value="0" />
+						<input class="text-align-center width-min40" name="attr_ranged_weapon_full" type="number" value="0" />
 						<span class="input-text width-min50" data-i18n="clip-u">Clip:</span>
-						<input class="text-align-center width-min40" name="attr_ranged_weapon_clip" type="text" value="0" />
+						<input class="text-align-center width-min40" name="attr_ranged_weapon_clip" type="number" value="0" />
 						<div class="margin1" />
 						<span class="input-text width-min15">/</span>
-						<input class="text-align-center width-min40" name="attr_max_ranged_weapon_clip" type="text" value="0" />
+						<input class="text-align-center width-min40" name="attr_max_ranged_weapon_clip" type="number" value="0" />
 						<span class="input-text width-min50" data-i18n="reload-u">Reload:</span>
 						<input class="text-align-center width-min40" name="attr_ranged_weapon_reload" type="text" value="Full" />
 					</div>
@@ -2628,7 +2628,7 @@
 					<div class="margin2" />
 					<input class="flex-item10" name="attr_gear" type="text">
 					<div class="margin2" />
-					<input class="flex-item1 text-align-center" name="attr_gear_weight" type="number" placeholder="kg" value="0">
+					<input class="flex-item1 text-align-center" name="attr_gear_weight" type="number" value="0">
 					<div class="margin2" />
 					<input class="flex-item1 text-align-center" name="attr_gear_page" type="text" placeholder="pg#">
 				</div>
@@ -3579,8 +3579,18 @@
 
 <rolltemplate class="sheet-rolltemplate-dh2e2021damage">
 	<div class="rolltemplate-container-damage">
-		<span>{{Who}} attacks with {{WeaponName}}.</span>
+		<span>{{Who}} attacks with {{Name}}.</span>
 		<span>Dealing <span class="rolltemplate-container-damage-value {{Border}}">{{Damage}}</span> {{Type}} dmg (pen: {{Penetration}}).</span>
+		{{#allprops() Damage Type Penetration Who Border Name}}
+			<div class="rolltemplate-flex-row-space-around">
+				<div class="flex-item1">
+					<span>{{key}}</span>
+				</div>
+				<div class="flex-item1">
+					<span>{{value}}</span>
+				</div>
+			</div>
+		{{/allprops() Damage Type Penetration Who Border Name}}
 	</div>
 </rolltemplate>
 <rolltemplate class="sheet-rolltemplate-dh2e2021roll">
@@ -3597,7 +3607,7 @@
 					<div class="rolltemplate-flex-column">
 						<span>{{key}}</span>
 					</div>
-					<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center">
+					<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center flex-item1">
 						<span>{{value}}</span>
 					</div>
 				</div>
@@ -3711,7 +3721,7 @@ function getSectionIDsAsync(sectionName){
         setActiveCharacterId(prevAcid); 
     });
 }
-function getSingleAttrAsync(prop){ 
+function getSingleAttrAsync(prop) { 
     var acid=getActiveCharacterId(); 
     var prevAcid=null;               
     return new Promise((resolve,reject)=>{
@@ -3724,6 +3734,22 @@ function getSingleAttrAsync(prop){
         setActiveCharacterId(prevAcid); 
     });
 }
+function sanitizeToNumber(input) {
+    let num = 0;
+    if (typeof input !== 'number' && typeof input !== 'string') {
+        return num;
+    }
+    if (typeof input === 'string') {
+        num = parseFloat(input);
+    } else {
+        num = input;
+    }
+    if (num === NaN) {
+        return 0;
+    }
+    return num;
+}
+
 const Characteristics = [
     'weapon_skill',
     'ballistic_skill',
@@ -3747,14 +3773,42 @@ for (let a = 0; a < Characteristics.length; a++) {
         });
     });
 }
-on(`change:max_base_wounds sheet:opened`, () => {
+
+const repeatingHiddenValues = [
+	{name:'repeating_psypowers1', suffix:'psypower_hidden_row_id'},
+	{name:'repeating_psypowers2', suffix:'psypower_hidden_row_id'},
+	{name:'repeating_rangedweapons', suffix:'ranged_weapon_hidden_row_id'},
+	{name:'repeating_meleeweapons', suffix:'melee_weapon_hidden_row_id'},
+];
+for (let a = 0; a < repeatingHiddenValues.length; a++) {
+	on(`change:${repeatingHiddenValues[a].name}`, () => {
+		getSectionIDs(repeatingHiddenValues[a].name, (idarray) => {
+			const setOps = {};
+			for(let i = 0; i < idarray.length; i++) {
+				setOps[`${repeatingHiddenValues[a].name}_${idarray[i]}_${repeatingHiddenValues[a].suffix}`] = idarray[i];
+			}
+			setAttrs(setOps);
+		});
+	});
+}
+
+on(`change:max_base_wounds change:repeating_autoadvancements sheet:opened`, async () => {
     const attrs = [`max_base_wounds`];
+    const autoAdvanceValues = await getRepeatingSectionValues('repeating_autoadvancements', ['auto_advancement_1', 'auto_advancement_2', 'auto_advancement_3']);
+    const keys = Object.keys(autoAdvanceValues);
+    let soundConstitution = 0;
+    for (let a = 0; a < keys.length; a++) {
+    	if (autoAdvanceValues[keys[a]] === 'Sound Constitution') {
+    		soundConstitution++;
+    	}
+    }
     getAttrs(attrs, (values) => {
         const setAtt = {};
-        setAtt[`max_wounds`] = sanitizeToNumber(values[`max_base_wounds`]);
+        setAtt[`max_wounds`] = sanitizeToNumber(values[`max_base_wounds`]) + soundConstitution;
         setAttrs(setAtt);
     });
 });
+
 on(`change:strength change:toughness sheet:opened`, () => {
     const attrs = [`strength`, `toughness`];
     getAttrs(attrs, (values) => {
@@ -3765,160 +3819,49 @@ on(`change:strength change:toughness sheet:opened`, () => {
         setAttrs(setAtt);
     });
 });
-on("change:repeating_gear", () => {
-	getSectionIDs("repeating_gear", (idarray) => {
-		const attrs = [];
-		for(let i = 0; i < idarray.length; i++) {
-			attrs.push(`repeating_gear_${idarray[i]}_gear_weight`);
-		}
-		getAttrs(attrs, (values) => {
-			let sum = 0;
-			for(let a = 0; a < attrs.length; a++) {
-				sum += sanitizeToNumber(values[attrs[a]]);
-			}
-			setAttrs({
-				current_carry: sum.toFixed(2) + ' kg'
-			});
-		});
-	});
-});
-on("change:repeating_psypowers1", () => {
-	getSectionIDs("repeating_psypowers1", (idarray) => {
-		const setOps = {};
-		for(var i=0; i < idarray.length; i++) {
-			setOps[`repeating_psypowers1_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
-		}
-		setAttrs(setOps);
-	});
-});
-on("change:repeating_psypowers2", () => {
-	getSectionIDs("repeating_psypowers2", (idarray) => {
-		const setOps = {};
-		for(var i=0; i < idarray.length; i++) {
-			setOps[`repeating_psypowers2_${idarray[i]}_psypower_hidden_row_id`] = idarray[i];
-		}
-		setAttrs(setOps);
-	});
-});
-on("change:repeating_rangedweapons", () => {
-   getSectionIDs("repeating_rangedweapons", (idarray) => {
-      const setOps = {};
-      for(var i=0; i < idarray.length; i++) {
-         setOps[`repeating_rangedweapons_${idarray[i]}_ranged_weapon_hidden_row_id`] = idarray[i];
-      }
-      setAttrs(setOps);
-   });
-});
-on("change:repeating_meleeweapons", () => {
-   getSectionIDs("repeating_meleeweapons", (idarray) => {
-      const setOps = {};
-      for(var i=0; i < idarray.length; i++) {
-         setOps[`repeating_meleeweapons_${idarray[i]}_melee_weapon_hidden_row_id`] = idarray[i];
-      }
-      setAttrs(setOps);
-   });
-});
-function sanitizeToNumber(input) {
-    let num = 0;
-    if (typeof input !== 'number' && typeof input !== 'string') {
-        return num;
-    }
-    if (typeof input === 'string') {
-        num = parseFloat(input);
-    } else {
-        num = input;
-    }
-    if (num === NaN) {
-        return 0;
-    }
-    return num;
-}
 
-on('sheet:opened', (ev) => {
-    setAttrs({ hidden_api_trigger: "calc_all_fields_1" });
-    setAttrs({ hidden_api_trigger: "calc_all_fields_2" });
+on('change:repeating_gear', async () => {
+	const gearWeight = await getRepeatingSectionValues('repeating_gear', ['gear_weight']);
+	const keys = Object.keys(gearWeight);
+	let sum = 0;
+	for(let a = 0; a < keys.length; a++) {
+		sum += sanitizeToNumber(gearWeight[keys[a]]);
+	}
+    setAttrsAsync({current_carry: sum.toFixed(2) + ' kg'});
 });
+
 async function calcAdvExp() {
-	const advanceIds = await getSectionIDsAsync('repeating_advancements');
-	const autoAdvanceIds = await getSectionIDsAsync('repeating_autoadvancements');
-	const eliteAptitudeIds = await getSectionIDsAsync('repeating_eliteadvances');
-	const advanceData = [];
-	const autoAdvanceData = [];
-	const eliteAptitudeData = [];
-    for (let a = 0; a < advanceIds.length; a++) {
-        advanceData.push(`repeating_advancements_${advanceIds[a]}_advancement1exp`);
-        advanceData.push(`repeating_advancements_${advanceIds[a]}_advancement2exp`);
-        advanceData.push(`repeating_advancements_${advanceIds[a]}_advancement3exp`);
-    }
-    for (let a = 0; a < autoAdvanceIds.length; a++) {
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_1exp`);
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_2exp`);
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_3exp`);
-    }
-    for (let a = 0; a < eliteAptitudeIds.length; a++) {
-        eliteAptitudeData.push(`repeating_eliteadvances_${eliteAptitudeIds[a]}_elite_advance_exp`);
-    }
-    const advanceValues = await getAttrsAsync(advanceData);
-    const autoAdvanceValues = await getAttrsAsync(autoAdvanceData);
-    const eliteAptitudeValues = await getAttrsAsync(eliteAptitudeData);
     const expTotal = await getAttrsAsync(['exp_total']);
     let sum = 0;
-    for (let a = 0; a < advanceData.length; a++) {
-        sum += sanitizeToNumber(advanceValues[advanceData[a]]);
-    }
-    for (let a = 0; a < autoAdvanceData.length; a++) {
-        sum += sanitizeToNumber(autoAdvanceValues[autoAdvanceData[a]]);
-    }
-    for (let a = 0; a < eliteAptitudeData.length; a++) {
-        sum += sanitizeToNumber(eliteAptitudeValues[eliteAptitudeData[a]]);
+	let expNumbers = {};
+	const values = await Promise.all([
+		getRepeatingSectionValues('repeating_advancements', ['advancement1exp', 'advancement2exp', 'advancement3exp']),
+		getRepeatingSectionValues('repeating_autoadvancements', ['auto_advancement_1exp', 'auto_advancement_2exp', 'auto_advancement_3exp']),
+		getRepeatingSectionValues('repeating_eliteadvances', ['elite_advance_exp'])
+	]);
+	for (let a = 0; a < values.length; a++) {
+		expNumbers = {...expNumbers, ...(values[a])};
+	}
+    const keys = Object.keys(expNumbers);
+    for (let a = 0; a < keys.length; a++) {
+        sum += sanitizeToNumber(expNumbers[keys[a]]);
     }
     await setAttrsAsync({
         exp_spent: sum,
         exp_to_spend: sanitizeToNumber(expTotal['exp_total']) - sum
     });
 }
+
 on('change:repeating_autoadvancements', async () => {
-	const autoAdvanceIds = await getSectionIDsAsync('repeating_autoadvancements');
-	const aptitude1Ids = await getSectionIDsAsync('repeating_aptitude1');
-	const aptitude2Ids = await getSectionIDsAsync('repeating_aptitude2');
-	const eliteAptitudeIds = await getSectionIDsAsync('repeating_eliteadvances');
-	const autoAdvanceData = [];
-	const aptitude1Data = [];
-	const aptitude2Data = [];
-	const eliteAptitudeData = [];
-	const aptitudes = {};
-    for (let a = 0; a < autoAdvanceIds.length; a++) {
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_1`);
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_2`);
-        autoAdvanceData.push(`repeating_autoadvancements_${autoAdvanceIds[a]}_auto_advancement_3`);
-    }
-    for (let a = 0; a < aptitude1Ids.length; a++) {
-        aptitude1Data.push(`repeating_aptitude1_${aptitude1Ids[a]}_aptitudes`);
-    }
-    for (let a = 0; a < aptitude2Ids.length; a++) {
-        aptitude2Data.push(`repeating_aptitude2_${aptitude2Ids[a]}_aptitudes`);
-    }
-    for (let a = 0; a < eliteAptitudeIds.length; a++) {
-        eliteAptitudeData.push(`repeating_eliteadvances_${eliteAptitudeIds[a]}_elite_advance_aptitude`);
-    }
-    const autoAdvanceValues = await getAttrsAsync(autoAdvanceData);
-    const aptitude1Values = await getAttrsAsync(aptitude1Data);
-    const aptitude2Values = await getAttrsAsync(aptitude2Data);
-    const eliteAptitudeValues = await getAttrsAsync(eliteAptitudeData);
-    for (let a = 0; a < aptitude1Data.length; a++) {
-    	aptitudes[aptitude1Values[aptitude1Data[a]]] = true;
-    }
-    for (let a = 0; a < aptitude2Data.length; a++) {
-    	aptitudes[aptitude2Values[aptitude2Data[a]]] = true;
-    }
-    for (let a = 0; a < eliteAptitudeData.length; a++) {
-    	aptitudes[eliteAptitudeValues[eliteAptitudeData[a]]] = true;
-    }
-    for (let a = 0; a < autoAdvanceData.length; a++) {
-    	const value = autoAdvanceValues[autoAdvanceData[a]];
-        const attribute = autoAdvanceData[a] + 'exp';
+	const aptitudes = await getAptitudesMap();
+    const autoAdvanceValues = await getRepeatingSectionValues('repeating_autoadvancements', ['auto_advancement_1', 'auto_advancement_2', 'auto_advancement_3']);
+    const keys = Object.keys(autoAdvanceValues);
+    for (let a = 0; a < keys.length; a++) {
+    	const value = autoAdvanceValues[keys[a]];
+        const attribute = keys[a] + 'exp';
     	if (value === 'none') {
-	        await setAttrsAsync({[attribute]: 0});
+	        setAttrsAsync({[attribute]: 0});
+	        continue;
     	}
 	    const adv = advancements[value];
 	    if (adv) {
@@ -3930,11 +3873,40 @@ on('change:repeating_autoadvancements', async () => {
 	            match++;
 	        }
 	        const cost = advancementsCosts[adv.tier][match];
-	        await setAttrsAsync({[attribute]: cost});
+	        setAttrsAsync({[attribute]: cost});
 	    }
     }
     calcAdvExp();
 });
+
+async function getAptitudesMap() {
+	let aptitudeData = {};
+	const values = await Promise.all([
+		getRepeatingSectionValues('repeating_aptitude1', ['aptitudes']),
+		getRepeatingSectionValues('repeating_aptitude2', ['aptitudes']),
+		getRepeatingSectionValues('repeating_eliteadvances', ['elite_advance_aptitude'])
+	]);
+	for (let a = 0; a < values.length; a++) {
+		aptitudeData = {...aptitudeData, ...(values[a])};
+	}
+	const keys = Object.keys(aptitudeData);
+	const aptitudes = {};
+    for (let a = 0; a < keys.length; a++) {
+    	aptitudes[aptitudeData[keys[a]]] = true;
+    }
+    return aptitudes;
+}
+
+async function getRepeatingSectionValues(repeatingSectionName, suffixes) {
+	const repeatingSectionId = await getSectionIDsAsync(repeatingSectionName);
+	const attributes = [];
+	for (let a = 0; a < repeatingSectionId.length; a++) {
+		for (let b = 0; b < suffixes.length; b++) {
+			attributes.push(`${repeatingSectionName}_${repeatingSectionId[a]}_${suffixes[b]}`);
+		}
+    }
+    return await getAttrsAsync(attributes);
+}
 
 on('change:repeating_advancements change:exptotal change:repeating_eliteadvances sheet:opened', () => {
     calcAdvExp();

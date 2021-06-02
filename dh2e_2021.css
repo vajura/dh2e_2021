@@ -549,6 +549,21 @@
 	border: 2px solid #3FB315 !important;
 }
 
+.sheet-rolltemplate-container-damage .sheet-rolltemplate-flex-row-space-around {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+    justify-content: space-around;
+	align-content: stretch;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.sheet-rolltemplate-container-damage .sheet-flex-item1 {
+    flex: 1 1 0;
+    align-self: auto;
+}
+
 .sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-center-text {
 	text-align: center;
     margin-left: -10px;
