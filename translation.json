@@ -473,5 +473,8 @@
 	"primary-objective-u":"Primary objective",
 	"secondary-objectives-u":"Secondary objectives",
 	"secondary-objective-u":"Secondary objective",
-	"none":"none"
+	"none":"none",
+	"front-u":"Front:",
+	"side-u":"Side:",
+	"rear-u":"Rear:"
 }

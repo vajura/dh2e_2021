@@ -239,11 +239,18 @@ function calculateAmmoUsage(charId, prefix, weaponId, weaponType, jam, roll, rof
 }
 
 function calcWeaponHit(who, playerId, paramArray, msg, fate) {
+    const npc = paramArray[10];
     const charId = paramArray[0];
-    const prefix = paramArray[1];
+    let prefix = paramArray[1];
+    if (npc) {
+        prefix = `npc_${prefix}`;
+    }
     let weaponType = 'melee_weapon';
     if (prefix.indexOf('rangedweapons') !== -1) {
         weaponType = 'ranged_weapon';
+    }
+    if (npc) {
+        weaponType = `npc_${weaponType}`;
     }
     const weaponId = paramArray[2];
     const skill = sanitizeToNumber(paramArray[3]);
@@ -267,7 +274,6 @@ function calcWeaponHit(who, playerId, paramArray, msg, fate) {
         jammed: false,
         status: ''
     };
-    const advancments = getAdvancments(charId, ['Marksman', 'Precision Killer (ballistic skill)', 'Precision Killer (weapon skill)']);
     result.push(getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_name`));
     if (weaponType === 'ranged_weapon') {
         result.push('Ballistic skill');
@@ -277,6 +283,10 @@ function calcWeaponHit(who, playerId, paramArray, msg, fate) {
     result.push(skill);
     result.push('Aim');
     result.push(aimMod);
+    let advancments = {};
+    if (!npc) {
+        advancments = getAdvancments(charId, ['Marksman', 'Precision Killer (ballistic skill)', 'Precision Killer (weapon skill)']);
+    }
     if (weaponType === 'ranged_weapon') {
         result.push('Range');
         result.push(rangeMod);
@@ -308,14 +318,18 @@ function calcWeaponHit(who, playerId, paramArray, msg, fate) {
 
     const specials = getWeaponSpecials(prefix, weaponId, weaponType, charId);
     const mods = getWeaponMods(prefix, weaponId, weaponType, charId);
+    //log(specials);
+    //log(mods);
     checkWeaponSpecials(specials, result, jam, roll, aimMod, rangeMod);
     checkWeaponMods(mods, result, aimMod, rofMod);
     const {bulletsUsed, ammoBefore} = calculateAmmoUsage(charId, prefix, weaponId, weaponType, jam, roll, rofMod, supressingFireMode, firingModeMod, fate);
-    saveRollInfo(weaponId, 'ammoBefore', ammoBefore);
-    saveRollInfo(weaponId, 'aim', aimMod);
-    saveRollInfo(weaponId, 'range', rangeMod);
+    if (!npc) {
+        saveRollInfo(weaponId, 'ammoBefore', ammoBefore);
+        saveRollInfo(weaponId, 'aim', aimMod);
+        saveRollInfo(weaponId, 'range', rangeMod);
+    }
 
-    postWeaponHitInfo(who, charId, prefix, weaponId, weaponType, bulletsUsed, ammoBefore, jam.jammed, playerId);
+    postAmmoAndJamInfo(who, charId, prefix, weaponId, weaponType, bulletsUsed, ammoBefore, jam.jammed, playerId);
     postRollTemplateResult(who, playerId, result, weaponId);
     postHitLocationInfo(who, roll);
 }
@@ -345,7 +359,7 @@ function postHitLocationInfo(who, roll) {
     sendChat(who, `Location ${hitLocation} hits ${hitPart}`);
 }
 
-function postWeaponHitInfo(who, charId, prefix, weaponId, weaponType, bulletsUsed, ammoBefore, jammed, playerId) {
+function postAmmoAndJamInfo(who, charId, prefix, weaponId, weaponType, bulletsUsed, ammoBefore, jammed, playerId) {
     const weaponName = getAttrByName(charId, `${prefix}_${weaponId}_${weaponType}_name`);
     const playerName = getAttrByName(charId, `player_name`);
     if (playerIsGM(playerId) && playerName.indexOf('npc') === -1) {
@@ -764,8 +778,17 @@ function getAdvancments(charId, advNames) {
     return values;
 }
 
-function toggleGetAdvancments() {
-    getAdvancmentsEnabled = !getAdvancmentsEnabled;
+function toggleGetAdvancments(who, playerId, paramArray) {
+    const toggle = paramArray[0];
+    if (toggle == 'on' || toggle == '1') {
+        getAdvancmentsEnabled = true;
+    } else {
+        getAdvancmentsEnabled = false;
+    }
+}
+
+function disableGetAdvancments() {
+    getAdvancmentsEnabled = false;
 }
 
 on('chat:message', function (msg) {
@@ -777,6 +800,8 @@ on('chat:message', function (msg) {
     const focusPowerCmd = '!dh2e2021focuspower ';
     const psyHitCmd = '!dh2e2021psyhit ';
     const toggleCmd = '!dh2e2021toggle ';
+    const disableToggleCmd = '!dh2e2021toggle';
+    const notSavedRolls = [toggleCmd, disableToggleCmd];
     let fate = false;
     //log(JSON.stringify(msg, undefined, 2));
     const commands = [
@@ -785,7 +810,8 @@ on('chat:message', function (msg) {
         {cmd: weaponDamageCmd, fn: calcWeaponDmg},
         {cmd: focusPowerCmd, fn: calcFocusPower},
         {cmd: psyHitCmd, fn: calcPsyHit},
-        {cmd: toggleCmd, fn: toggleGetAdvancments}
+        {cmd: toggleCmd, fn: toggleGetAdvancments},
+        {cmd: disableToggleCmd, fn: disableGetAdvancments}
     ];
     if (msg.type !== 'api') {
         return;
@@ -802,7 +828,7 @@ on('chat:message', function (msg) {
     }
     for (let a = 0; a < commands.length; a++) {
         if (msg.content.indexOf(commands[a].cmd) !== -1) {
-            if (commands[a].cmd !== toggleCmd) {
+            if (!notSavedRolls.includes(commands[a].cmd)) {
                 saveRollInfo(playerId, 'msg', msg);
             }
             const content = processInlinerolls(msg);

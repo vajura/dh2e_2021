@@ -258,6 +258,10 @@
 	-webkit-writing-mode: horizontal-tb;
 }
 
+.charsheet .sheet-section .npc-textarea {
+	min-height: 120px;
+}
+
 .charsheet .width-min100 {
 	min-width: 100px !important;
 }
@@ -330,6 +334,10 @@
 .charsheet .sheet-section .characteristic-data {
 	position: relative;
 	max-width: 255px;
+}
+
+.charsheet .sheet-section .characteristic-data.characteristic-select {
+	max-width: 172px;
 }
 
 .charsheet .sheet-section .characteristics button[type="roll"] {

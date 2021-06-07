@@ -207,14 +207,19 @@
 						<input name="attr_base_weapon_skill" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_weapon_skill" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_weapon_skill">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_weapon_skill">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_weapon_skill_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_ballistic_skill" type="roll" value="!dh2e2021roll Ballistic Skill check,Ballistic Skill,@{ballistic_skill},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="ballistic-skill-(bs)-u">Ballistic Skill (BS)</span>
@@ -225,14 +230,19 @@
 						<input name="attr_base_ballistic_skill" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_ballistic_skill" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_ballistic_skill">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_ballistic_skill">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_ballistic_skill_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_strength" type="roll" value="!dh2e2021roll Strength check,Strength,@{strength},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="strength-(s)-u">Strength (S)</span>
@@ -243,14 +253,19 @@
 						<input name="attr_base_strength" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_strength" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_strength">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_strength">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_strength_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_toughness" type="roll" value="!dh2e2021roll Toughness check,Toughness,@{toughness},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="toughness-(t)-u">Toughness (T)</span>
@@ -261,14 +276,19 @@
 						<input name="attr_base_toughness" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_toughness" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_toughness">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_toughness">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_toughness_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_agility" type="roll" value="!dh2e2021roll Agility check,Agility,@{agility},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="agility-(ag)-u">Agility (Ag)</span>
@@ -279,14 +299,19 @@
 						<input name="attr_base_agility" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_agility" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_agility">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_agility">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_agility_cost" readonly="" type="number" value="0">
+					</div>
 				</div>
 				<div class="margin2" />
 				<div class="flex-column flex-item1">
@@ -300,14 +325,19 @@
 						<input name="attr_base_intelligence" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_intelligence" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_intelligence">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_intelligence">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_intelligence_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_perception" type="roll" value="!dh2e2021roll Perception check,Perception,@{perception},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="perception-(per)-u">Perception (Per)</span>
@@ -318,14 +348,19 @@
 						<input name="attr_base_perception" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_perception" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_perception">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_perception">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_perception_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_willpower" type="roll" value="!dh2e2021roll Willpower check,Willpower,@{willpower},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="willpower-(wp)-u">Willpower (WP)</span>
@@ -336,14 +371,19 @@
 						<input name="attr_base_willpower" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_willpower" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_willpower">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_willpower">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_willpower_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_fellowship" type="roll" value="!dh2e2021roll Fellowship check,Fellowship,@{fellowship},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="fellowship-(fel)-u">Fellowship (Fel)</span>
@@ -354,14 +394,19 @@
 						<input name="attr_base_fellowship" class="base-characteristic-input" type="number" value="20" />
 						<input name="attr_u_fellowship" class="unnatural-characteristic-input" type="number" value="0" />
 					</div>
-					<select class="advanceselect characteristic-data" name="attr_advance_fellowship">
-						<option value="0" data-i18n="none-(0)-u">None (0)</option>
-						<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
-						<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
-						<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
-						<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
-						<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
-					</select>
+					<div class="flex-row">
+						<select class="characteristic-data characteristic-select" name="attr_advance_fellowship">
+							<option value="0" data-i18n="none-(0)-u">None (0)</option>
+							<option value="5" data-i18n="simple-(+5)-u">Simple (+5)</option>
+							<option value="10" data-i18n="intermediate-(+10)-u">Intermediate (+10)</option>
+							<option value="15" data-i18n="trained-(+15)-u">Trained (+15)</option>
+							<option value="20" data-i18n="proficient-(+20)-u">Proficient (+20)</option>
+							<option value="25" data-i18n="expert-(+25)-u">Expert (+25)</option>
+						</select>
+						<div class="margin2" />
+						<span class="input-text width-min40" data-i18n="exp-u">exp:</span>
+						<input class="width-min40 input-left-right-border text-align-center" style="width: 40px;" name="attr_advance_fellowship_cost" readonly="" type="number" value="0">
+					</div>
 					<div class="flex-row characteristic-data">
 						<button name="roll_influence" type="roll" value="!dh2e2021roll Influence check,Influence,@{influence},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
 							<span data-i18n="influence-(inf)-u">Influence (Inf)</span>
@@ -552,7 +597,7 @@
 						<div class="flex-column width100">
 							<fieldset class="repeating_conditions width100">
 								<div class="margin2" />
-								<select class="advanceselect width100" name="attr_condition">
+								<select class="width100" name="attr_condition">
 									<option selected data-i18n="none-u">None</option>
 									<option data-i18n="recently-healed-u">Recently Healed</option>
 									<option data-i18n="blinded-u">Blinded</option>
@@ -2714,7 +2759,7 @@
 					<div class="margin2" />
 					<input name="attr_elite_advance_exp" type="number" data-i18n-placeholder="experience-points-u" Placeholder="XP" value="0">
 					<div class="margin2" />
-					<select class="advanceselect width100" name="attr_elite_advance_aptitude">
+					<select class="width100" name="attr_elite_advance_aptitude">
 						<option value="none" data-i18n="aptitude" selected disabled>Aptitude</option>
 						<option value="general" data-i18n="general-u">General</option>
 						<option value="weapon skill" data-i18n="weapon-skill-u">Weapon Skill</option>
@@ -3333,6 +3378,1116 @@
 		<div class="margin100" />
 	</div>
 </div>
+<div class="sheet-section sheet-section-npcsandminions">
+	<div class="flex-column width100">
+		<fieldset class="repeating_npc width100">
+			<div class="flex-column width100">
+				<div class="flex-row">
+					<span class="input-text" data-i18n="name-u">Name:</span>
+					<input name="attr_npc_name" type="text">
+					<span class="input-text" data-i18n="type-u">Type:</span>
+					<input name="attr_npc_type" type="text">
+				</div>
+				<div class="flex-row">
+					<span class="input-text" data-i18n="homeworld-u">Homeworld</span>
+					<input name="attr_npc_homeworld" type="text">
+					<span class="input-text" data-i18n="background-u">Background:</span>
+					<input name="attr_npc_background" type="text">
+				</div>
+				<div class="flex-row">
+					<span class="input-text" data-i18n="appearance-u">Appearance:</span>
+					<input name="attr_npc_apperance" type="text">
+					<span class="input-text" data-i18n="personality-u">Personality:</span>
+					<input name="attr_npc_personality" type="text">
+				</div>
+				<div class="flex-row flex-space-around">
+					<img src="https://i.imgur.com/HwWl1uL.png">
+				</div>
+				<div class="flex-row">
+					<div class="flex-column flex-item2">
+						<div class="flex-row characteristics">
+							<div class="flex-column flex-item1">
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_weapon_skill" type="roll" value="!dh2e2021roll Weapon Skill check,Weapon Skill,@{npc_weapon_skill},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="weapon-skill-(ws)-u">Weapon Skill (WS)</span>
+									</button>
+									<input name="attr_npc_weapon_skill" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_weapon_skill" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_ballistic_skill" type="roll" value="!dh2e2021roll Ballistic Skill check,Ballistic Skill,@{npc_ballistic_skill},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="ballistic-skill-(bs)-u">Ballistic Skill (BS)</span>
+									</button>
+									<input name="attr_npc_ballistic_skill" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_ballistic_skill" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_strength" type="roll" value="!dh2e2021roll Strength check,Strength,@{npc_strength},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="strength-(s)-u">Strength (S)</span>
+									</button>
+									<input name="attr_npc_strength" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_strength" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_toughness" type="roll" value="!dh2e2021roll Toughness check,Toughness,@{npc_toughness},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="toughness-(t)-u">Toughness (T)</span>
+									</button>
+									<input name="attr_npc_toughness" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_toughness" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_agility" type="roll" value="!dh2e2021roll Agility check,Agility,@{npc_agility},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="agility-(ag)-u">Agility (Ag)</span>
+									</button>
+									<input name="attr_npc_agility" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_agility" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+							</div>
+							<div class="margin2" />
+							<div class="flex-column flex-item1">
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_intelligence" type="roll" value="!dh2e2021roll Intelligence check,Intelligence,@{npc_intelligence},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="intelligence-(int)-u">Weapon Skill (WS)</span>
+									</button>
+									<input name="attr_npc_intelligence" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_intelligence" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_perception" type="roll" value="!dh2e2021roll Perception check,Perception,@{npc_perception},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="perception-(per)-u">Perception (Per)</span>
+									</button>
+									<input name="attr_npc_perception" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_perception" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_willpower" type="roll" value="!dh2e2021roll Willpower check,Willpower,@{npc_willpower},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="willpower-(wp)-u">Willpower (WP)</span>
+									</button>
+									<input name="attr_npc_willpower" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_willpower" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_fellowship" type="roll" value="!dh2e2021roll Fellowship check,Fellowship,@{npc_fellowship},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="fellowship-(fel)-u">Fellowship (Fel)</span>
+									</button>
+									<input name="attr_npc_fellowship" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_fellowship" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+								<div class="flex-row characteristic-data">
+									<button name="roll_npc_influence" type="roll" value="!dh2e2021roll Influence check,Influence,@{npc_influence},Modifier,[[?{Target Modifier|0}]],Roll,[[1d100]]">
+										<span data-i18n="influence-(inf)-u">Influence (Inf)</span>
+									</button>
+									<input name="attr_npc_influence" class="characteristic-input" type="number" value="20">
+									<span class="input-text unnatural-characteristic-input-text" data-i18n="unnt-u">Unnt:</span>
+									<input name="attr_npc_u_influence" class="unnatural-characteristic-input" type="number" value="0" />
+								</div>
+							</div>
+						</div>
+
+						<div class="flex-column">
+							<div class="flex-row flex-space-around">
+								<h3 data-i18n="movement-u">Movement</h3>
+							</div>
+							<div class="flex-row">
+								<span class="input-text width-min70" data-i18n="half-move-u">Half Move:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_half_move" disabled type="number" value="1*@{npc_half_move_mod}+floor(@{npc_agility}/10)+@{npc_u_agility}+@{npc_size}" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="full-move-u">Full Move:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_full_move" disabled type="number" value="@{npc_full_move_mod}+2*(floor(@{npc_agility}/10)+@{npc_u_agility}+@{npc_size})" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="charge-u">Charge:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_charge_move" disabled type="number" value="@{npc_charge_move_mod}+3*(floor(@{npc_agility}/10)+@{npc_u_agility}+@{npc_size})" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="run-u">Run:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_run_move" disabled type="number" value="@{npc_run_move_mod}+6*(floor(@{npc_agility}/10)+@{npc_u_agility}+@{npc_size})" />
+							</div>
+							<div class="flex-row">
+								<span class="input-text width-min70" data-i18n="mod-u">Mod:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_half_move_mod" type="number" placeholder="0" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="mod-u">Mod:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_full_move_mod" type="number" placeholder="0" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="mod-u">Mod:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_charge_move_mod" type="number" placeholder="0" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="mod-u">Mod:</span>
+								<input class="width-min70 text-align-center" name="attr_npc_run_move_mod" type="number" placeholder="0" />
+							</div>
+							<div class="margin5" />
+							<div class="flex-row flex-space-around">
+								<h3 data-i18n="fatigue-u">Fatigue</h3>
+								<h3 data-i18n="size-u">Size</h3>
+							</div>
+							<div class="flex-row">
+								<div class="flex-row flex-item1">
+									<span class="input-text width-min70" data-i18n="threshold-u">Threshold:</span>
+									<div class="margin2" />
+									<input class="width-min70 text-align-center" name="attr_npc_fatigue_threshold" disabled type="number" placeholder="0" value="floor(@{npc_willpower}/10)+floor(@{npc_toughness}/10)+@{npc_u_willpower}+@{npc_u_toughness}" />
+									<div class="margin2" />
+									<span class="input-text width-min70" data-i18n="current-u">Current:</span>
+									<div class="margin2" />
+									<input class="width-min70 text-align-center" name="attr_npc_fatigue" type="number" value="0" />
+								</div>
+								<div class="margin5" />
+								<div class="flex-row flex-item1">
+									<select class="advanceselect" name="attr_npc_size">
+										<option value="0" data-i18n="average-(4)-u">Average (4)</option>
+										<option value="-3" data-i18n="miniscule-(1)-u">Miniscule (1)</option>
+										<option value="-2" data-i18n="puny-(2)-u">Puny (2)</option>
+										<option value="-1" data-i18n="weedy-(3)-u">Weedy (3)</option>
+										<option value="1" data-i18n="hulking-(5)-u">Hulking (5)</option>
+										<option value="2" data-i18n="enormous-(6)-u">Enormous (6)</option>
+										<option value="3" data-i18n="massive-(7)-u">Massive (7)</option>
+										<option value="4" data-i18n="immense-(8)-u">Immense (8)</option>
+										<option value="5" data-i18n="monumental-(9)-u">Monumental (9)</option>
+										<option value="6" data-i18n="titanic-(10)-u">Titanic (10)</option>
+									</select>
+								</div>
+							</div>
+							<div class="margin10" />
+							<div class="flex-row flex-space-around">
+								<h3 data-i18n="armor-and-defence-u">armor &amp; Defence</h3>
+							</div>
+							<div class="flex-row">
+								<div class="flex-column flex-item2 armor-silhoullette flex-space-around">
+									<div class="flex-row flex-space-around">
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="head-u">Head</span>
+											<input class="text-align-center" name="attr_npc_head_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_head_soak" type="number" value="@{npc_head_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+									</div>
+									<div class="flex-row flex-space-around">
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="right-arm-u">Right arm</span>
+											<input class="text-align-center" name="attr_npc_right_arm_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_right_arm_soak" type="number" value="@{npc_right_arm_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="body-u">Body</span>
+											<input class="text-align-center" name="attr_npc_body_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_body_soak" type="number" value="@{npc_body_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="left-arm-u">Left arm</span>
+											<input class="text-align-center" name="attr_npc_left_arm_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_left_arm_soak" type="number" value="@{npc_left_arm_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+									</div>
+									<div class="flex-row flex-space-around">
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="right-leg-u">Right leg</span>
+											<input class="text-align-center" name="attr_npc_right_leg_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_right_leg_soak" type="number" value="@{npc_right_leg_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+										<div class="quickborder sheet-armorblock">
+											<span data-i18n="left-leg-u">Left leg</span>
+											<input class="text-align-center" name="attr_npc_left_leg_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
+											<span>(1-10)</span>
+											<input class="text-align-center" name="attr_npc_left_leg_soak" type="number" value="@{npc_left_leg_armor}+@{npc_u_toughness}+floor(@{npc_toughness}/10)" disabled />
+										</div>
+									</div>
+								</div>
+								<div class="margin5" />
+								<div class="flex-column flex-item2">
+									<div class="flex-row flex-space-around">
+										<h3 data-i18n="wounds-u">Wounds</h3>
+									</div>
+									<div class="margin5" />
+									<div class="flex-row">
+										<span class="input-text" data-i18n="total-u">Total:</span>
+										<input class="text-align-center" name="attr_npc_max_wounds" type="number" value="0" />
+									</div>
+									<div class="flex-row">
+										<span class="input-text" data-i18n="current-u">Current:</span>
+										<input class="text-align-center" name="attr_npc_wounds" type="number" value="0" />
+									</div>
+									<div class="flex-row">
+										<span class="input-text" data-i18n="critical-damage-u">Critical damage:</span>
+										<input class="text-align-center" name="attr_npc_critical" type="number" value="0" />
+									</div>
+									<div class="flex-row">
+										<span class="input-text" data-i18n="status-u">Status:</span>
+										<select class="advanceselect" name="attr_npc_status_condition">
+											<option value="0" data-i18n="unharmed-u">Unharmed</option>
+											<option value="0" data-i18n="lightly-damaged-u">Lightly Damaged</option>
+											<option value="-10" data-i18n="heavily-damaged-u">Heavily Damaged</option>
+											<option value="-10" data-i18n="critically-damaged-u">Critically Damaged</option>
+										</select>
+									</div>
+									<div class="flex-row flex-space-around">
+										<h3 data-i18n="conditions-u">Conditions</h3>
+									</div>
+									<div class="flex-row">
+										<div class="flex-column width100">
+											<div class="margin2" />
+											<select class="width100" name="attr_npc_condition1">
+												<option selected data-i18n="none-u">None</option>
+												<option data-i18n="recently-healed-u">Recently Healed</option>
+												<option data-i18n="blinded-u">Blinded</option>
+												<option data-i18n="blood-loss-u">Blood Loss</option>
+												<option data-i18n="deafened-u">Deafened</option>
+												<option data-i18n="falling-u">Falling</option>
+												<option data-i18n="fire-u">Fire</option>
+												<option data-i18n="stunned-u">Stunned</option>
+												<option data-i18n="suffocation-u">Suffocation</option>
+												<option data-i18n="unconsciousness-u">Unconsciousness</option>
+												<option data-i18n="useless-limbs-u">Useless Limbs</option>
+												<option data-i18n="vacuum-u">Vacuum</option>
+												<option disabled data-i18n="amputated-limb-u">Amputated Limb</option>
+												<option data-i18n="lost-hand-u">Lost Hand</option>
+												<option data-i18n="lost-arm-u">Lost Arm</option>
+												<option data-i18n="lost-eye-u">Lost Eye</option>
+												<option data-i18n="lost-foot-u">Lost Foot</option>
+												<option data-i18n="lost-leg-u">Lost Leg</option>
+											</select>
+											<div class="margin2" />
+											<select class="width100" name="attr_npc_condition2">
+												<option selected data-i18n="none-u">None</option>
+												<option data-i18n="recently-healed-u">Recently Healed</option>
+												<option data-i18n="blinded-u">Blinded</option>
+												<option data-i18n="blood-loss-u">Blood Loss</option>
+												<option data-i18n="deafened-u">Deafened</option>
+												<option data-i18n="falling-u">Falling</option>
+												<option data-i18n="fire-u">Fire</option>
+												<option data-i18n="stunned-u">Stunned</option>
+												<option data-i18n="suffocation-u">Suffocation</option>
+												<option data-i18n="unconsciousness-u">Unconsciousness</option>
+												<option data-i18n="useless-limbs-u">Useless Limbs</option>
+												<option data-i18n="vacuum-u">Vacuum</option>
+												<option disabled data-i18n="amputated-limb-u">Amputated Limb</option>
+												<option data-i18n="lost-hand-u">Lost Hand</option>
+												<option data-i18n="lost-arm-u">Lost Arm</option>
+												<option data-i18n="lost-eye-u">Lost Eye</option>
+												<option data-i18n="lost-foot-u">Lost Foot</option>
+												<option data-i18n="lost-leg-u">Lost Leg</option>
+											</select>
+											<div class="margin2" />
+											<select class="width100" name="attr_npc_condition3">
+												<option selected data-i18n="none-u">None</option>
+												<option data-i18n="recently-healed-u">Recently Healed</option>
+												<option data-i18n="blinded-u">Blinded</option>
+												<option data-i18n="blood-loss-u">Blood Loss</option>
+												<option data-i18n="deafened-u">Deafened</option>
+												<option data-i18n="falling-u">Falling</option>
+												<option data-i18n="fire-u">Fire</option>
+												<option data-i18n="stunned-u">Stunned</option>
+												<option data-i18n="suffocation-u">Suffocation</option>
+												<option data-i18n="unconsciousness-u">Unconsciousness</option>
+												<option data-i18n="useless-limbs-u">Useless Limbs</option>
+												<option data-i18n="vacuum-u">Vacuum</option>
+												<option disabled data-i18n="amputated-limb-u">Amputated Limb</option>
+												<option data-i18n="lost-hand-u">Lost Hand</option>
+												<option data-i18n="lost-arm-u">Lost Arm</option>
+												<option data-i18n="lost-eye-u">Lost Eye</option>
+												<option data-i18n="lost-foot-u">Lost Foot</option>
+												<option data-i18n="lost-leg-u">Lost Leg</option>
+											</select>
+											<div class="margin2" />
+											<select class="width100" name="attr_npc_condition4">
+												<option selected data-i18n="none-u">None</option>
+												<option data-i18n="recently-healed-u">Recently Healed</option>
+												<option data-i18n="blinded-u">Blinded</option>
+												<option data-i18n="blood-loss-u">Blood Loss</option>
+												<option data-i18n="deafened-u">Deafened</option>
+												<option data-i18n="falling-u">Falling</option>
+												<option data-i18n="fire-u">Fire</option>
+												<option data-i18n="stunned-u">Stunned</option>
+												<option data-i18n="suffocation-u">Suffocation</option>
+												<option data-i18n="unconsciousness-u">Unconsciousness</option>
+												<option data-i18n="useless-limbs-u">Useless Limbs</option>
+												<option data-i18n="vacuum-u">Vacuum</option>
+												<option disabled data-i18n="amputated-limb-u">Amputated Limb</option>
+												<option data-i18n="lost-hand-u">Lost Hand</option>
+												<option data-i18n="lost-arm-u">Lost Arm</option>
+												<option data-i18n="lost-eye-u">Lost Eye</option>
+												<option data-i18n="lost-foot-u">Lost Foot</option>
+												<option data-i18n="lost-leg-u">Lost Leg</option>
+											</select>
+											<div class="margin2" />
+											<select class="width100" name="attr_npc_condition5">
+												<option selected data-i18n="none-u">None</option>
+												<option data-i18n="recently-healed-u">Recently Healed</option>
+												<option data-i18n="blinded-u">Blinded</option>
+												<option data-i18n="blood-loss-u">Blood Loss</option>
+												<option data-i18n="deafened-u">Deafened</option>
+												<option data-i18n="falling-u">Falling</option>
+												<option data-i18n="fire-u">Fire</option>
+												<option data-i18n="stunned-u">Stunned</option>
+												<option data-i18n="suffocation-u">Suffocation</option>
+												<option data-i18n="unconsciousness-u">Unconsciousness</option>
+												<option data-i18n="useless-limbs-u">Useless Limbs</option>
+												<option data-i18n="vacuum-u">Vacuum</option>
+												<option disabled data-i18n="amputated-limb-u">Amputated Limb</option>
+												<option data-i18n="lost-hand-u">Lost Hand</option>
+												<option data-i18n="lost-arm-u">Lost Arm</option>
+												<option data-i18n="lost-eye-u">Lost Eye</option>
+												<option data-i18n="lost-foot-u">Lost Foot</option>
+												<option data-i18n="lost-leg-u">Lost Leg</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="margin10" />
+					<div class="flex-column flex-item2">
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="skills-u">Skills</h3>
+						</div>
+						<div class="margin10" />
+						<textarea class="npc-textarea" name="attr_npc_skills"></textarea>
+						<div class="margin10" />
+
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="talents-and-traits-u">Talents &amp; Traits</h3>
+						</div>
+						<div class="margin10" />
+						<textarea class="npc-textarea" name="attr_npc_notes"></textarea>
+						<div class="margin10" />
+
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="gear-and-weapons-u">Gear &amp; Weapons</h3>
+						</div>
+						<div class="margin10" />
+						<textarea class="npc-textarea" name="attr_npc_gear_weapons"></textarea>
+						<div class="margin10" />
+
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="special-rules-u">Special Rules</h3>
+						</div>
+						<div class="margin10" />
+						<textarea class="npc-textarea" name="attr_npc_special"></textarea>
+						<div class="margin10" />
+
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="miscellaneous-and-notes-u">Miscellaneous &amp; Notes</h3>
+						</div>
+						<div class="margin10" />
+						<textarea class="npc-textarea" name="attr_npc_mics"></textarea>
+						<div class="margin10" />
+						</div>
+					</div>
+				</div>
+				<div class="flex-row flex-space-around">
+					<img src="https://i.imgur.com/HwWl1uL.png">
+				</div>
+				<div class="flex-row">
+					<div class="flex-column flex-item2">
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="ranged-weapons-u">Ranged Weapon</h3>
+						</div>
+						<input type="hidden" name="attr_npc_ranged_weapon_hidden_row_id" />
+						<div class="flex-column tinted-background">
+							<div class="flex-row">
+								<span class="input-text width-min50" data-i18n="name-u">Name:</span>
+								<div class="margin2" />
+								<input name="attr_npc_ranged_weapon_name" type="text" />
+								<div class="margin2" />
+								<span class="input-text width-min50" data-i18n="weight-u">Weight:</span>
+								<div class="margin2" />
+								<input class="width-min40" name="attr_npc_ranged_weapon_weight" type="text" value="0"/>
+								<div class="margin2" />
+								<span class="input-text width-min50" data-i18n="class-u">Class:</span>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_class">
+									<option data-i18n="pistol-u" value="Pistol">Pistol</option>
+									<option data-i18n="basic-u" value="Basic">Basic</option>
+									<option data-i18n="heavy-u" value="Heavy">Heavy</option>
+									<option data-i18n="thrown-u" value="Thrown">Thrown</option>
+									<option data-i18n="vehicle-u" Value="Vehicle">Vehicle</option>
+								</select>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<span class="input-text width-min50" data-i18n="range-u">Range:</span>
+								<div class="margin2" />
+								<input name="attr_npc_ranged_weapon_range" type="text" />
+								<div class="margin2" />
+								<span class="input-text width-min70" data-i18n="damage-u">Damage:</span>
+								<div class="margin2" />
+								<input name="attr_npc_ranged_weapon_damage" type="text" value="1d10"/>
+								<div class="margin2" />
+								<span class="input-text width-min50" data-i18n="type-u">Type:</span>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_type">
+									<option value="energy" data-i18n="energy-u">Energy</option>
+									<option value="impact" data-i18n="impact-u">Impact</option>
+									<option value="rending" data-i18n="rending-u">Rending</option>
+									<option Value="explosive" data-i18n="explosive-u">Explosive</option>
+								</select>
+								<div class="margin2" />
+								<span class="input-text width-min40" data-i18n="pen-u">Pen:</span>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_ranged_weapon_penetration" type="number" value="0" />
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<span class="input-text width-min50" data-i18n="rate-of-fire-u">RoF:</span>
+								<input class="text-align-center width-min40" name="attr_npc_ranged_weapon_single" type="text" value="S" />
+								<div class="margin1" />
+								<span class="input-text width-min15">/</span>
+								<input class="text-align-center width-min40" name="attr_npc_ranged_weapon_semi" type="number" value="0" />
+								<div class="margin1" />
+								<span class="input-text width-min15">/</span>
+								<input class="text-align-center width-min40" name="attr_npc_ranged_weapon_full" type="number" value="0" />
+								<span class="input-text width-min50" data-i18n="clip-u">Clip:</span>
+								<input class="text-align-center width-min40" name="attr_npc_ranged_weapon_clip" type="number" value="0" />
+								<div class="margin1" />
+								<span class="input-text width-min15">/</span>
+								<input class="text-align-center width-min40" name="attr_npc_max_ranged_weapon_clip" type="number" value="0" />
+								<span class="input-text width-min50" data-i18n="reload-u">Reload:</span>
+								<input class="text-align-center width-min40" name="attr_npc_ranged_weapon_reload" type="text" value="Full" />
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<select name="attr_npc_ranged_weapon_special1">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin-linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_ranged_weapon_special1_x" type="number" value="0"/>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_special2">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin-linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_ranged_weapon_special2_x" type="number" value="0"/>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_special3">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin_linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_ranged_weapon_special3_x" type="number" value="0"/>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<select name="attr_npc_ranged_weapon_mod1">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_mod2">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_mod3">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_ranged_weapon_mod4">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
+								<input class="width-min70" name="attr_npc_ranged_weapon_custom" type="text" />
+								<div class="margin2" />
+								<button name="roll_npc_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},@{npc_ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]],npc"><span data-i18n="hit-u">Hit</span></button>
+								<div class="margin2" />
+								<button name="roll_npc_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},[[@{npc_ranged_weapon_damage}]],@{npc_ranged_weapon_penetration},@{npc_ranged_weapon_type},@{npc_ranged_weapon_name},npc"><span data-i18n="damage-button-u">Damage</span></button>
+							</div>
+						</div>
+						<div class="margin10" />
+					</div>
+					<div class="margin10" />
+					<div class="flex-column flex-item2">
+						<div class="flex-row flex-space-around">
+							<h3 data-i18n="melee-weapons-u">Melee Weapon</h3>
+						</div>
+						<input type="hidden" name="attr_npc_melee_weapon_hidden_row_id" />
+						<div class="flex-column tinted-background">
+							<div class="flex-row">
+								<span class="input-text width-min50" data-i18n="name-u">Name:</span>
+								<div class="margin2" />
+								<input name="attr_npc_melee_weapon_name" type="text" />
+								<div class="margin2" />
+								<span class="input-text width-min50" data-i18n="weight-u">Weight:</span>
+								<div class="margin2" />
+								<input class="width-min40" name="attr_npc_melee_weapon_weight" type="text" />
+								<div class="margin2" />
+								<span class="input-text width-min100" data-i18n="class-melee-u">Class: Melee</span>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<span class="input-text width-min70" data-i18n="damage-u">Damage:</span>
+								<div class="margin2" />
+								<input name="attr_npc_melee_weapon_damage" type="text" />
+								<div class="margin2" />
+								<span class="input-text width-min50" data-i18n="type-u">Type:</span>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_type">
+									<option value="energy" data-i18n="energy-u">Energy</option>
+									<option value="impact" data-i18n="impact-u">Impact</option>
+									<option value="rending" data-i18n="rending-u">Rending</option>
+									<option Value="explosive" data-i18n="explosive-u">Explosive</option>
+								</select>
+								<div class="margin2" />
+								<span class="input-text width-min40" data-i18n="pen-u">Pen:</span>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_melee_weapon_penetration" type="number" />
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<select name="attr_npc_melee_weapon_special1">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin-linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_melee_weapon_special1_x" type="number" value="0"/>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_special2">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin-linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_melee_weapon_special2_x" type="number" value="0"/>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_special3">
+									<option data-i18n="no-special-u" value="none">No special</option>
+									<option data-i18n="accurate-u" value="accurate">Accurate</option>
+									<option data-i18n="balanced-u" value="balanced">Balanced</option>
+									<option data-i18n="blast-x-u" value="blast_x">Blast (X)</option>
+									<option data-i18n="concussive-x-u" value="concussive_x">Concussive (X)</option>
+									<option data-i18n="corrosive-u" value="corrosive">Corrosive</option>
+									<option data-i18n="crippling-x-u" value="crippling_x">Crippling (X)</option>
+									<option data-i18n="daemonbane-u" value="daemonbane">Daemonbane</option>
+									<option data-i18n="defensive-u" value="defensive">Defensive</option>
+									<option data-i18n="felling-x-u" value="felling_x">Felling (X)</option>
+									<option data-i18n="flame-u" value="flame">Flame</option>
+									<option data-i18n="flexible-u" value="flexible">Flexible</option>
+									<option data-i18n="force-u" value="force">Force</option>
+									<option data-i18n="graviton-u" value="graviton">Graviton</option>
+									<option data-i18n="hallucinogenic-x-u" value="hallucinogenic_x">Hallucinogenic (X)</option>
+									<option data-i18n="haywire-x-u" value="haywire_x">Haywire (X)</option>
+									<option data-i18n="inaccurate-u" value="inaccurate">Inaccurate</option>
+									<option data-i18n="indirect-x-u" value="indirect_x">Indirect (X)</option>
+									<option data-i18n="lance-u" value="lance">Lance</option>
+									<option data-i18n="maximal-u" value="maximal">Maximal</option>
+									<option data-i18n="melta-u" value="melta">Melta</option>
+									<option data-i18n="overheats-u" value="overheats">Overheats</option>
+									<option data-i18n="power-field-u" value="power_field">Power Field</option>
+									<option data-i18n="primitive-x-u" value="primitive_x">Primitive (X)</option>
+									<option data-i18n="proven-x-u" value="proven_x">Proven (X)</option>
+									<option data-i18n="razor-sharp-u" value="razor_sharp">Razor Sharp</option>
+									<option data-i18n="recharge-u" value="recharge">Recharge</option>
+									<option data-i18n="reliable-u" value="reliable">Reliable</option>
+									<option data-i18n="sanctified-u" value="sanctified">Sanctified</option>
+									<option data-i18n="scatter-u" value="scatter">Scatter</option>
+									<option data-i18n="shocking-u" value="shocking">Shocking</option>
+									<option data-i18n="smoke-x-u" value="smoke_x">Smoke (X)</option>
+									<option data-i18n="snare-x-u" value="snare_x">Snare (X)</option>
+									<option data-i18n="spray-u" value="spray">Spray</option>
+									<option data-i18n="storm-u" value="storm">Storm</option>
+									<option data-i18n="tainted-u" value="tainted">Tainted</option>
+									<option data-i18n="tearing-u" value="tearing">Tearing</option>
+									<option data-i18n="toxic-x-u" value="toxic_x">Toxic (X)</option>
+									<option data-i18n="twin-linked-u" value="twin_linked">Twin-linked</option>
+									<option data-i18n="unbalanced-u" value="unbalanced">Unbalanced</option>
+									<option data-i18n="unreliable-u" value="unreliable">Unreliable</option>
+									<option data-i18n="unwieldy-u" value="unwieldy">Unwieldy</option>
+									<option data-i18n="vengeful-x-u" value="vengeful_x">Vengeful (X)</option>
+								</select>
+								<div class="margin2" />
+								<input style="width: 15px; min-width: 15px" class="text-align-center" name="attr_npc_melee_weapon_special3_x" type="number" value="0"/>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<select name="attr_npc_melee_weapon_mod1">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_mod2">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_mod3">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+								<div class="margin2" />
+								<select name="attr_npc_melee_weapon_mod4">
+									<option data-i18n="no-mod-u" value="none">No mod</option>
+									<option data-i18n="auxiliary-grenade-launcher-u" value="auxiliary_grenade_launcher">Auxiliary Grenade Launcher</option>
+									<option data-i18n="backpack-ammo-supply-u" value="backpack_ammo_supply">Backpack Ammo Supply</option>
+									<option data-i18n="compact-u" value="compact">Compact</option>
+									<option data-i18n="custom-grip-u" value="custom_grip">Custom Grip</option>
+									<option data-i18n="deactivated-safety-features-u" value="deactivated_safety_features">Deactivated Safety Features</option>
+									<option data-i18n="expanded-magazine-u" value="expanded_magazine">Expanded Magazine</option>
+									<option data-i18n="exterminator-u" value="exterminator">Exterminator</option>
+									<option data-i18n="fire-selector-u" value="fire_selector">Fire Selector</option>
+									<option data-i18n="fluid-action-u" value="fluid_action">Fluid Action</option>
+									<option data-i18n="forearm-weapon-mounting-u" value="forearm_weapon_mounting">Forearm Weapon Mounting</option>
+									<option data-i18n="melee-attachment-u" value="melee_attachment">Melee Attachment</option>
+									<option data-i18n="modified-stock-u" value="modified_stock">Modified Stock</option>
+									<option data-i18n="mono-u" value="mono">Mono</option>
+									<option data-i18n="motion-predictor-u" value="motion_predictor">Motion Predictor</option>
+									<option data-i18n="omni-scope-u" value="omni_scope">Omni-Scope</option>
+									<option data-i18n="photo-sight-u" value="photo_sight">Photo Sight</option>
+									<option data-i18n="pistol-grip-u" value="pistol_grip">Pistol Grip</option>
+									<option data-i18n="preysense-sight-u" value="preysense_sight">Preysense Sight</option>
+									<option data-i18n="quick-release-u" value="quick_release">Quick-Release</option>
+									<option data-i18n="red-dot-laser-sight-u" value="red_dot_laser_sight">Red-Dot Laser Sight</option>
+									<option data-i18n="reinforced-u" value="reinforced">Reinforced</option>
+									<option data-i18n="sacred-inscriptions-u" value="sacred_inscriptions">Sacred Inscriptions</option>
+									<option data-i18n="silencer-u" value="silencer">Silencer</option>
+									<option data-i18n="suspensors-u" value="suspensors">Suspensors</option>
+									<option data-i18n="targeter-u" value="targeter">Targeter</option>
+									<option data-i18n="telescopic-sight-u" value="telescopic_sight">Telescopic Sight</option>
+									<option data-i18n="tox-dispenser-u" value="tox_dispenser">Tox Dispenser</option>
+									<option data-i18n="bipod-u" value="bipod">Tripod/Bipod</option>
+									<option data-i18n="vox-operated-u" value="vox_operated">Vox-Operated</option>
+								</select>
+							</div>
+							<div class="margin2" />
+							<div class="flex-row">
+								<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
+								<input class="width-min70" name="attr_npc_melee_weapon_custom" type="text" />
+								<div class="margin2" />
+								<button name="roll_npc_melee_hit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},@{npc_weapon_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Attack Type |All out (+30),+30|Charge (+20),+20|Standard (+10),+10|Swift Attack (+0),+0|Lighting (-10),-10}]],0,0,[[?{Modifier|0})]],[[1d100]],npc">
+									<span data-i18n="hit-u">Hit</span>
+								</button>
+								<div class="margin2" />
+								<button name="roll_npc_meleedamage" type="roll" value="!dh2e2021damage @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},[[@{npc_melee_weapon_damage}+@{npc_u_strength}+(floor(@{npc_strength}/10))]],@{npc_melee_weapon_penetration},@{npc_melee_weapon_type},@{npc_melee_weapon_name},npc">
+									<span data-i18n="damage-button-u">Damage</span>
+								</button>
+							</div>
+						</div>
+						<div class="margin10" />
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<div class="flex-row flex-space-around">
+			<div class="margin100" />
+		</div>
+	</div>
+</div>
 <div class="sheet-section sheet-section-journal">
 	<div class="flex-row">
 		<div class="flex-column width100">
@@ -3343,7 +4498,6 @@
 			<div class="flex-row">
 				<input class="input-text text-align-center" name="attr_primary_objective" type="text" data-i18n-placeholder="primary-objective-u" placeholder="Primary objective">
 			</div>
-			<div class="margin10" />
 			<div class="flex-row">
 				<textarea style="min-height: 300px;" name="attr_primary_objective_description"></textarea>
 			</div>
@@ -3371,9 +4525,12 @@
 			</div>
 		</div>
 	</div>
+	<div class="margin10" />
+	<div class="flex-row flex-space-around">
+		<img src="https://i.imgur.com/HwWl1uL.png">
+	</div>
 	<div class="flex-row">
 		<div class="flex-column width100">
-			<div class="margin10" />
 			<div class="margin10" />
 			<div class="flex-row flex-space-around">
 				<h3 data-i18n="journal-u">Journal</h3>
@@ -3398,6 +4555,68 @@
 		<div class="margin100" />
 	</div>
 </div>
+<div class="sheet-section sheet-section-vehicles">
+	<div class="flex-row flex-space-around">
+		<h3 data-i18n="vehicles-u">Vehicles</h3>
+	</div>
+	<div class="flex-column">
+		<fieldset class="repeating_vehicles width100">
+			<div class="flex-row">
+				<div class="margin10" />
+			</div>
+			<div class="flex-column tinted-background ">
+				<div class="flex-row">
+					<span class="input-text" data-i18n="name-u">Name:</span>
+					<input name="attr_vehicle_name" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="type-u">Type:</span>
+					<input name="attr_vehicle_type" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="front-u">Front:</span>
+					<input name="attr_vehicle_front" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="side-u">Side:</span>
+					<input name="attr_vehicle_side" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="rear-u">Rear:</span>
+					<input name="attr_vehicle_rear" type="text" />
+				</div>
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="tactical-speed-u">Tactical Speed:</span>
+					<input name="attr_vehicle_tactical_speed" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="cruising-speed-u">Cruising Speed:</span>
+					<input name="attr_vehicle_cruising_speed" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="manoeuvrability-u">Manoeuvrability:</span>
+					<input name="attr_vehicle_manoeuvrability" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="integrity-u">Integrity:</span>
+					<input name="attr_vehicle_integrity" type="text" />
+					<div class="margin2" />
+					<span class="input-text" data-i18n="size-u">Size:</span>
+					<input name="attr_vehicle_size" type="text" />
+				</div>
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="traits-u">Traits:</span>
+					<input name="attr_vehicle_traits" type="text" />
+				</div>
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="crew-u">Crew:</span>
+					<input name="attr_vehicle_crew" type="text" />
+				</div>
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="weapons-u">Weapons:</span>
+					<input name="attr_vehicle_weapons" type="text" />
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
 <div class="sheet-section sheet-section-psykana">
 	<div class="flex-row flex-space-around">
 		<h3 data-i18n="focus-power-test-u">Focus Power Test</h3>
@@ -3419,6 +4638,9 @@
 		<div class="margin10" />
 	</div>
 	<div class="flex-row flex-space-around">
+		<img src="https://i.imgur.com/HwWl1uL.png">
+	</div>
+	<div class="flex-row flex-space-around">
 		<h3 data-i18n="psychic-powers-u">Psychic Powers</h3>
 	</div>
 	<div class="flex-row flex-space-around">
@@ -3428,7 +4650,7 @@
 	<div class="flex-row">
 		<span class="input-text width-min70" data-i18n="class-u">Class:</span>
 		<div class="margin2" />
-		<select class="advanceselect characteristic-data" name="attr_psyker_class">
+		<select class="characteristic-data" name="attr_psyker_class">
 			<option value="bound" data-i18n="bound-u"><b>Bound</b></option>
 			<option value="unbound" data-i18n="unbound-u"><b>Unbound</b></option>
 			<option value="daemonic" data-i18n="daemonic-u"><b>Daemonic</b></option>
@@ -3574,7 +4796,52 @@
 		<div class="margin100" />
 	</div>
 </div>
-<input name="attr_hidden_api_trigger" type="hidden">
+<div class="sheet-section sheet-section-social">
+	<div class="flex-row">
+		<div class="flex-column flex-item2">
+			<div class="flex-row flex-space-around">
+				<h3 data-i18n="peers-u">Peers</h3>
+			</div>
+			<fieldset class="repeating_peers width100">
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="peer-u">Peer: </span>
+					<input name="attr_peer" type="text">
+					<div class="margin2" />
+					<input class="width-min70" name="attr_peer_influence" value="0" type="number" title="Times Taken">
+					<div class="margin2" />
+					<div class="sheet-item impskull">
+						<button name="roll_peers" type="roll"
+								value="!dh2e2021roll @{peer},Fellowship,@{fellowship},Peer influence,[[+@{peer_influence}*10]],Modifier,[[+?{Modifier|0}]],Roll,[[1d100]]">
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="margin10" />
+		<div class="flex-column flex-item2">
+			<div class="flex-row flex-space-around">
+				<h3 data-i18n="enemies-u">Enemies</h3>
+			</div>
+			<fieldset class="repeating_enemies width100">
+				<div class="margin2" />
+				<div class="flex-row">
+					<span class="input-text" data-i18n="enemy-u">Enemy: </span>
+					<input name="attr_enemy" type="text">
+					<div class="margin2" />
+					<input class="width-min70" name="attr_enemy_influence" value="0" type="number" title="Times gained">
+					<div class="margin2" />
+					<div class="sheet-item impskull">
+						<button name="roll_enemies" type="roll"
+								value="!dh2e2021roll @{enemy},Fellowship,@{fellowship},Enemy influence,[[+@{enemy_influence}*10]],Modifier,[[+?{Modifier|0}]],Roll,[[1d100]]">
+						</button>
+					</div>
+					<!--<button name="roll_E1Fel" type="roll" value="!roll40k @{character_name}'s relationship with @{EnemyRe}, @{Fellowship}, [[-(@{enemyReInf}*10)+?{Modifier|0}]]" title="Modified Fellowship Roll"></button>-->
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
 
 
 <rolltemplate class="sheet-rolltemplate-dh2e2021damage">
@@ -3779,6 +5046,8 @@ const repeatingHiddenValues = [
 	{name:'repeating_psypowers2', suffix:'psypower_hidden_row_id'},
 	{name:'repeating_rangedweapons', suffix:'ranged_weapon_hidden_row_id'},
 	{name:'repeating_meleeweapons', suffix:'melee_weapon_hidden_row_id'},
+	{name:'repeating_npc', suffix:'npc_ranged_weapon_hidden_row_id'},
+	{name:'repeating_npc', suffix:'npc_melee_weapon_hidden_row_id'}
 ];
 for (let a = 0; a < repeatingHiddenValues.length; a++) {
 	on(`change:${repeatingHiddenValues[a].name}`, () => {
@@ -3809,11 +5078,11 @@ on(`change:max_base_wounds change:repeating_autoadvancements sheet:opened`, asyn
     });
 });
 
+const weightMap = {0: 0.9,1: 2.25,2: 4.5,3: 9,4: 18,5: 27,6: 36,7: 45,8: 56,9: 67,10: 78,11: 90,12: 112,13: 225,14: 337,15: 450,16: 675,17: 900,18: 1.350,19: 1.800,20: 2.250};	
 on(`change:strength change:toughness sheet:opened`, () => {
     const attrs = [`strength`, `toughness`];
     getAttrs(attrs, (values) => {
-        const weightMap = {0: 0.9,1: 2.25,2: 4.5,3: 9,4: 18,5: 27,6: 36,7: 45,8: 56,9: 67,10: 78,11: 90,12: 112,13: 225,14: 337,15: 450,16: 675,17: 900,18: 1.350,19: 1.800,20: 2.250};
-		const sum = Math.floor(sanitizeToNumber(values[`strength`]) / 10) + Math.floor(sanitizeToNumber(values[`toughness`]) / 10);
+        const sum = Math.floor(sanitizeToNumber(values[`strength`]) / 10) + Math.floor(sanitizeToNumber(values[`toughness`]) / 10);
 		const setAtt = {};
         setAtt[`max_carry`] = weightMap[sum].toFixed(2) + ' kg';
         setAttrs(setAtt);
@@ -3839,6 +5108,14 @@ async function calcAdvExp() {
 		getRepeatingSectionValues('repeating_autoadvancements', ['auto_advancement_1exp', 'auto_advancement_2exp', 'auto_advancement_3exp']),
 		getRepeatingSectionValues('repeating_eliteadvances', ['elite_advance_exp'])
 	]);
+	const costArray = [];
+	for (let a = 0; a < Characteristics.length; a++) {
+		costArray.push(`advance_${Characteristics[a]}_cost`);
+	}
+	const charAdvancementsCost = await getAttrsAsync(costArray);
+	for (let a = 0; a < Characteristics.length; a++) {
+		sum += sanitizeToNumber(charAdvancementsCost[`advance_${Characteristics[a]}_cost`]);
+	}
 	for (let a = 0; a < values.length; a++) {
 		expNumbers = {...expNumbers, ...(values[a])};
 	}
@@ -3852,15 +5129,19 @@ async function calcAdvExp() {
     });
 }
 
-on('change:repeating_autoadvancements', async () => {
+on('change:repeating_autoadvancements change:repeating_aptitude1 change:repeating_aptitude2', async (changedAttribute) => {
+    if (changedAttribute.sourceAttribute.endsWith('exp')) {
+    	return;
+    }
 	const aptitudes = await getAptitudesMap();
     const autoAdvanceValues = await getRepeatingSectionValues('repeating_autoadvancements', ['auto_advancement_1', 'auto_advancement_2', 'auto_advancement_3']);
     const keys = Object.keys(autoAdvanceValues);
+    const costMap = {};
     for (let a = 0; a < keys.length; a++) {
     	const value = autoAdvanceValues[keys[a]];
-        const attribute = keys[a] + 'exp';
+        const expFieldName = keys[a] + 'exp';
     	if (value === 'none') {
-	        setAttrsAsync({[attribute]: 0});
+	        costMap[expFieldName] = 0;
 	        continue;
     	}
 	    const adv = advancements[value];
@@ -3872,10 +5153,10 @@ on('change:repeating_autoadvancements', async () => {
 	        if (aptitudes[adv.a2]) {
 	            match++;
 	        }
-	        const cost = advancementsCosts[adv.tier][match];
-	        setAttrsAsync({[attribute]: cost});
+	        costMap[expFieldName] = advancementsCosts[adv.tier][match];
 	    }
     }
+    await setAttrsAsync(costMap);
     calcAdvExp();
 });
 
@@ -3908,9 +5189,37 @@ async function getRepeatingSectionValues(repeatingSectionName, suffixes) {
     return await getAttrsAsync(attributes);
 }
 
-on('change:repeating_advancements change:exptotal change:repeating_eliteadvances sheet:opened', () => {
+on('change:repeating_advancements change:exp_total change:repeating_eliteadvances sheet:opened', () => {
     calcAdvExp();
 });
+
+for (let a = 0; a < Characteristics.length; a++) {
+    const ch = Characteristics[a];
+    on(`change:advance_${ch} change:repeating_aptitude1 change:repeating_aptitude2`, async (changedAttribute) => {
+        const aptitudes = await getAptitudesMap();
+        const attr = await getAttrsAsync([`advance_${ch}`]);
+        const advancementLevel = attr[`advance_${ch}`] / 5;
+    	const adv = charAdvancements[ch];
+	    if (adv) {
+	        let match = 0;
+	        if (aptitudes[adv.a1]) {
+	            match++;
+	        }
+	        if (aptitudes[adv.a2]) {
+	            match++;
+	        }
+	        let sum = 0;
+	        for (let a = 0; a <= advancementLevel; a++) {
+	        	sum += charAdvancementsCosts[a][match];
+	        }
+	        await setAttrsAsync({[`advance_${ch}_cost`]: sum});
+	    }
+        if (changedAttribute.sourceAttribute.indexOf('aptitude1') !== -1 || changedAttribute.sourceAttribute.indexOf('aptitude2') !== -1) {
+			return;
+		}
+	    calcAdvExp();
+    });
+}
 
 const advancementsCosts = {
     1: {
@@ -3929,6 +5238,78 @@ const advancementsCosts = {
         0: 1200
     }
 }
+
+const charAdvancementsCosts = {
+    0: {
+        2: 0,
+        1: 0,
+        0: 0
+    },
+    1: {
+        2: 100,
+        1: 250,
+        0: 500
+    },
+    2: {
+        2: 250,
+        1: 500,
+        0: 750
+    },
+    3: {
+        2: 500,
+        1: 750,
+        0: 1000
+    },
+    4: {
+        2: 750,
+        1: 1000,
+        0: 1500
+    },
+    5: {
+        2: 1250,
+        1: 1500,
+        0: 2500
+    }
+}
+
+const charAdvancements = {
+   "weapon_skill":{
+      "a1":"weapon skill",
+      "a2":"offence"
+   },
+   "ballistic_skill":{
+      "a1":"ballistic skill",
+      "a2":"finesse"
+   },
+   "strength":{
+      "a1":"strength",
+      "a2":"offence"
+   },
+   "toughness":{
+      "a1":"toughness",
+      "a2":"defense"
+   },
+   "agility":{
+      "a1":"agility",
+      "a2":"finesse"
+   },
+   "intelligence":{
+      "a1":"intelligence",
+      "a2":"knowledge"
+   },
+   "perception":{
+      "a1":"perception",
+      "a2":"fieldcraft"
+   },
+   "willpower":{
+      "a1":"willpower",
+      "a2":"psyker"
+   },
+   "fellowship":{
+      "a1":"fellowship",
+      "a2":"social"
+   }
+};
 
 const advancements = {
     'Ambidextrous':{name:'Ambidextrous',
