@@ -2302,7 +2302,7 @@
 						<div class="margin2" />
 						<button name="roll_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},@{ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]]"><span data-i18n="hit-u">Hit</span></button>
 						<div class="margin2" />
-						<button name="roll_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},[[@{ranged_weapon_damage}]],@{ranged_weapon_penetration},@{ranged_weapon_type},@{ranged_weapon_name}"><span data-i18n="damage-button-u">Damage</span></button>
+						<button name="roll_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},[[@{ranged_weapon_damage}]],@{ranged_weapon_penetration},@{ranged_weapon_type},@{ranged_weapon_name},0,0"><span data-i18n="damage-button-u">Damage</span></button>
 					</div>
 				</div>
 				<div class="margin10" />
@@ -2632,7 +2632,7 @@
 							<span data-i18n="hit-u">Hit</span>
 						</button>
 						<div class="margin2" />
-						<button name="roll_meleedamage" type="roll" value="!dh2e2021damage @{character_id},repeating_meleeweapons,@{melee_weapon_hidden_row_id},[[@{melee_weapon_damage}+@{u_strength}+(floor(@{strength}/10))]],@{melee_weapon_penetration},@{melee_weapon_type},@{melee_weapon_name}">
+						<button name="roll_meleedamage" type="roll" value="!dh2e2021damage @{character_id},repeating_meleeweapons,@{melee_weapon_hidden_row_id},[[@{melee_weapon_damage}]],@{melee_weapon_penetration},@{melee_weapon_type},@{melee_weapon_name},@{strength},@{u_strength}">
 							<span data-i18n="damage-button-u">Damage</span>
 						</button>
 					</div>
@@ -3385,18 +3385,21 @@
 				<div class="flex-row">
 					<span class="input-text" data-i18n="name-u">Name:</span>
 					<input name="attr_npc_name" type="text">
+					<div class="margin2" />
 					<span class="input-text" data-i18n="type-u">Type:</span>
 					<input name="attr_npc_type" type="text">
 				</div>
 				<div class="flex-row">
 					<span class="input-text" data-i18n="homeworld-u">Homeworld</span>
 					<input name="attr_npc_homeworld" type="text">
+					<div class="margin2" />
 					<span class="input-text" data-i18n="background-u">Background:</span>
 					<input name="attr_npc_background" type="text">
 				</div>
 				<div class="flex-row">
 					<span class="input-text" data-i18n="appearance-u">Appearance:</span>
 					<input name="attr_npc_apperance" type="text">
+					<div class="margin2" />
 					<span class="input-text" data-i18n="personality-u">Personality:</span>
 					<input name="attr_npc_personality" type="text">
 				</div>
@@ -4142,7 +4145,7 @@
 								<div class="margin2" />
 								<button name="roll_npc_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},@{npc_ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]],npc"><span data-i18n="hit-u">Hit</span></button>
 								<div class="margin2" />
-								<button name="roll_npc_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},[[@{npc_ranged_weapon_damage}]],@{npc_ranged_weapon_penetration},@{npc_ranged_weapon_type},@{npc_ranged_weapon_name},npc"><span data-i18n="damage-button-u">Damage</span></button>
+								<button name="roll_npc_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},[[@{npc_ranged_weapon_damage}]],@{npc_ranged_weapon_penetration},@{npc_ranged_weapon_type},@{npc_ranged_weapon_name},0,0,npc"><span data-i18n="damage-button-u">Damage</span></button>
 							</div>
 						</div>
 						<div class="margin10" />
@@ -4473,13 +4476,25 @@
 									<span data-i18n="hit-u">Hit</span>
 								</button>
 								<div class="margin2" />
-								<button name="roll_npc_meleedamage" type="roll" value="!dh2e2021damage @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},[[@{npc_melee_weapon_damage}+@{npc_u_strength}+(floor(@{npc_strength}/10))]],@{npc_melee_weapon_penetration},@{npc_melee_weapon_type},@{npc_melee_weapon_name},npc">
+								<button name="roll_npc_meleedamage" type="roll" value="!dh2e2021damage @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},[[@{npc_melee_weapon_damage}]],@{npc_melee_weapon_penetration},@{npc_melee_weapon_type},@{npc_melee_weapon_name},@{npc_strength},@{npc_u_strength},npc">
 									<span data-i18n="damage-button-u">Damage</span>
 								</button>
 							</div>
 						</div>
 						<div class="margin10" />
 					</div>
+				</div>
+				<div class="flex-row flex-space-around">
+					<img src="https://i.imgur.com/cIVDlKw.png">
+				</div>
+				<div class="flex-row flex-space-around">
+					<div class="margin10" />
+				</div>
+				<div class="flex-row flex-space-around">
+					<div class="margin10" />
+				</div>
+				<div class="flex-row flex-space-around">
+					<div class="margin10" />
 				</div>
 			</div>
 		</fieldset>
@@ -4721,8 +4736,7 @@
 						<input class="input-text" name="attr_psypower_penetration" type="number" value="0" />
 						<div class="margin2" />
 						<button name="roll_psypower_hit" type="roll" value="!dh2e2021psyhit @{character_id},repeating_psypowers1,@{psypower_hidden_row_id},@{psypower_name},@{psypower_focus},@{willpower},@{perception},@{psyniscience_characteristic},@{psy_rating},[[?{Psy Use?|1}]],[[?{Modifier|0}]],[[@{Psyniscience1} + @{Psyniscience2} + @{Psyniscience3} + @{Psyniscience4}]],@{psypower_power_modifier},[[1d100]]"> <span data-i18n="hit-u">Hit</span> </button>
-						<button name="roll_psypower_damage" type="roll" value="!dh2e2021damage @{character_id},repeating_psypowers1,@{psypower_hidden_row_id},[[@{psypower_damage} + @{psy_rating}]],@{psypower_penetration},@{psypower_damage_type},@{psypower_name}"> <span data-i18n="damage-button-u">Damage</span> </button>
-
+						<button name="roll_psypower_damage" type="roll" value="!dh2e2021damage @{character_id},repeating_psypowers1,@{psypower_hidden_row_id},[[@{psypower_damage}]],@{psypower_penetration},@{psypower_damage_type},@{psypower_name},@{psy_rating}"> <span data-i18n="damage-button-u">Damage</span> </button>
 						<button name="roll_psypower_info" type="roll" value="&{template:default} {{name=@{psypower_name}}} {{Action=@{psypower_action}}} {{SubType(s)=@{psypower_subtype}}} {{Range=@{psypower_range}}} {{F. Power=@{psypower_focus}}} {{D. type=@{psypower_damage_type}}} {{Sustained?=@{psypower_sustained}}} {{Effect=@{psypower_effect}}}"> <span data-i18n="info-u">Info</span> </button>
 					</div>
 					<div class="flex-row">
@@ -4781,7 +4795,7 @@
 						<input class="input-text" name="attr_psypower_penetration" type="text" />
 						<div class="margin2" />
 						<button name="roll_psypower_hit" type="roll" value="!dh2e2021psyhit @{character_id},repeating_psypowers1,@{psypower_hidden_row_id},@{psypower_name},@{psypower_focus},@{willpower},@{perception},@{psyniscience_characteristic},@{psy_rating},[[?{Psy Use?|1}]],[[?{Modifier|0}]],[[@{Psyniscience1} + @{Psyniscience2} + @{Psyniscience3} + @{Psyniscience4}]],@{psypower_power_modifier},[[1d100]]"> <span data-i18n="hit-u">Hit</span> </button>
-						<button name="roll_psypower_damage" type="roll" value="!dh2e2021damage @{character_id},repeating_psypowers2,@{psypower_hidden_row_id},[[@{psypower_damage} + @{psy_rating}]],@{psypower_penetration},@{psypower_damage_type},@{psypower_name}"> <span data-i18n="damage-button-u">Damage</span> </button>
+						<button name="roll_psypower_damage" type="roll" value="!dh2e2021damage @{character_id},repeating_psypowers2,@{psypower_hidden_row_id},[[@{psypower_damage}]],@{psypower_penetration},@{psypower_damage_type},@{psypower_name},@{psy_rating}"> <span data-i18n="damage-button-u">Damage</span> </button>
 						<button name="roll_psypower_info" type="roll" value="&{template:default} {{name=@{psypower_name}}} {{Action=@{psypower_action}}} {{SubType(s)=@{psypower_subtype}}} {{Range=@{psypower_range}}} {{F. Power=@{psypower_focus}}} {{D. type=@{psypower_damage_type}}} {{Sustained?=@{psypower_sustained}}} {{Effect=@{psypower_effect}}}"> <span data-i18n="info-u">Info</span> </button>
 					</div>
 					<div class="flex-row">
@@ -4836,28 +4850,50 @@
 								value="!dh2e2021roll @{enemy},Fellowship,@{fellowship},Enemy influence,[[+@{enemy_influence}*10]],Modifier,[[+?{Modifier|0}]],Roll,[[1d100]]">
 						</button>
 					</div>
-					<!--<button name="roll_E1Fel" type="roll" value="!roll40k @{character_name}'s relationship with @{EnemyRe}, @{Fellowship}, [[-(@{enemyReInf}*10)+?{Modifier|0}]]" title="Modified Fellowship Roll"></button>-->
 				</div>
 			</fieldset>
 		</div>
 	</div>
 </div>
 
-
 <rolltemplate class="sheet-rolltemplate-dh2e2021damage">
-	<div class="rolltemplate-container-damage">
-		<span>{{Who}} attacks with {{Name}}.</span>
-		<span>Dealing <span class="rolltemplate-container-damage-value {{Border}}">{{Damage}}</span> {{Type}} dmg (pen: {{Penetration}}).</span>
-		{{#allprops() Damage Type Penetration Who Border Name}}
-			<div class="rolltemplate-flex-row-space-around">
-				<div class="flex-item1">
-					<span>{{key}}</span>
+	<div class="rolltemplate-container">
+		<div class="rolltemplate-flex-column">
+			<div class="rolltemplate-spacer15" />
+		</div>
+		<div class="rolltemplate-flex-column">
+			<div class="rolltemplate-flex-row rolltemplate-flex-space-around">
+				<span class="rolltemplate-center-text">{{Name}}</span>
+			</div>
+			<div class="rolltemplate-spacer2" />
+			{{#allprops() Damage Penetration Type Border Who Name}}
+				<div class="rolltemplate-flex-row">
+					<div class="rolltemplate-flex-column">
+						<span>{{key}}</span>
+					</div>
+					<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center flex-item1">
+						<span>{{value}}</span>
+					</div>
 				</div>
-				<div class="flex-item1">
-					<span>{{value}}</span>
+			{{/allprops() Damage Penetration Type Border Who Name}}
+			<div class="rolltemplate-flex-row rolltemplate-divider" />
+			<div class="rolltemplate-flex-row">
+				<div class="rolltemplate-flex-column">
+					<span>Penetration</span>
+				</div>
+				<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center">
+					<span>{{Penetration}}</span>
 				</div>
 			</div>
-		{{/allprops() Damage Type Penetration Who Border Name}}
+			<div class="rolltemplate-flex-row">
+				<div class="rolltemplate-flex-column">
+					<span>{{Type}} dmg</span>
+				</div>
+				<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center">
+					<span class="rolltemplate-container-damage-value {{Border}}">{{Damage}}</span>
+				</div>
+			</div>
+		</div>
 	</div>
 </rolltemplate>
 <rolltemplate class="sheet-rolltemplate-dh2e2021roll">
@@ -4869,6 +4905,7 @@
 			<div class="rolltemplate-flex-row rolltemplate-flex-space-around">
 				<span class="rolltemplate-center-text">{{Name}}</span>
 			</div>
+			<div class="rolltemplate-spacer2" />
 			{{#allprops() Roll Target Degreesp Degreesm Name}}
 				<div class="rolltemplate-flex-row">
 					<div class="rolltemplate-flex-column">
@@ -4879,9 +4916,7 @@
 					</div>
 				</div>
 			{{/allprops() Roll Target Degreesp Degreesm Name}}
-			<div class="rolltemplate-flex-row rolltemplate-divider">
-				<img src="https://i.imgur.com/XqQtJ4m.png">
-			</div>
+			<div class="rolltemplate-flex-row rolltemplate-divider" />
 			<div class="rolltemplate-flex-row">
 				<div class="rolltemplate-flex-column">
 					<span>Target</span>
@@ -4895,12 +4930,10 @@
 					<span>Roll</span>
 				</div>
 				<div class="rolltemplate-flex-column rolltemplate-flex-align-items-center">
-					<span>{{Roll}}</span>
+					<span class="rolltemplate-container-roll-value">{{Roll}}</span>
 				</div>
 			</div>
-			<div class="rolltemplate-flex-row rolltemplate-divider">
-				<img src="https://i.imgur.com/XqQtJ4m.png">
-			</div>
+			<div class="rolltemplate-flex-row rolltemplate-divider" />
 			<div class="rolltemplate-spacer7" />
 			{{#Degreesp}}
 				<div class="rolltemplate-flex-row rolltemplate-degrees">

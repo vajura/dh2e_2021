@@ -81,22 +81,16 @@
 }
 
 .charsheet {
-    background-image: url(http://i.imgur.com/0pdFte1.png);
+    background-image: url(https://i.imgur.com/0pdFte1.png);
     background-size: cover;
 	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
 	font-size: 14px;
 }
 
-.sheet-watermark {
-    background: url(http://i.imgur.com/KtIcPpG.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .charsheet .sheet-section {
 	margin-top: 10px;
 	display: none;
-    background: url(http://i.imgur.com/KtIcPpG.png);
+    /*background: url(http://i.imgur.com/KtIcPpG.png);*/
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -508,11 +502,11 @@
 	padding: 2px;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container {
 	position: relative;
 	height: 296px;
 	background-image: url(https://i.imgur.com/eInHIf9.png);
-	background-size: contain;
+	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
 	display: flex;
@@ -523,6 +517,15 @@
 	align-items: flex-start;
 	width: 100%;
 	font-weight: bold;
+}
+
+.sheet-rolltemplate-dh2e2021roll  .sheet-rolltemplate-container-roll-value, .sheet-rolltemplate-dh2e2021damage  .sheet-rolltemplate-container-roll-value {
+	background-color: #FFFFFFAA;
+    border: 2px solid #FFFFFFAA;
+    padding: 0 3px 0 3px;
+    font-weight: bold;
+    cursor: help;
+    font-size: 1.1em;
 }
 
 .sheet-rolltemplate-container-damage {
@@ -540,7 +543,7 @@
 	width: 100%;
 }
 
-.sheet-rolltemplate-container-damage .sheet-rolltemplate-container-damage-value {
+.sheet-rolltemplate-container-damage-value {
 	background-color: #FEF68E;
     border: 2px solid #FEF68E;
     padding: 0 3px 0 3px;
@@ -549,11 +552,11 @@
     font-size: 1.1em;
 }
 
-.sheet-rolltemplate-container-damage .sheet-rolltemplate-container-damage-value-min {
+.sheet-rolltemplate-container-damage-value-min {
     border: 2px solid #B31515 !important;
 }
 
-.sheet-rolltemplate-container-damage .sheet-rolltemplate-container-damage-value-max {
+.sheet-rolltemplate-container-damage-value-max {
 	border: 2px solid #3FB315 !important;
 }
 
@@ -572,14 +575,14 @@
     align-self: auto;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-center-text {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-center-text, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-center-text {
 	text-align: center;
     margin-left: -10px;
     font-size: 20px;
     color: black;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-row {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-row, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-flex-row {
 	margin-top: 1px;
 	margin-left: 5px;
 	display: flex;
@@ -591,7 +594,7 @@
 	width: calc(100% - 5px);
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-column {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-column, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-flex-column {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -601,37 +604,44 @@
 	width: 100%;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-space-around {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-space-around, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-flex-space-around {
     justify-content: space-around;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-align-items-center {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-flex-align-items-center, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-flex-align-items-center {
 	align-items: center;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-degrees {
 	justify-content: center;
 	align-items: center;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-plus {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-plus, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-plus {
 	font-size: 18px;
 	color: green;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-minus {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-minus, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-degrees .sheet-rolltemplate-degrees-span-minus {
 	font-size: 18px;
 	color: blue;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-spacer15 {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-spacer15, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-spacer15 {
 	margin: 15px;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-spacer7 {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-spacer7, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-spacer7 {
 	margin: 7px;
 }
 
-.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-divider {
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-spacer2, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-spacer2 {
+	margin: 2px;
+}
+
+.sheet-rolltemplate-dh2e2021roll .sheet-rolltemplate-container .sheet-rolltemplate-divider, .sheet-rolltemplate-dh2e2021damage .sheet-rolltemplate-container .sheet-rolltemplate-divider {
 	margin-left: 2px;
+	border-bottom: 1px solid gray;
+	margin-top: 3px;
+	margin-bottom: 2px;
 }
