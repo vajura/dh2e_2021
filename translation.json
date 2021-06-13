@@ -476,5 +476,6 @@
 	"none":"none",
 	"front-u":"Front:",
 	"side-u":"Side:",
-	"rear-u":"Rear:"
+	"rear-u":"Rear:",
+	"free-skill-compensation-u": "Free skill exp:"
 }

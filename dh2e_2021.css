@@ -272,6 +272,10 @@
 	min-width: 40px !important;
 }
 
+.charsheet .width-min30 {
+	min-width: 30px !important;
+}
+
 .charsheet .width-min15 {
 	min-width: 15px !important;
 }
