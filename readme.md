@@ -8,15 +8,20 @@ All parts of this sheet was rewritten from the ground up, it features auto calcu
 Sheetworker scripts are used wherever possible since the API can be laggy, the sandbox API is only used for handling of message events (hit, damage, skill checks etc.).
 
 ### Hit & Damage info
-Weapons take into account mods and qualities from the dropdown selects that are available on them, whenever possible those are then added to the hit/damage checks.
-[![img](https://i.imgur.com/hUIuh1R.png)](https://i.imgur.com/hUIuh1R.png)
+Weapons take into account mods and qualities from the dropdown selects that are available on them, whenever possible those are then added to the hit/damage checks.  
+
+[![img](https://i.imgur.com/hUIuh1R.png)](https://i.imgur.com/hUIuh1R.png)  
+
 If we take the shotgun above as an example it has the **Scatter** special and **Modified stock**, since the range was standard it doesn't add another +10 modifier from **Scatter** but it does add +2 from the **Modified stock** because of the half aim.
 The hit roll also includes expended ammo, degrees of success/failure and hit location.
-The damage roll again includes all relevant modifiers from the sheet, in this case it adds -3 damage for the **Scatter** (since the weapon was not fired in close or point blank range) but it also includes the Mighty Shot talent this char has taken, this is auto calculated from the advancment tab.
-[![img](https://i.imgur.com/AjWLBNO.png)](https://i.imgur.com/AjWLBNO.png)  
+The damage roll again includes all relevant modifiers from the sheet, in this case it adds -3 damage for the **Scatter** (since the weapon was not fired in close or point blank range) but it also includes the Mighty Shot talent this char has taken, this is auto calculated from the advancment tab.  
+
+[![img](https://i.imgur.com/AjWLBNO.png)](https://i.imgur.com/AjWLBNO.png)
+
 Another example of an melee weapon
-[![img](https://i.imgur.com/EmJS2bB.png)](https://i.imgur.com/EmJS2bB.png)
-[![img](https://i.imgur.com/Tr0TMPi.png)](https://i.imgur.com/Tr0TMPi.png)
+[![img](https://i.imgur.com/EmJS2bB.png)](https://i.imgur.com/EmJS2bB.png)  
+[![img](https://i.imgur.com/Tr0TMPi.png)](https://i.imgur.com/Tr0TMPi.png)  
+
 A thing to note here is the Damage value of Dice 1 in parantheses which indicates that it is ignored since this weapon has Tearing and that value is taken instead.
 
 Psykana hit/damage as well as skill checks follow the same structure and add all relevant modifiers to their rolls, most modifiers are present and can be selected and they follow the rules as written in the book.
@@ -26,7 +31,7 @@ Some damage calculation rely on the user having performed a hit calculation with
 ### EXP auto calculation
 
 Experience gets automatically calculated from accross the sheet, this includes Characteristics advancments, Skill advancments and of course Talent Advancements, in case anything is missing Custom advancements inputs are also available. All exp values get calculated from your set Aptitudes, if those change all the exp values get recalculated. 
-NOTE: The **Free skill exp** field in the Advancements tab is used to offset all the free talents or skills a char might get at creation.
+NOTE: The **Free skill exp** field in the Advancements tab is used to offset all the free talents or skills a char might get at creation.  
 [![img](https://i.imgur.com/1iSaazK.png)](https://i.imgur.com/1iSaazK.png)
 
 ### Use fate button
