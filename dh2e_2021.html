@@ -517,11 +517,20 @@
 			<div class="flex-row">
 				<div class="flex-column flex-item2 armor-silhoullette flex-space-around">
 					<div class="flex-row flex-space-around">
+						<span class="input-text width-min50" data-i18n="pen-u">Pen:</span>
+						<input class="width-min70 text-align-center" name="attr_pen_armor_calc" type="number" value="0" />
+						<div class="margin2" />
+						<span class="input-text width-min50" data-i18n="felling-u">Felling:</span>
+						<input class="width-min70 text-align-center" name="attr_felling_armor_calc" type="number" value="0" />
+					</div>
+					<div class="margin5" />
+					<div class="flex-row flex-space-around">
 						<div class="quickborder sheet-armorblock">
 							<span data-i18n="head-u">Head</span>
 							<input class="text-align-center" name="attr_head_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_head_soak" type="number" value="@{head_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}" disabled />
+							<input class="text-align-center" name="attr_head_soak" type="number" disabled
+							value="(((@{head_armor} + @{machine_trait} - @{pen_armor_calc}) + abs(@{head_armor} + @{machine_trait} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 					</div>
 					<div class="flex-row flex-space-around">
@@ -529,19 +538,22 @@
 							<span data-i18n="right-arm-u">Right arm</span>
 							<input class="text-align-center" name="attr_right_arm_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_right_arm_soak" type="number" value="@{right_arm_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}+@{right_arm_bionic}" disabled />
+							<input class="text-align-center" name="attr_right_arm_soak" type="number" disabled 
+							value="(((@{right_arm_armor} + @{machine_trait} + @{right_arm_bionic} - @{pen_armor_calc}) + abs(@{right_arm_armor} + @{machine_trait} + @{right_arm_bionic} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 						<div class="quickborder sheet-armorblock">
 							<span data-i18n="body-u">Body</span>
 							<input class="text-align-center" name="attr_body_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_body_soak" type="number" value="@{body_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}" disabled />
+							<input class="text-align-center" name="attr_body_soak" type="number" disabled 
+							value="(((@{body_armor} + @{machine_trait} - @{pen_armor_calc}) + abs(@{body_armor} + @{machine_trait} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 						<div class="quickborder sheet-armorblock">
 							<span data-i18n="left-arm-u">Left arm</span>
 							<input class="text-align-center" name="attr_left_arm_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_left_arm_soak" type="number" value="@{left_arm_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}+@{left_arm_bionic}" disabled />
+							<input class="text-align-center" name="attr_left_arm_soak" type="number" disabled  
+							value="(((@{left_arm_armor} + @{machine_trait} + @{left_arm_bionic} - @{pen_armor_calc}) + abs(@{left_arm_armor} + @{machine_trait} + @{left_arm_bionic} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 					</div>
 					<div class="flex-row flex-space-around">
@@ -549,13 +561,15 @@
 							<span data-i18n="right-leg-u">Right leg</span>
 							<input class="text-align-center" name="attr_right_leg_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_right_leg_soak" type="number" value="@{right_leg_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}+@{right_leg_bionic}" disabled />
+							<input class="text-align-center" name="attr_right_leg_soak" type="number" disabled 
+							value="(((@{right_leg_armor} + @{machine_trait} + @{right_leg_bionic} - @{pen_armor_calc}) + abs(@{right_leg_armor} + @{machine_trait} + @{right_leg_bionic} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 						<div class="quickborder sheet-armorblock">
 							<span data-i18n="left-leg-u">Left leg</span>
 							<input class="text-align-center" name="attr_left_leg_armor" data-i18n-placeholder="armor-value-u" placeholder="Ar" type="number" />
 							<span>(1-10)</span>
-							<input class="text-align-center" name="attr_left_leg_soak" type="number" value="@{left_leg_armor}+@{u_toughness}+floor(@{toughness}/10)+@{machine_trait}+@{left_leg_bionic}" disabled />
+							<input class="text-align-center" name="attr_left_leg_soak" type="number" disabled 
+							value="(((@{left_leg_armor} + @{machine_trait} + @{left_leg_bionic} - @{pen_armor_calc}) + abs(@{left_leg_armor} + @{machine_trait} + @{left_leg_bionic} - @{pen_armor_calc})) / 2) + (((@{u_toughness} - @{felling_armor_calc}) + abs(@{u_toughness} - @{felling_armor_calc})) / 2) + floor(@{toughness}/10)" />
 						</div>
 					</div>
 				</div>
@@ -2447,7 +2461,7 @@
 						<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
 						<input class="width-min70" name="attr_ranged_weapon_custom" type="text" />
 						<div class="margin2" />
-						<button name="roll_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},@{ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]]"><span data-i18n="hit-u">Hit</span></button>
+						<button name="roll_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},@{ballistic_skill},@{u_ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]]"><span data-i18n="hit-u">Hit</span></button>
 						<div class="margin2" />
 						<button name="roll_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{ranged_weapon_hidden_row_id},[[@{ranged_weapon_damage}]],@{ranged_weapon_penetration},@{ranged_weapon_type},@{ranged_weapon_name},0,0"><span data-i18n="damage-button-u">Damage</span></button>
 					</div>
@@ -2775,7 +2789,7 @@
 						<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
 						<input class="width-min70" name="attr_melee_weapon_custom" type="text" />
 						<div class="margin2" />
-						<button name="roll_melee_hit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_meleeweapons,@{melee_weapon_hidden_row_id},@{weapon_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Attack Type |All out (+30),+30|Charge (+20),+20|Standard (+10),+10|Swift Attack (+0),+0|Lighting (-10),-10}]],0,0,[[?{Modifier|0})]],[[1d100]]">
+						<button name="roll_melee_hit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_meleeweapons,@{melee_weapon_hidden_row_id},@{weapon_skill},@{u_weapon_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Attack Type |All out (+30),+30|Charge (+20),+20|Standard (+10),+10|Swift Attack (+0),+0|Lighting (-10),-10}]],0,0,[[?{Modifier|0})]],[[1d100]]">
 							<span data-i18n="hit-u">Hit</span>
 						</button>
 						<div class="margin2" />
@@ -4293,7 +4307,7 @@
 								<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
 								<input class="width-min70" name="attr_npc_ranged_weapon_custom" type="text" />
 								<div class="margin2" />
-								<button name="roll_npc_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},@{npc_ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]],npc"><span data-i18n="hit-u">Hit</span></button>
+								<button name="roll_npc_rangedhit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},@{npc_ballistic_skill},@{npc_u_ballistic_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Range |Short Range (+10),+10|Standard range (+0),+0|Point Blank (+30),+30|Long Range (-10),-10|Extreme Range (-30),-30}]],[[?{Rate of Fire|Standard (+10),+10|Semi auto (+0),+0|Full Auto (-10),-10|Called Shot (-20),-20|Suppressing Fire (semi) (-20),-21|Suppressing Fire (auto) (-20),-22}]],[[?{Firing Mode|Normal,1|Overcharge,2|Maximal,3|Overload,4}]],[[?{Modifier|0})]],[[1d100]],npc"><span data-i18n="hit-u">Hit</span></button>
 								<div class="margin2" />
 								<button name="roll_npc_rangeddamage" type="roll" value="!dh2e2021damage @{character_id},repeating_rangedweapons,@{npc_ranged_weapon_hidden_row_id},[[@{npc_ranged_weapon_damage}]],@{npc_ranged_weapon_penetration},@{npc_ranged_weapon_type},@{npc_ranged_weapon_name},0,0,npc"><span data-i18n="damage-button-u">Damage</span></button>
 							</div>
@@ -4622,7 +4636,7 @@
 								<span class="input-text width-min70" data-i18n="custom-points-u">Custom:</span>
 								<input class="width-min70" name="attr_npc_melee_weapon_custom" type="text" />
 								<div class="margin2" />
-								<button name="roll_npc_melee_hit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},@{npc_weapon_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Attack Type |All out (+30),+30|Charge (+20),+20|Standard (+10),+10|Swift Attack (+0),+0|Lighting (-10),-10}]],0,0,[[?{Modifier|0})]],[[1d100]],npc">
+								<button name="roll_npc_melee_hit" type="roll" value="!dh2e2021weaponhit @{character_id},repeating_meleeweapons,@{npc_melee_weapon_hidden_row_id},@{npc_weapon_skill},@{npc_u_weapon_skill},[[?{Aim |Half aim (+10),+10|No aim (+0),+0|Full aim (+20),+20}]],[[?{Attack Type |All out (+30),+30|Charge (+20),+20|Standard (+10),+10|Swift Attack (+0),+0|Lighting (-10),-10}]],0,0,[[?{Modifier|0})]],[[1d100]],npc">
 									<span data-i18n="hit-u">Hit</span>
 								</button>
 								<div class="margin2" />

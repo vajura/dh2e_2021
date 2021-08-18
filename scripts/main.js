@@ -1,5 +1,7 @@
 const savedRolls = {};
-
+let getAdvancmentsEnabled = true;
+let logging = false;
+let hitCounter = 1;
 const Characteristics = ['weapon_skill','ballistic_skill','strength','toughness','agility','intelligence','perception','willpower','fellowship','influence'];
 
 function sanitizeToNumber(input) {
@@ -104,6 +106,18 @@ function addWeaponSpecialsToHitResult(wData, result) {
                     wData.jam.jammed = true;
                 }
             break;
+            case 'overheats':
+                wData.jam.status = 'overheats';
+                if (wData.roll >= 91) {
+                    wData.jam.jammed = true;
+                }
+            break;
+        }
+    }
+    if (wData.firingModeMod === 4) {
+        wData.jam.status = 'unreliable';
+        if (wData.roll >= 91) {
+            wData.jam.jammed = true;
         }
     }
 }
@@ -170,6 +184,8 @@ function calculateAmmoUsage(wData, fate) {
     if (wData.weaponType.indexOf('ranged_weapon') !== -1) {
         const semiAuto = sanitizeToNumber(getAttrByName(wData.charId, `${wData.prefix}_${wData.weaponId}_${wData.weaponType}_semi`));
         const fullAuto = sanitizeToNumber(getAttrByName(wData.charId, `${wData.prefix}_${wData.weaponId}_${wData.weaponType}_full`));
+        wData.bulletsUsedSemiAuto = semiAuto;
+        wData.bulletsUsedfullAuto = fullAuto;
         const currentAmmo = findObjs({
             type: 'attribute',
             characterid: wData.charId,
@@ -211,7 +227,7 @@ function calculateAmmoUsage(wData, fate) {
             }
             bulletsUsed = 1 * wData.firingModeMod;
         }
-        if (wData.jam.jammed) {
+        if (wData.jam.jammed && wData.jam.status !== 'overheats') {
             bulletsUsed = ammo;
             ammo = 0;
         }
@@ -224,44 +240,45 @@ function calculateAmmoUsage(wData, fate) {
     return {bulletsUsed, ammoBefore};
 }
 
-function getwhData(paramArray) {
-    const whData = {};
-    whData.npc = paramArray[10];
-    whData.charId = paramArray[0];
-    whData.prefix = paramArray[1];
-    whData.weaponType = 'melee_weapon';
-    if (whData.prefix.indexOf('rangedweapons') !== -1) {
-        whData.weaponType = 'ranged_weapon';
+function getwData(paramArray) {
+    const wData = {};
+    wData.npc = paramArray[11];
+    wData.charId = paramArray[0];
+    wData.prefix = paramArray[1];
+    wData.weaponType = 'melee_weapon';
+    if (wData.prefix.indexOf('rangedweapons') !== -1) {
+        wData.weaponType = 'ranged_weapon';
     }
-    if (whData.npc) {
-        whData.prefix = `repeating_npc`;
-        whData.weaponType = `npc_${whData.weaponType}`;
+    if (wData.npc) {
+        wData.prefix = `repeating_npc`;
+        wData.weaponType = `npc_${wData.weaponType}`;
     }
-    whData.weaponId = paramArray[2];
-    whData.skill = sanitizeToNumber(paramArray[3]);
-    whData.aimMod = sanitizeToNumber(paramArray[4]);
-    whData.rangeMod = sanitizeToNumber(paramArray[5]);
-    whData.meleeAttackType = sanitizeToNumber(paramArray[5]);
-    whData.rofMod = sanitizeToNumber(paramArray[6]);
-    whData.supressingFireMode = 'none';
-    if (whData.rofMod === -21) {
-        whData.supressingFireMode = 'semi';
-        whData.rofMod = -20;
-    } else if (whData.rofMod === -22) {
-        whData.supressingFireMode = 'auto';
-        whData.rofMod = -20;
+    wData.weaponId = paramArray[2];
+    wData.skill = sanitizeToNumber(paramArray[3]);
+    wData.uSkill = sanitizeToNumber(paramArray[4]);
+    wData.aimMod = sanitizeToNumber(paramArray[5]);
+    wData.rangeMod = sanitizeToNumber(paramArray[6]);
+    wData.meleeAttackType = sanitizeToNumber(paramArray[6]);
+    wData.rofMod = sanitizeToNumber(paramArray[7]);
+    wData.supressingFireMode = 'none';
+    if (wData.rofMod === -21) {
+        wData.supressingFireMode = 'semi';
+        wData.rofMod = -20;
+    } else if (wData.rofMod === -22) {
+        wData.supressingFireMode = 'auto';
+        wData.rofMod = -20;
     }
-    whData.firingModeMod = sanitizeToNumber(paramArray[7]);
-    whData.modifier = sanitizeToNumber(paramArray[8]);
-    whData.roll = sanitizeToNumber(paramArray[9]);
-    whData.jam = {
+    wData.firingModeMod = sanitizeToNumber(paramArray[8]);
+    wData.modifier = sanitizeToNumber(paramArray[9]);
+    wData.roll = sanitizeToNumber(paramArray[10]);
+    wData.jam = {
         jammed: false,
         status: ''
     };
-    return whData;
+    return wData;
 }
 
-function postHitLocationInfo(who, roll) {
+function postHitLocationAndHitsInfo(who, roll, attackType, degOfSuc, wData) {
     let hitLocation = 1;
     if (roll < 100) {
         const tenth = Math.floor(roll / 10);
@@ -282,85 +299,115 @@ function postHitLocationInfo(who, roll) {
     } else {
         hitPart = 'Left Arm';
     }
-    sendChat(who, `Location ${hitLocation} hits ${hitPart}`);
+    if (wData !== undefined && attackType !== undefined && degOfSuc >= 0) {
+        let hitsText = "";
+        degOfSuc--;
+        let hitsNumber = 1;
+        if (attackType === -10 || wData.supressingFireMode === 'auto') {
+            hitsNumber = degOfSuc + 1;
+            if (wData && wData.weaponType.indexOf('ranged_weapon') !== -1 && hitsNumber > wData.bulletsUsedfullAuto) {
+                hitsNumber = wData.bulletsUsedfullAuto;
+            }
+        } else if (attackType === 0 || wData.supressingFireMode === 'semi') {
+            hitsNumber = Math.floor(degOfSuc / 2) + 1;
+            if (wData && wData.weaponType.indexOf('ranged_weapon') !== -1 && hitsNumber > wData.bulletsUsedSemiAuto) {
+                hitsNumber = wData.bulletsUsedSemiAuto;
+            }
+        }
+        hitsText += `with a total of ${hitsNumber} hit/s.`;
+        saveRollInfo(wData.weaponId, 'totalHits', hitsNumber);
+        sendChat(who, `Location ${hitLocation} hits ${hitPart} ${hitsText}`);
+    } else {
+        sendChat(who, `Location ${hitLocation} hits ${hitPart}.`);
+    }
 }
 
 function calcWeaponHit(who, playerId, paramArray, msg, fate) {
-    const whData = getwhData(paramArray);
+    const wData = getwData(paramArray);
     const result = [];
-    result.push(getAttrByName(whData.charId, `${whData.prefix}_${whData.weaponId}_${whData.weaponType}_name`));
-    if (whData.weaponType.indexOf('ranged_weapon') !== -1) {
+    result.push(getAttrByName(wData.charId, `${wData.prefix}_${wData.weaponId}_${wData.weaponType}_name`));
+    if (wData.weaponType.indexOf('ranged_weapon') !== -1) {
         result.push('Ballistic skill');
     } else {
         result.push('Weapon skill');
     }
-    result.push(whData.skill);
+    result.push(wData.skill);
     result.push('Aim');
-    result.push(whData.aimMod);
-    whData.advancments = {};
-    if (!whData.npc) {
-        whData.advancments = getAdvancments(whData.charId, ['Marksman', 'Precision Killer (ballistic skill)', 'Precision Killer (weapon skill)']);
+    result.push(wData.aimMod);
+    wData.advancments = {};
+    if (!wData.npc) {
+        wData.advancments = getAdvancments(wData.charId, ['Marksman', 'Precision Killer (ballistic skill)', 'Precision Killer (weapon skill)']);
     }
-    if (whData.weaponType.indexOf('ranged_weapon') !== -1) {
+    if (wData.weaponType.indexOf('ranged_weapon') !== -1) {
         result.push('Range');
-        result.push(whData.rangeMod);
+        result.push(wData.rangeMod);
         result.push('RoF');
-        result.push(whData.rofMod);
-        if (whData.rangeMod < 0 && whData.advancments['Marksman']) {
+        result.push(wData.rofMod);
+        if (wData.rangeMod < 0 && wData.advancments['Marksman']) {
             result.push('Marksman');
-            result.push(-whData.rangeMod);
+            result.push(-wData.rangeMod);
         }
-        if (whData.rofMod === -20 && whData.supressingFireMode === 'none' && whData.advancments['Precision Killer (ballistic skill)']) {
+        if (wData.rofMod === -20 && wData.supressingFireMode === 'none' && wData.advancments['Precision Killer (ballistic skill)']) {
             result.push('Precision Killer');
             result.push(20);
         }
     }
-    if (whData.weaponType.indexOf('melee_weapon') !== -1) {
+    if (wData.weaponType.indexOf('melee_weapon') !== -1) {
         result.push('Attack type');
-        result.push(whData.meleeAttackType);
-        if (whData.meleeAttackType === -20 && whData.advancments['Precision Killer (weapon skill)']) {
+        result.push(wData.meleeAttackType);
+        if (wData.meleeAttackType === -20 && wData.advancments['Precision Killer (weapon skill)']) {
             result.push('Precision Killer');
             result.push(20);
         }
     }
-    if (whData.modifier !== 0) {
+    if (wData.modifier !== 0) {
         result.push('Modifier');
-        result.push(whData.modifier);
+        result.push(wData.modifier);
     }
     result.push('Roll');
-    result.push(whData.roll);
+    result.push(wData.roll);
 
-    getWeaponSpecials(whData);
-    getWeaponMods(whData);
-    addWeaponSpecialsToHitResult(whData, result);
-    addWeaponModsToHitResult(whData, result);
-    const {bulletsUsed, ammoBefore} = calculateAmmoUsage(whData, fate);
-    whData.bulletsUsed = bulletsUsed;
-    whData.ammoBefore = ammoBefore;
-    saveRollInfo(whData.weaponId, 'ammoBefore', whData.ammoBefore);
-    saveRollInfo(whData.weaponId, 'aim', whData.aimMod);
-    saveRollInfo(whData.weaponId, 'range', whData.rangeMod);
-    saveRollInfo(whData.weaponId, 'rof', whData.rofMod);
+    getWeaponSpecials(wData);
+    getWeaponMods(wData);
+    addWeaponSpecialsToHitResult(wData, result);
+    addWeaponModsToHitResult(wData, result);
+    const {bulletsUsed, ammoBefore} = calculateAmmoUsage(wData, fate);
+    wData.bulletsUsed = bulletsUsed;
+    wData.ammoBefore = ammoBefore;
+    saveRollInfo(wData.weaponId, 'ammoBefore', wData.ammoBefore);
+    saveRollInfo(wData.weaponId, 'aim', wData.aimMod);
+    saveRollInfo(wData.weaponId, 'range', wData.rangeMod);
+    saveRollInfo(wData.weaponId, 'rof', wData.rofMod);
+    saveRollInfo(wData.weaponId, 'firingModeMod', wData.firingModeMod);
 
-    postAmmoAndJamInfo(who, playerId, whData);
-    postRollTemplateResult(who, playerId, result, whData.weaponId);
-    postHitLocationInfo(who, whData.roll);
+    postAmmoAndJamInfo(who, playerId, wData);
+    const degOfSuc = postRollTemplateResult(who, playerId, result, wData.weaponId, wData.uSkill);
+    if (!wData.jam.jammed && degOfSuc > 0) {
+        if (wData.weaponType.indexOf('ranged_weapon') !== -1) {
+            postHitLocationAndHitsInfo(who, wData.roll, wData.rofMod, degOfSuc, wData);
+        } else {
+            postHitLocationAndHitsInfo(who, wData.roll, wData.meleeAttackType, degOfSuc, wData);
+        }
+    }
+    hitCounter = 1;
 }
 
-function postAmmoAndJamInfo(who, playerId, whData) {
-    const weaponName = getAttrByName(whData.charId, `${whData.prefix}_${whData.weaponId}_${whData.weaponType}_name`);
-    const playerName = getAttrByName(whData.charId, `player_name`);
+function postAmmoAndJamInfo(who, playerId, wData) {
+    const weaponName = getAttrByName(wData.charId, `${wData.prefix}_${wData.weaponId}_${wData.weaponType}_name`);
+    const playerName = getAttrByName(wData.charId, `player_name`);
     if (playerIsGM(playerId) && playerName.indexOf('npc') === -1) {
         return;
     }
-    if (whData.weaponType.indexOf('ranged_weapon') !== -1) {
-        const remainingAmmo = whData.ammoBefore - whData.bulletsUsed;
+    if (wData.weaponType.indexOf('ranged_weapon') !== -1) {
+        const remainingAmmo = wData.ammoBefore - wData.bulletsUsed;
         sendChat(who, `<br/><div style="padding:5px;font-style:italic;text-align: center;font-weight: bold;background-color:#F5E4D3;color:#653E10">${who} whispers "Emperor Guide my Bullet"<div>`);
-        sendChat(who, `${weaponName} expends ${whData.bulletsUsed} ammo, ${remainingAmmo} left.`);
+        sendChat(who, `${weaponName} expends ${wData.bulletsUsed} ammo, ${remainingAmmo} left.`);
         if (remainingAmmo < 0) {
             sendChat(who, `<div style="color:red;">${weaponName} used more ammo then it had.</div>`);
         }
-        if (whData.jam.jammed) {
+        if (wData.jam.jammed && wData.jam.status === 'overheats') {
+            sendChat(who, `<div style="color:red;">${weaponName} has overheated.</div>`);
+        } else if (wData.jam.jammed) {
             sendChat(who, `<div style="color:red;">${weaponName} has jammed.</div>`);
         }
     } else {
@@ -368,7 +415,7 @@ function postAmmoAndJamInfo(who, playerId, whData) {
     }
 }
 
-function postRollTemplateResult(who, playerId, result, weaponId) {
+function postRollTemplateResult(who, playerId, result, weaponId, uSkill) {
     const paramMap = {};
     let roll = -1;
     const name = result[0];
@@ -391,6 +438,9 @@ function postRollTemplateResult(who, playerId, result, weaponId) {
     let degOfSuc = 0;
     if (roll <= target) {
         degOfSuc = (Math.floor(target / 10) - Math.floor(roll / 10)) + 1;
+        if (uSkill !== undefined) {
+            degOfSuc += uSkill;
+        }
         output += ` {{Degreesp=+${degOfSuc}}}`;
     } else {
         degOfSuc = (Math.floor(roll / 10) - Math.floor(target / 10)) + 1;
@@ -401,6 +451,7 @@ function postRollTemplateResult(who, playerId, result, weaponId) {
         saveRollInfo(weaponId, 'degOfSuc', degOfSuc);
     }
     sendChat(who, output);
+    return degOfSuc; 
 }
 
 function saveRollInfo(id, key, value) {
@@ -583,6 +634,8 @@ function calcDamage(who, playerId, paramArray, msg) {
         wdData.degOfSuc = savedRolls[wdData.weaponId].degOfSuc;
         wdData.rangeMod = savedRolls[wdData.weaponId].range;
         wdData.rofMod = savedRolls[wdData.weaponId].rof;
+        wdData.totalHits = savedRolls[wdData.weaponId].totalHits;
+        wdData.firingModeMod = savedRolls[wdData.weaponId].firingModeMod;
     }
     if (wdData.weaponType.indexOf('melee_weapon') !== -1 || wdData.weaponType.indexOf('ranged_weapon') !== -1  ) {
         getWeaponSpecials(wdData);
@@ -629,6 +682,21 @@ function calcDamage(who, playerId, paramArray, msg) {
             damageRolls += ` {{Scatter=+3}}`;
             wdData.damage += 3;
         }
+        if (wdData.firingModeMod === 2) {
+            damageRolls += ` {{Overcharge=+${1}}}`;
+            wdData.damage += 1;
+        }
+        if (wdData.firingModeMod === 3) {
+            const maximalRoll = Math.floor(Math.random() * 10) + 1;
+            damageRolls += ` {{Maximal=+${maximalRoll}}}`;
+            wdData.damage += maximalRoll;
+            wdData.penetration += 2;
+        }
+        if (wdData.firingModeMod === 4) {
+            damageRolls += ` {{Overcharge=+${2}}}`;
+            wdData.damage += 2;
+            wdData.penetration += 2;
+        }
     }
     if (wdData.weaponType.indexOf('ranged_weapon') !== -1 && !wdData.npc) {
         const advancments = getAdvancments(wdData.charId, ['Mighty Shot']);
@@ -670,16 +738,23 @@ function calcDamage(who, playerId, paramArray, msg) {
     if (max) {
         border = 'rolltemplate-container-damage-value-max';
     }
+    let hitCounterString = "";
+    if (wdData.totalHits !== undefined) {
+        hitCounterString = `(${hitCounter}/${wdData.totalHits})`
+    } else {
+        hitCounterString = `(${hitCounter})`
+    }
     const {dmgTemplateString, totalRoll} = getDmgTemplateString(msg, wdData.tearingDmg);
     wdData.damage += totalRoll;
     damageRolls = dmgTemplateString + ' ' + damageRolls;
-    let output = `&{template:dh2e2021damage} {{Name=${wdData.name}}}`;
+    let output = `&{template:dh2e2021damage} {{Name=${wdData.name} ${hitCounterString}}}`;
     output += ` {{Who=${who}}}`;
     output += ` {{Damage=${wdData.damage}}}`;
     output += ` {{Penetration=${wdData.penetration}}}`;
     output += ` {{Type=${(wdData.type[0].toUpperCase() + wdData.type.substr(1))}}}`;
     output += ` {{Border=${border}}}`;
     output += damageRolls;
+    hitCounter++;
     sendChat(who, output);
 }
 
@@ -756,13 +831,12 @@ function calcPsyHit(who, playerId, paramArray) {
     result.push('Roll');
     result.push(roll);
     postRollTemplateResult(who, playerId, result);
-    postHitLocationInfo(who, roll);
+    postHitLocationAndHitsInfo(who, roll);
     if (roll % 11 === 0 || roll === 100) {
         sendChat(who, `Something stirs in the warp... <br/>Roll for Psychic Phenomena`);
     }
 }
 
-let getAdvancmentsEnabled = true;
 function getAdvancments(charId, advNames) {
     const values = {};
     if (!getAdvancmentsEnabled) {
@@ -799,6 +873,19 @@ function disableGetAdvancments() {
     getAdvancmentsEnabled = false;
 }
 
+function toggleLogging(who, playerId, paramArray) {
+    const toggle = paramArray[0];
+    if (toggle == 'on' || toggle == '1') {
+        logging = true;
+    } else {
+        logging = false;
+    }
+}
+
+function disableLogging() {
+    logging = false;
+}
+
 on('chat:message', function (msg) {
     if (msg.type !== 'api') {
         return;
@@ -812,9 +899,13 @@ on('chat:message', function (msg) {
     const psyHitCmd = '!dh2e2021psyhit ';
     const toggleCmd = '!dh2e2021toggle ';
     const disableToggleCmd = '!dh2e2021toggle';
+    const loggingCmd = '!dh2e2021logging ';
+    const disableLoggingCmd = '!dh2e2021logging';
     const notSavedRolls = [toggleCmd, disableToggleCmd];
     let fate = false;
-    //log(JSON.stringify(msg, undefined, 2));
+    if (logging) {
+        log(JSON.stringify(msg, undefined, 2));
+    }
     const commands = [
         {cmd: rollCmd, fn: postRollTemplateResult},
         {cmd: weaponHitCmd, fn: calcWeaponHit},
@@ -822,7 +913,9 @@ on('chat:message', function (msg) {
         {cmd: focusPowerCmd, fn: calcFocusPower},
         {cmd: psyHitCmd, fn: calcPsyHit},
         {cmd: toggleCmd, fn: toggleGetAdvancments},
-        {cmd: disableToggleCmd, fn: disableGetAdvancments}
+        {cmd: disableToggleCmd, fn: disableGetAdvancments},
+        {cmd: loggingCmd, fn: toggleLogging},
+        {cmd: disableLoggingCmd, fn: disableLogging}
     ];
     if (msg.content.indexOf(fateCmd) !== -1 && savedRolls[playerId] && savedRolls[playerId].msg) {
         const content = processInlinerolls(msg);
