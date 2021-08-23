@@ -451,7 +451,7 @@ function postRollTemplateResult(who, playerId, result, weaponId, uSkill) {
         saveRollInfo(weaponId, 'degOfSuc', degOfSuc);
     }
     sendChat(who, output);
-    return degOfSuc; 
+    return degOfSuc;
 }
 
 function saveRollInfo(id, key, value) {
