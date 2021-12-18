@@ -5,6 +5,9 @@ let hitCounter = 1;
 const Characteristics = ['weapon_skill','ballistic_skill','strength','toughness','agility','intelligence','perception','willpower','fellowship','influence'];
 
 function sanitizeToNumber(input) {
+    if (input === undefined || input === null) {
+        return 0;
+    }
     let num = 0;
     if (typeof input !== 'number' && typeof input !== 'string') {
         return num;
@@ -191,7 +194,10 @@ function calculateAmmoUsage(wData, fate) {
             characterid: wData.charId,
             name: `${wData.prefix}_${wData.weaponId}_${wData.weaponType}_clip`
         }, {caseInsensitive: true})[0];
-        let ammo = sanitizeToNumber(currentAmmo.get('current'));
+        let ammo = 0;
+        if (currentAmmo !== undefined) {
+            ammo = sanitizeToNumber(currentAmmo.get('current'));
+        }
         if (fate && savedRolls[wData.weaponId] && savedRolls[wData.weaponId].ammoBefore) {
             ammo = savedRolls[wData.weaponId].ammoBefore
         }
@@ -295,9 +301,9 @@ function postHitLocationAndHitsInfo(who, roll, attackType, degOfSuc, wData) {
     } else if (hitLocation <= 70) {
         hitPart = 'Body';
     } else if (hitLocation <= 85) {
-        hitPart = 'Right Arm';
+        hitPart = 'Right Leg';
     } else {
-        hitPart = 'Left Arm';
+        hitPart = 'Left Leg';
     }
     if (wData !== undefined && attackType !== undefined && degOfSuc >= 0) {
         let hitsText = "";
@@ -726,10 +732,6 @@ function calcDamage(who, playerId, paramArray, msg) {
             wdData.damage += wdData.uStrength;
         }
     }
-    if (wdData.weaponType.indexOf('psy_power') !== -1) {
-        damageRolls += `{{Psy rating=+${wdData.psyRating}}}`;
-        wdData.damage += wdData.psyRating;
-    }
     let border = '';
     const {min, max} = checkMinMax(msg, wdData.tearingDmg);
     if (min) {
@@ -835,6 +837,7 @@ function calcPsyHit(who, playerId, paramArray) {
     if (roll % 11 === 0 || roll === 100) {
         sendChat(who, `Something stirs in the warp... <br/>Roll for Psychic Phenomena`);
     }
+    hitCounter = 1;
 }
 
 function getAdvancments(charId, advNames) {
